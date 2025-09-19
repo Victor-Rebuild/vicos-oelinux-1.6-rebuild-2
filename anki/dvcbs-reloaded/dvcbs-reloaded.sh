@@ -320,7 +320,7 @@ function copyfull()
   echo ${base}.${code}${BUILD_SUFFIX} > ${dir}edits/etc/os-version
   echo ${base} > ${dir}edits/etc/os-version-base
   echo ${code} > ${dir}edits/etc/os-version-code
-  cp ../../_build/apq8009-robot-boot.img.gz.enc ${refo}/apq8009-robot-boot.img.gz
+  cp ../../_build/apq8009-robot-boot.img.xz.enc ${refo}/apq8009-robot-boot.img.xz
 }
 
 function mountota()
@@ -331,9 +331,9 @@ function mountota()
   mkdir ${dir}edits
   if [ -d ${dir}apps_proc ]; then
      echo "Woah this is a REALLY old OTA... Mounting anyway. This could actually work on your robot, but I don't guarantee it."
-     mv ${dir}apps_proc/poky/build/tmp-glibc/deploy/images/apq8009-robot-robot/apq8009-robot-sysfs.img.gz ${dir}
-     gzip -d ${dir}apq8009-robot-sysfs.img.gz
-     rm -f ${dir}apq8009-robot-sysfs.img.gz
+     mv ${dir}apps_proc/poky/build/tmp-glibc/deploy/images/apq8009-robot-robot/apq8009-robot-sysfs.img.xz ${dir}
+     xz -d ${dir}apq8009-robot-sysfs.img.xz
+     rm -f ${dir}apq8009-robot-sysfs.img.xz
      mount -o loop,rw,sync ${dir}apq8009-robot-sysfs.img ${dir}edits
      rm -rf ${dir}apps_proc
      rm -rf ${dir}latest.tar
@@ -341,18 +341,18 @@ function mountota()
      exit 0
   fi
   echo "Decrypting"
-  openssl enc -d -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${dir}apq8009-robot-sysfs.img.gz -out ${dir}apq8009-robot-sysfs.img.dec.gz
+  openssl enc -d -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${dir}apq8009-robot-sysfs.img.xz -out ${dir}apq8009-robot-sysfs.img.dec.xz
   echo "Decompressing. This may take a minute."
-  gzip -d ${dir}apq8009-robot-sysfs.img.dec.gz
+  xz -d ${dir}apq8009-robot-sysfs.img.dec.xz
   echo "Rename img.dec to img"
   mv ${dir}apq8009-robot-sysfs.img.dec ${dir}apq8009-robot-sysfs.img
   echo "Mounting IMG"
   mount -o loop,rw,sync ${dir}apq8009-robot-sysfs.img ${dir}edits
   echo "Removing tmp files"
-  rm ${dir}apq8009-robot-sysfs.img.gz
+  rm ${dir}apq8009-robot-sysfs.img.xz
   rm -f ${dir}latest.tar
   rm -f ${dir}manifest.sha256
-  rm -f ${dir}apq8009-robot-boot.img.gz
+  rm -f ${dir}apq8009-robot-boot.img.xz
   rm -f ${dir}manifest.ini
   echo "Done! You can now mess around (as root) in ${dir}edits/."
 }
@@ -362,29 +362,29 @@ function buildcustomandsign()
   echo "Compressing. This may take a minute."
   umount ${dir}edits
   sysfsbytes=`du -b ${dir}apq8009-robot-sysfs.img | awk '{print $1;}'`
-  gzip -k ${dir}apq8009-robot-sysfs.img
+  xz -9 --extreme -k ${dir}apq8009-robot-sysfs.img
   mkdir ${dir}final
   echo "Encrypting"
-  openssl enc -e -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${dir}apq8009-robot-sysfs.img.gz -out ${dir}final/apq8009-robot-sysfs.img.dec.gz
+  openssl enc -e -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${dir}apq8009-robot-sysfs.img.xz -out ${dir}final/apq8009-robot-sysfs.img.dec.xz
   mkdir -p ${dir}tempSign
-  cp ${dir}final/apq8009-robot-sysfs.img.dec.gz ${dir}tempSign/apq8009-robot-sysfs.img.gz
+  cp ${dir}final/apq8009-robot-sysfs.img.dec.xz ${dir}tempSign/apq8009-robot-sysfs.img.xz
   echo "Decrypting into temp directory to get correct hash"
-  openssl enc -d -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${dir}tempSign/apq8009-robot-sysfs.img.gz -out ${dir}tempSign/apq8009-robot-sysfs.img.dec.gz
-  gzip -d ${dir}tempSign/apq8009-robot-sysfs.img.dec.gz
-  mv ${dir}final/apq8009-robot-sysfs.img.dec.gz ${dir}/final/apq8009-robot-sysfs.img.gz
+  openssl enc -d -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${dir}tempSign/apq8009-robot-sysfs.img.xz -out ${dir}tempSign/apq8009-robot-sysfs.img.dec.xz
+  xz -d ${dir}tempSign/apq8009-robot-sysfs.img.dec.xz
+  mv ${dir}final/apq8009-robot-sysfs.img.dec.xz ${dir}/final/apq8009-robot-sysfs.img.xz
   echo "Figuring out SHA256 sum and putting it into manifest."
   sysfssum=$(sha256sum ${dir}tempSign/apq8009-robot-sysfs.img.dec | head -c 64)
   mkdir -p ${refo}/tempBoot
-  cp ${refo}/apq8009-robot-boot.img.gz ${refo}/tempBoot/
-  openssl enc -d -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${refo}/tempBoot/apq8009-robot-boot.img.gz -out ${refo}/tempBoot/apq8009-robot-boot.img.dec.gz
-  gzip -d ${refo}/tempBoot/apq8009-robot-boot.img.dec.gz
+  cp ${refo}/apq8009-robot-boot.img.xz ${refo}/tempBoot/
+  openssl enc -d -aes-256-ctr -pass file:${refo}/ota.pas -md md5 -in ${refo}/tempBoot/apq8009-robot-boot.img.xz -out ${refo}/tempBoot/apq8009-robot-boot.img.dec.xz
+  xz -d ${refo}/tempBoot/apq8009-robot-boot.img.dec.xz
   bootbytes=$(du -b ${refo}/tempBoot/apq8009-robot-boot.img.dec | awk '{print $1;}')
   bootsha=$(sha256sum ${refo}/tempBoot/apq8009-robot-boot.img.dec | head -c 64)
   if [ ${BUILD_TYPE} == "prod" ]; then
-     printf '%s\n' '[META]' 'manifest_version=0.9.2' 'update_version='${base}'.'${code}${BUILD_SUFFIX} 'ankidev=0' 'num_images=2' 'reboot_after_install=0' '[BOOT]' 'encryption=1' 'delta=0' 'compression=gz' 'wbits=31' 'bytes='${bootbytes} 'sha256='${bootsha} '[SYSTEM]' 'encryption=1' 'delta=0' 'compression=gz' 'wbits=31' 'bytes='${sysfsbytes} 'sha256='${sysfssum} >${refo}/manifest.ini
+     printf '%s\n' '[META]' 'manifest_version=0.9.2' 'update_version='${base}'.'${code}${BUILD_SUFFIX} 'ankidev=0' 'num_images=2' 'reboot_after_install=0' '[BOOT]' 'encryption=1' 'delta=0' 'compression=xz' 'wbits=31' 'bytes='${bootbytes} 'sha256='${bootsha} '[SYSTEM]' 'encryption=1' 'delta=0' 'compression=xz' 'wbits=31' 'bytes='${sysfsbytes} 'sha256='${sysfssum} >${refo}/manifest.ini
   else
      #echoing would be long so just printf
-     printf '%s\n' '[META]' 'manifest_version=1.0.0' 'update_version='${base}'.'${code}${BUILD_SUFFIX} 'ankidev=1' 'num_images=2' 'reboot_after_install=0' '[BOOT]' 'encryption=1' 'delta=0' 'compression=gz' 'wbits=31' 'bytes='${bootbytes} 'sha256='${bootsha} '[SYSTEM]' 'encryption=1' 'delta=0' 'compression=gz' 'wbits=31' 'bytes='${sysfsbytes} 'sha256='${sysfssum} >${refo}/manifest.ini
+     printf '%s\n' '[META]' 'manifest_version=1.0.0' 'update_version='${base}'.'${code}${BUILD_SUFFIX} 'ankidev=1' 'num_images=2' 'reboot_after_install=0' '[BOOT]' 'encryption=1' 'delta=0' 'compression=xz' 'wbits=31' 'bytes='${bootbytes} 'sha256='${bootsha} '[SYSTEM]' 'encryption=1' 'delta=0' 'compression=xz' 'wbits=31' 'bytes='${sysfsbytes} 'sha256='${sysfssum} >${refo}/manifest.ini
   fi
   if [ ${BUILD_TYPE} == "oskrs" ] || [ ${BUILD_TYPE} == "prod" ]; then
      echo "Signing manifest.ini"
@@ -399,21 +399,21 @@ function buildcustomandsign()
   else
      echo "Not putting manifest.sha256 in because the build type is not oskr."
   fi
-  tar -C ${refo} -rf ${refo}/temp.tar apq8009-robot-boot.img.gz
+  tar -C ${refo} -rf ${refo}/temp.tar apq8009-robot-boot.img.xz
   cp ${refo}/temp.tar ${dir}final/
-  tar -C ${dir}final -rf ${dir}final/temp.tar apq8009-robot-sysfs.img.gz
+  tar -C ${dir}final -rf ${dir}final/temp.tar apq8009-robot-sysfs.img.xz
   mv ${dir}final/temp.tar ${dir}final/${base}.${code}.ota
   echo "Removing some temp files."
   rm -rf ${dir}edits
-  rm -f ${dir}final/apq8009-robot-sysfs.img.gz
+  rm -f ${dir}final/apq8009-robot-sysfs.img.xz
   rm -f ${dir}apq8009-robot-sysfs.img
-  rm -f ${dir}apq8009-robot-sysfs.img.gz
+  rm -f ${dir}apq8009-robot-sysfs.img.xz
   rm -f ${refo}/manifest.ini
   rm -f ${refo}/manifest.sha256
   rm -f ${refo}/temp.tar
   rm -rf ${dir}tempSign
   rm -rf ${refo}/tempBoot
-  rm -r ${refo}/apq8009-robot-boot.img.gz
+  rm -r ${refo}/apq8009-robot-boot.img.xz
   mv ${dir}final/${base}.${code}.ota ${dir}
   rm -rf ${dir}final
   echo "Done! Output should be in ${dir}${base}.${code}.ota!"

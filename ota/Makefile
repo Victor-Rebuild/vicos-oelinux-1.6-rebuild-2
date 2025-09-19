@@ -9,14 +9,15 @@ BOOT_STEM=apq8009-robot-boot
 SYS_STEM=apq8009-robot-sysfs
 MANIFEST=$(BUILD)/manifest
 
-BOOT_GZ=$(BUILD)/$(BOOT_STEM).img.gz
+BOOT_GZ=$(BUILD)/$(BOOT_STEM).img.xz
 BOOT_GZ_ENC=$(BOOT_GZ).enc
 BOOT_STATS=$(BUILD)/$(BOOT_STEM).stats
-SYS_GZ=$(BUILD)/$(SYS_STEM).img.gz
+SYS_GZ=$(BUILD)/$(SYS_STEM).img.xz
 SYS_STATS=$(BUILD)/$(SYS_STEM).stats
 SYS_GZ_ENC=$(SYS_GZ).enc
 
-GZIP_MODE=--best
+GZIP_MODE=-9
+GZIP_MODE_2=--extreme
 GZIP_WBITS=31
 
 UNAME_S := $(shell uname -s)
@@ -70,11 +71,11 @@ $(BUILD)/%.img: $(IMG_DIR)/%.img
 	# Pad image to a multiple of 4096 bytes.  Needed for later delta updates
 	dd if=/dev/zero of=$@ bs=1 count=$(shell echo $$(( 4096 - `stat -c %s $<` % 4096 ))) conv=notrunc oflag=append > /dev/null 2> /dev/null
 
-%.img.gz: %.img
+%.img.xz: %.img
 	echo "Compressing $<..."
-	./pigz/amd64/pigz $(GZIP_MODE) --force --keep $<
+	xz $(GZIP_MODE) $(GZIP_MODE_2) --force --keep $<
 
-%.img.gz.enc: %.img.gz
+%.img.xz.enc: %.img.xz
 	openssl aes-256-ctr -pass $(OTAPASS) -md md5 -in $< -out $@ > /dev/null 2> /dev/null
 
 $(IMG_DIR)/apq8009-robot-sysfs.ext4:
@@ -91,7 +92,7 @@ $(BUILD)/%.img: $(IMG_DIR)/%.ext4
 	openssl dgst -sha256 -sign $(OTAKEY) -passin env:OTA_MANIFEST_SIGNING_KEY -out $@ $<
 
 orange_boot_img: $(BUILD)
-	curl http://vmosAlpha.ankicore.com/apq8009-robot-boot.img.gz.enc > $(BOOT_GZ_ENC)
+	curl http://vmosAlpha.ankicore.com/apq8009-robot-boot.img.xz.enc > $(BOOT_GZ_ENC)
 	touch $(BOOT_GZ_ENC)
 	curl http://vmosAlpha.ankicore.com/apq8009-robot-boot.stats > $(BOOT_STATS)
 	touch $(BOOT_STATS)
@@ -106,7 +107,7 @@ $(MANIFEST).ini: $(BUILD) $(BOOT_STATS) $(SYS_STATS)
 	echo "[BOOT]"                               >> $@
 	echo "encryption=$(OTAENC)"                 >> $@
 	echo "delta=0"                              >> $@
-	echo "compression=gz"                       >> $@
+	echo "compression=xz"                       >> $@
 	echo "wbits=$(GZIP_WBITS)"                  >> $@
 	cat $(BOOT_STATS)                           >> $@
 	echo "[SYSTEM]"                             >> $@
@@ -127,8 +128,8 @@ $(OTA_FILE): $(MANIFEST).ini $(BOOT_GZ_ENC) $(SYS_GZ_ENC)
 	--group=$(GROUP) \
 	-C $(BUILD) \
 	manifest.ini \
-	apq8009-robot-boot.img.gz.enc \
-	apq8009-robot-sysfs.img.gz.enc
+	apq8009-robot-boot.img.xz.enc \
+	apq8009-robot-sysfs.img.xz.enc
 
 $(OTA_FILE)-sign: $(MANIFEST).sha256 $(BOOT_GZ_ENC) $(SYS_GZ_ENC)
 	$(TAR) --transform='flags=r;s|.enc||' -cf $(patsubst %-sign,%, $@) \
@@ -138,8 +139,8 @@ $(OTA_FILE)-sign: $(MANIFEST).sha256 $(BOOT_GZ_ENC) $(SYS_GZ_ENC)
 	-C $(BUILD) \
 	manifest.ini \
 	manifest.sha256 \
-	apq8009-robot-boot.img.gz.enc \
-	apq8009-robot-sysfs.img.gz.enc
+	apq8009-robot-boot.img.xz.enc \
+	apq8009-robot-sysfs.img.xz.enc
 
 serve: $(OTA_FILE)
 	cd $(BUILD); python -m SimpleHTTPServer 5555
