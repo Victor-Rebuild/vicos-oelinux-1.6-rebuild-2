@@ -40,7 +40,7 @@ cd anki/victor-1.6
 
 #if [[ ${ELLIE} = "1" ]]; then
     git checkout Main
-    git pull --recursive
+    git pull --recurse-submodules
     git checkout $REBUILD_COMMIT
 #fi
 
