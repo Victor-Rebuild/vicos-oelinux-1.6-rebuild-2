@@ -1,7 +1,5 @@
 # vicos-1.6-rebuild-2
 
-This is where the ota code for 1.6-rebuild lives!
-
 ## Prebuilt OTA:
 
 Not yet
@@ -36,6 +34,10 @@ cd vicos-oelinux-1.6-rebuild-2
 ### Where is my OTA?
 
 `./_build/1.6.1.1.ota`
+
+## Rebuilds
+
+- Wire tries to make it so whenever changes are made, you don't need to do a full rebuild; however, due to this being synced up to poky's `master` branch, behavior can be unpredictable. **Due to this, I recommend doing a full rebuild each time.** You can clean your build directory by running `sudo rm -rf poky/build/tmp-glibc poky/build/cache poky/build/sstate-cache poky/build/downloads`.
 
 ##  Donate
 
