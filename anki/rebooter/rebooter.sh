@@ -30,7 +30,7 @@ reboot_robot(){
   $VERBOSE && echo "Rebooting... see you on the other side or whatever"
   das_event "robot.maintenance_reboot" "success"
   status /data/maintenance_reboot 1
-  /sbin/reboot
+  /sbin/reboot -f
 }
 
 uptime_secs(){
