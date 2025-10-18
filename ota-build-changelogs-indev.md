@@ -2,6 +2,12 @@
 ## https://modder.my.to/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0015 (2025/10/18)
+Actually fix rebooter
+
+## 1.6.1.0014 (2025/10/15)
+Fix rebooter, update to victor commit ed60b0d96132bb5980e980783f023c2328a2562e, fix blackjack dealer tts, add user customizable backpack lights
+
 ## 1.6.1.0013 (2025/09/18)
 Uncan prod builds, update victor to 0b916a6fe7291a1dae66cc7d371c174952066532.
 

@@ -30,7 +30,7 @@ reboot_robot(){
   $VERBOSE && echo "Rebooting... see you on the other side or whatever"
   das_event "robot.maintenance_reboot" "success"
   status /data/maintenance_reboot 1
-  /sbin/reboot -f
+  /sbin/reboot
 }
 
 uptime_secs(){
@@ -65,7 +65,7 @@ inhibitors(){
     gov=$(cat "$gov_file")
     [[ "$gov" != powersave* && "$gov" != userspace* ]] || list+=(powersave)
   fi
-  ps_list | grep -q "$UPDATER_PROCESS" && list+=("$UPDATER_PROCESS")
+  #ps_list | grep -q "$UPDATER_PROCESS" && list+=("$UPDATER_PROCESS")
   echo "${list[@]}"
 }
 
