@@ -2,6 +2,9 @@
 ## https://modder.my.to/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0015 (2025/10/23)
+Actually actually "fix" rebooter, update victor to b21be4d18ea34519e0653509ec44a42380c7edbc which allows Vector to count age in years.
+
 ## 1.6.1.0015 (2025/10/18)
 Actually fix rebooter
 

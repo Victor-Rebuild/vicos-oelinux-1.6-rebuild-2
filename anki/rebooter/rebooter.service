@@ -7,5 +7,6 @@ Requires=fake-hwclock.service
 
 [Service]
 Type=simple
-EnvironmentFile=-/data/etc/rebooter.env
-ExecStart=/sbin/rebooter.sh
+ExecStartPre=/anki/bin/vic-log-event rebooter.service "Reboot time has arrived.  See you on the other side...."
+ExecStartPre=/usr/bin/sleep 3
+ExecStart=/usr/bin/systemctl reboot
