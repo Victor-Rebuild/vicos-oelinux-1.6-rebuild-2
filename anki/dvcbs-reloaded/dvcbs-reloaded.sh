@@ -286,6 +286,7 @@ function copyfull()
   echo ${builddate} > ${dir}edits/etc/version
   echo ro.product.name=Vector >> ${dir}edits/build.prop
   echo ro.revision=project-victor_os >> ${dir}edits/build.prop
+  echo ro.build.os.cfw.name=wire-os_wire_os >> ${IMAGE_ROOTFS}/build.prop
   echo ro.anki.version=${base}.${code} >> ${dir}edits/build.prop
   echo ro.anki.victor.version=${base}.${code} >> ${dir}edits/build.prop
   echo ro.build.fingerprint=${base}.${code}${BUILD_SUFFIX} >> ${dir}edits/build.prop
