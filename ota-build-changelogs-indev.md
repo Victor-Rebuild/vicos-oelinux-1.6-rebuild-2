@@ -2,6 +2,9 @@
 ## https://modder.my.to/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0019 (2025/10/25)
+I hate myself and rebooter
+
 ## 1.6.1.0019 (2025/10/24)
 Rebooter works, make it only activate if uptime is over a hour.
 
