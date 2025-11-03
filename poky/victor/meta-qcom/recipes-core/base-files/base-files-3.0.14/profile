@@ -20,7 +20,6 @@ if [ -d /etc/profile.d ]; then
 	unset i
 fi
 
-
 if [ ! -f /data/.config/ ]; then
 	mkdir -p /data/.config/
 fi
@@ -46,7 +45,7 @@ alias l='ls -CF --color=auto'
 alias btop="btop --force-utf"
 alias grep='grep --color=auto'
 alias recovery="/sbin/reboot recovery & exit"
-alias neofetch="neofetch --no_config --ascii_colors 2 --ascii /etc/vector-ascii"
+alias neofetch="neofetch --ascii_colors 2 --ascii /etc/vector-ascii"
 alias voff="voff && exit"
 alias mrw="mount -o rw,remount /"
 alias stop_robot="systemctl stop anki-robot.target"
