@@ -20,6 +20,11 @@ if [ -d /etc/profile.d ]; then
 	unset i
 fi
 
+
+if [ ! -f /data/.config/ ]; then
+	mkdir -p /data/.config/
+fi
+
 # Make sure we are on a serial console (i.e. the device used starts with
 # /dev/tty[A-z]), otherwise we confuse e.g. the eclipse launcher which tries do
 # use ssh
