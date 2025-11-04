@@ -4,6 +4,13 @@ EXPECTED_HASH_ELLIE="d454e1542f11d6432e24ced777faa285  -"
 
 unset DO_SIGN
 
+trap ctrl_c INT
+
+function ctrl_c() {
+    echo
+    exit 1
+}
+
 clear
 
 echo "Hey, is this build going to the release or indev stack"
@@ -37,21 +44,20 @@ echo
 
 VERSION_CODE=$version
 
-echo "Now, did you get permission from Ellie to send your builds to the server?"
-echo -n "(yes/no): "
-read ellie_or_not
+#echo "Now, did you get permission from Ellie to send your builds to the server?"
+#echo -n "(yes/no): "
+#read ellie_or_not
 
-if [[ ${ellie_or_not} == "yes" ]]; then
-    echo "Alright fine, you can continue"
-elif [[ ${ellie_or_not} == "no" ]]; then
-    echo "Then don't use this script"
-    exit 1
-else
-    echo "That's not a yes or no"
-    exit 1
-fi
+#if [[ ${ellie_or_not} == "yes" ]]; then
+#    echo "Alright fine, you can continue"
+#elif [[ ${ellie_or_not} == "no" ]]; then
+#    echo "Then don't use this script"
+#    exit 1
+#else
+#    echo "That's not a yes or no"
+#    exit 1
+#fi
 
-echo
 echo "Alright we need the passwords now, what's the prod boot password?"
 echo -n "(aka, the ABOOT/qtipri password): "
 read prod_boot_password
