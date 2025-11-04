@@ -20,6 +20,7 @@ if [ -d /etc/profile.d ]; then
 	unset i
 fi
 
+
 if [ ! -f /data/.config/ ]; then
 	mkdir -p /data/.config/
 fi
