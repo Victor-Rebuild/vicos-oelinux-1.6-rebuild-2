@@ -2,7 +2,10 @@
 ## https://modder.my.to/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
-## 1.6.1.0019 (2025/10/25)
+## 1.6.1.0021 (2025/11/03)
+Fix btop warning, hardcode neofetch ascii art, useful command aliases, add vim-tiny.
+
+## 1.6.1.0020 (2025/10/25)
 I hate myself and rebooter
 
 ## 1.6.1.0019 (2025/10/24)
