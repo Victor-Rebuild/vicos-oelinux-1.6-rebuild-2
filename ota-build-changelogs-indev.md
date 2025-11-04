@@ -1,0 +1,72 @@
+# Indev ota changelogs
+## https://modder.my.to/otas/1.6-rebuild/indev/
+## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
+
+## 1.6.1.0021 (2025/11/03)
+Fix btop warning, hardcode neofetch ascii art, useful command aliases, add vim-tiny.
+
+## 1.6.1.0020 (2025/10/25)
+I hate myself and rebooter
+
+## 1.6.1.0019 (2025/10/24)
+Rebooter works, make it only activate if uptime is over a hour.
+
+## 1.6.1.0018 (2025/10/24)
+Can rebooter just work?
+
+## 1.6.1.0017 (2025/10/23)
+Ugh rebooter...
+
+## 1.6.1.0016 (2025/10/23)
+Actually actually "fix" rebooter, update victor to b21be4d18ea34519e0653509ec44a42380c7edbc which allows Vector to count age in years, add "wire_os" to build.prop so wp doesn't swap out vic-cloud.
+
+## 1.6.1.0015 (2025/10/18)
+Actually fix rebooter
+
+## 1.6.1.0014 (2025/10/15)
+Fix rebooter, update to victor commit ed60b0d96132bb5980e980783f023c2328a2562e, fix blackjack dealer tts, add user customizable backpack lights
+
+## 1.6.1.0013 (2025/09/18)
+Uncan prod builds, update victor to 0b916a6fe7291a1dae66cc7d371c174952066532.
+
+## 1.6.1.0012 (2025/09/17)
+Prod builds are canned, actually add the auto update stuff, nothing else right now.
+
+## 1.6.1.0011 (2025/09/14)
+Add auto updates back in, fix wired user prefs tab by updating vic-cloud and removing gateway (Victor bumped to 0b73d0dfd0a8f18047db6cfd7f96f7be25220650).
+
+## 1.6.1.0011 (2025/09/14)
+Remove python, add rainbow rampost lights back, C++ update engine and rewritten rebooter, put toastito's bot-specific ramposts back in, add prodperf build option so proddev builds work right and we can still make user builds, make the rampost error images point to `error.vicw.xyz` instead of the now dead `support.anki.com`.
+
+## 1.6.1.0010 (2025/09/13)
+First yocto ota, remove 1.6-specific customization temporarily, temp remove auto update implementation, no need to auth to change wifi networks, re-enable alexa, change faultcodehandler time limits, remove blackjack requests.
+
+## 1.6.1.0009 (2025/09/01)
+Dev only, change 1.6 settings to 1.6-rebuild settings, add face overlays, add Falling and Space Daydream animations, mm-anki-camera always trys to target 30 fps now, brand new auto update system rerwitten from scratch.
+
+## 1.6.1.0008 (2025/08/20)
+Wired broke due to it calling for /usr/bin/sleep and not /bin/sleep, this ota is just a fix for that
+
+## 1.6.1.0007 (2025/08/20)
+Manully cleaned update-os for this build, nothing else.
+
+## 1.6.1.0006 (2025/08/20 (Actually 2025/08/19 but it's like 11:45pm and I really don't wanna build any otas right now))
+Use new rampost boot images made by Toastito in V&F, make /data executable by default, make update-os up the cpu speeds and stop anki processes remove sb_server since we use picovoice now, port over wireutils from wireOS, re-enable HMP, cleaned kernel.
+
+## 1.6.1.0005 (2025/08/19)
+Don't copy in prebuilt ramposts and modules, use the one made with the ota, remove unneeded stuff from dvcbs-reloaded to hopefully cut down repo size a little, fix dynamic cpu speed on Vector 2.0 by updating Victor commit to [dd358480a177c6fa6d9a78dcd18a51900b806bb4](https://github.com/Switch-modder/victor-1.6-rebuild/commit/dd358480a177c6fa6d9a78dcd18a51900b806bb4).
+
+## 1.6.1.0004 (2025/08/19)
+Actually make the new different ramposts apply, don't clean anki every rebuild since cmake should be able to figure out what it needs to recompile should it have to happen.
+
+## 1.6.1.0003 (2025/08/18)
+Add a seperate proddev bitbake option, use different ramposts to confirm that we can have build specific ramposts.
+
+## 1.6.1.0002 (2025/08/18)
+Fixed the prod boot images so that they boot again, add new 1.6-rebuild rampost images.
+
+## 1.6.1.0001 (2025/08/18)
+Wired fully works, PicoVoice wakeword training works, changed OSKR messages to ankidevunit.
+
+## 1.6.1.0000 (2025/08/16)
+Dev only, first ota run, basically plain vicos-oelinux-nosign but with 1.6 anki.

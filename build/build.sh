@@ -8,9 +8,9 @@ set -e
 # Hidden env vars:
 # 1. AUTO_UPDATE: set to 1 if you want to inhibit the -au interaction
 
-CREATOR="Wire"
+CREATOR="Ellie"
 
-CURRENT_CONTAINER_NAME="vic-yocto-builder-7"
+CURRENT_CONTAINER_NAME="rebuild-yocto-builder-7"
 
 function usage() {
     echo "$1"
@@ -115,8 +115,8 @@ fi
 
 is_victor_there_and_compatible
 
-if [[ "$BOT_TYPE" != "oskr" && "$BOT_TYPE" != "dev" && "$BOT_TYPE" != "prod" && "$BOT_TYPE" != "devcloudless" ]]; then
-    usage "BOT_TYPE (-bt) should be 'oskr' or 'dev', got: $BOT_TYPE"
+if [[ "$BOT_TYPE" != "oskr" && "$BOT_TYPE" != "dev" && "$BOT_TYPE" != "prod" && "$BOT_TYPE" != "devcloudless" && "$BOT_TYPE" != "proddev" ]]; then
+    usage "BOT_TYPE (-bt) should be 'oskr', 'dev', 'devcloudless', prod, or proddev, got: $BOT_TYPE"
 fi
 
 if [[ "$DO_SIGN" == 1 && "$OTA_SIGNING_KEY_PASSWORD" == "" ]]; then
@@ -173,7 +173,7 @@ ANKIDEV=1
 if [[ $BOT_TYPE == "oskr" ]]; then
         export BOOT_IMAGE_SIGNING_PASSWORD="${BOOT_PASSWORD}"
 	BOOT_MAKE_COMMAND="make oskrsign"
-elif [[ $BOT_TYPE == "prod" ]]; then
+elif [[ $BOT_TYPE == "prod" || $BOT_TYPE == "proddev" ]]; then
         export BOOT_IMAGE_SIGNING_PASSWORD="${BOOT_PASSWORD}"
 	BOOT_MAKE_COMMAND="make prodsign"
 	ANKIDEV=0
@@ -202,6 +202,8 @@ fi
 # 	#sleep 10
 # fi
 
+rm -rf _build/*.ota
+
 if [[ -z $(docker images -q ${CURRENT_CONTAINER_NAME}) ]]; then
 	docker build --build-arg DIR_PATH="${DIRPATH}" --build-arg USER_NAME=$USER --build-arg UID=$(id -u $USER) --build-arg GID=$(id -u $USER) -t ${CURRENT_CONTAINER_NAME} build/
 else
@@ -228,6 +230,8 @@ docker run -it --rm \
     export BOOT_IMAGE_SIGNING_PASSWORD=${BOOT_PASSWORD} && \
     ${BOOT_MAKE_COMMAND} && \
     ANKIDEV=${ANKIDEV} make"
+
+RUN_FROM_MAIN=1 INCREMENT=$BUILD_INCREMENT PRODorOSKR=$BOT_TYPE ./build/inject-anki.sh
 
 echo
 echo -e "\033[1;32mCompleted successfully. Output is in ./_build.\033[0m"

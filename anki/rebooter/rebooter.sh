@@ -65,7 +65,7 @@ inhibitors(){
     gov=$(cat "$gov_file")
     [[ "$gov" != powersave* && "$gov" != userspace* ]] || list+=(powersave)
   fi
-  ps_list | grep -q "$UPDATER_PROCESS" && list+=("$UPDATER_PROCESS")
+  #ps_list | grep -q "$UPDATER_PROCESS" && list+=("$UPDATER_PROCESS")
   echo "${list[@]}"
 }
 
