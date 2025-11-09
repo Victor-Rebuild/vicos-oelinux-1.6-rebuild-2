@@ -32,10 +32,9 @@ do_install:append() {
     # kercre123 - install custom profile
     install -m 0755 ${WORKDIR}/sources/profile ${D}${sysconfdir}/profile
 
-    # Switch-modder - We can't save configs such as neofetch and btop's configs to / because it's set to ro.
-    # To get around that we'll symlink the .config folder so that it saves to by default to /data/.config
+    # Switch-modder - Fuck it, move root folder in and of itself to /data
     mkdir -p ${D}/root/
-    ln -s /data/.config ${D}/root/.config
+    ln -s /data/root ${D}/root
 
     # kercre123 - we use connman
     #install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants
