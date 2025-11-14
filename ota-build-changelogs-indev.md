@@ -38,7 +38,7 @@ Uncan prod builds, update victor to 0b916a6fe7291a1dae66cc7d371c174952066532.
 ## 1.6.1.0012 (2025/09/17)
 Prod builds are canned, actually add the auto update stuff, nothing else right now.
 
-## 1.6.1.0011 (2025/09/14)
+## 1.6.1.0011 (2025/09/14), hotpatch
 Add auto updates back in, fix wired user prefs tab by updating vic-cloud and removing gateway (Victor bumped to 0b73d0dfd0a8f18047db6cfd7f96f7be25220650).
 
 ## 1.6.1.0011 (2025/09/14)
