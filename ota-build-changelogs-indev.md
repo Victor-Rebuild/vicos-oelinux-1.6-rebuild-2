@@ -2,8 +2,8 @@
 ## https://modder.my.to/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
-## 1.6.1.0023 (2025/11/14)
-Update victor-1.6 to c7e100186d48259e1d856aef15abf43e6e4bfc5e, add snowglobe animation since it snowed here, remove now obsolete wired freqchange methods, restore frequency to what it was before instead of defaulting to balanced.
+## 1.6.1.0023 (2025/11/20)
+Update victor-1.6 to 6d8c2e5c3a29ad8fd49a1e793f79ff60c4b13ea2, add snowglobe animation since it snowed here, remove now obsolete wired freqchange methods, restore frequency to what it was before instead of defaulting to balanced, tighten button press window, make crashs reboot faster.
 
 ## 1.6.1.0022 (2025/11/09)
 Update victor-1.6 to 97e0c05353e8302891a4174173a266ae1555a9f1, fix authing with servers, better 2.0 eyes, correct wired typo.
