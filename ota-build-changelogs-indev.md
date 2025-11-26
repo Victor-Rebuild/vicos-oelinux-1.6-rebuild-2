@@ -2,6 +2,9 @@
 ## https://modder.my.to/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0025 (2025/11/26)
+Update victor-1.6 to 5c17cea29bffd02c170add60c4e1baca890060d2, adjust timing of success/fail sound effect, fix nightly reboots staying awake.
+
 ## 1.6.1.0023 (2025/11/20)
 Update victor-1.6 to 6d8c2e5c3a29ad8fd49a1e793f79ff60c4b13ea2, add snowglobe animation since it snowed here, remove now obsolete wired freqchange methods, restore frequency to what it was before instead of defaulting to balanced, tighten button press window, make crashs reboot faster.
 
