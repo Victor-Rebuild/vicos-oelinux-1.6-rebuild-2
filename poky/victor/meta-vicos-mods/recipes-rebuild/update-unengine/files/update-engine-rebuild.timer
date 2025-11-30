@@ -1,6 +1,6 @@
 [Unit]
 Description=Hourly checks for update, made by Ellie for 1.6 rebuild
-Requires=rebuild-update-unengine.service
+Requires=update-engine-rebuild.service
 
 [Timer]
 OnCalendar=*-*-* *:00:00

@@ -103,7 +103,7 @@ else
 fi
 
 echo
-echo "Just so we're clear, this is gonna build a dev, prod, and oskr ota and send it to the $release_or_indev stack on modder.my.to"
+echo "Just so we're clear, this is gonna build a dev, prod, and oskr ota and send it to the $release_or_indev stack on anki2.ca"
 echo "Are we good with this?"
 echo -n "(yes/no): "
 read confirm_send
@@ -143,4 +143,4 @@ echo "Unsetting variables"
 unset $VERSION_CODE $prod_boot_password $oskr_boot_password $OTA_PASS $ota_password $BUILD_STACK #$ELLIE
 echo
 
-echo "Done! Builds should be at https://modder.my.to/otas/1.6-rebuild/$BUILD_STACK/"
+echo "Done! Builds should be at https://anki2.ca/otas/1.6-rebuild/$BUILD_STACK/"

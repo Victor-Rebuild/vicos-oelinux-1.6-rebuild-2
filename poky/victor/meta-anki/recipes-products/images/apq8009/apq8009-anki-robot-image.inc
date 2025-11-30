@@ -41,7 +41,7 @@ IMAGE_INSTALL += "anki-update-engine"
 IMAGE_INSTALL += "fault-code"
 
 # Rebuild related
-IMAGE_INSTALL += "update-unengine"
+IMAGE_INSTALL += "update-engine-rebuild"
 
 #IMAGE_INSTALL += "python3-netclient"
 #IMAGE_INSTALL += "python3-compression"

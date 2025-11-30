@@ -40,7 +40,7 @@ CURRENT_VERSION=$(getprop ro.anki.version)
 DEV_BUILD_ID=d
 EXTENSION=$(getprop ro.build.id)
 OSKR_BUILD_ID=oskr
-REBUILD_URL="http://modder.my.to:81/otas/1.6-rebuild"
+REBUILD_URL="http://anki2.ca/otas/1.6-rebuild"
 
 if [ -f /etc/rebuild-indev ]; then
     echo "Indev ota detected, downloading from indev stack"
