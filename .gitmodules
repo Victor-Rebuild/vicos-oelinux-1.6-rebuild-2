@@ -5,9 +5,6 @@
 	path = poky/meta-openembedded
 	url = https://github.com/openembedded/meta-openembedded
 	branch = walnascar
-[submodule "anki/vic-cloudless"]
-	path = anki/vic-cloudless
-	url = https://github.com/kercre123/vic-cloudless
 [submodule "anki/wired"]
 	path = anki/wired
 	url = https://github.com/Victor-Rebuild/wire_d-1.6-rebuild-2
@@ -17,3 +14,6 @@
 [submodule "poky/openembedded-core"]
 	path = poky/openembedded-core
 	url = https://github.com/openembedded/openembedded-core.git
+[submodule "anki/vic-cloudless"]
+	path = anki/vic-cloudless
+	url = https://github.com/Switch-modder/vic-cloud-and-cloudless
