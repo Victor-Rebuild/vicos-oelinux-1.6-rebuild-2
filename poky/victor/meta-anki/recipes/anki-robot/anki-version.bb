@@ -32,17 +32,30 @@ do_install:append () {
     echo 0444 ${D}/etc/os-version-rev
 
     # build type tag
-    if [[ ${USER_BUILD} != "1" ]]; then
+    if [[ ${CLOUDLESS} == "1" ]]; then
         if [[ ${OSKR} = "1" ]]; then
             # set to "oskr" for oskr builds
-	    ANKI_BUILD_TYPE="oskr"
-	elif [[ ${ANKI_RESOURCE_ESCAPEPOD} == "1" ]]; then
+            ANKI_BUILD_TYPE="oskrcldless"
+        elif [[ ${PROD} == "1" ]]; then
             # set to "oskr" for oskr builds
-	    ANKI_BUILD_TYPE="epd"
-	else
+            ANKI_BUILD_TYPE="cldless"
+        else
             # set to "d" for dev builds
-            ANKI_BUILD_TYPE="d"
-	fi
+            ANKI_BUILD_TYPE="dcldless"
+        fi
+    else
+        if [[ ${USER_BUILD} != "1" ]]; then
+            if [[ ${OSKR} = "1" ]]; then
+                # set to "oskr" for oskr builds
+                ANKI_BUILD_TYPE="oskr"
+            elif [[ ${ANKI_RESOURCE_ESCAPEPOD} == "1" ]]; then
+                # set to "oskr" for oskr builds
+                ANKI_BUILD_TYPE="epd"
+            else
+                # set to "d" for dev builds
+                ANKI_BUILD_TYPE="d"
+        fi
+    fi
     elif [[ ${DEV} = "1" ]]; then
 	# set to "ud" for userdev builds
 	ANKI_BUILD_TYPE="ud"
