@@ -1,5 +1,5 @@
 # Indev ota changelogs
-## https://modder.my.to/otas/1.6-rebuild/indev/
+## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
 ## 1.6.1.0025 (2025/11/26)
