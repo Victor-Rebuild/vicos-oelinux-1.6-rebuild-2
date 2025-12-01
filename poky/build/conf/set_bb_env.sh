@@ -98,7 +98,7 @@ function build-8009-robot-perf-image() {
   cdbitbake ${@} machine-robot-image
 }
 
-function build-8009-robot-perf-cloudless-image() {
+function build-8009-robot-perf-devcloudless-image() {
   unset_bb_env
   export MACHINE=apq8009-robot
   export DISTRO=msm-perf
@@ -115,6 +115,17 @@ function build-8009-robot-oskr-image() {
   export VARIANT=perf
   export PRODUCT=robot
   export OSKR=1
+  cdbitbake ${@} machine-robot-image
+}
+
+function build-8009-robot-perf-oskrcloudless-image() {
+  unset_bb_env
+  export MACHINE=apq8009-robot
+  export DISTRO=msm-perf
+  export VARIANT=perf
+  export PRODUCT=robot
+  export OSKR=1
+  export CLOUDLESS=1
   cdbitbake ${@} machine-robot-image
 }
 
@@ -135,6 +146,17 @@ function build-8009-robot-prodperf-image() {
   export VARIANT=perf
   export PRODUCT=robot
   export PROD=1
+  cdbitbake ${@} machine-robot-image
+}
+
+function build-8009-robot-perf-prodcloudless-image() {
+  unset_bb_env
+  export MACHINE=apq8009-robot
+  export DISTRO=msm-perf
+  export VARIANT=perf
+  export PRODUCT=robot
+  export PROD=1
+  export CLOUDLESS=1
   cdbitbake ${@} machine-robot-image
 }
 
@@ -226,7 +248,15 @@ function build-dev() {
 }
 
 function build-devcloudless() {
-  build-8009-robot-perf-cloudless-image ${@}
+  build-8009-robot-perf-devcloudless-image ${@}
+}
+
+function build-oskrcloudless() {
+  build-8009-robot-perf-oskrcloudless-image ${@}
+}
+
+function build-prodcloudless() {
+  build-8009-robot-perf-prodcloudless-image ${@}
 }
 
 function build-proddev() {
@@ -334,8 +364,10 @@ list-build-commands()
     echo "Convenience commands for building Victor images:"
     echo "  build-dev"
     echo "  build-oskr"
-    echo "  build-devcloudless"
     echo "  build-prod"
+    echo "  build-devcloudless"
+    echo "  build-oskrcloudless"
+    echo "  build-prodcloudless"
     echo
     echo "Use 'list-build-commands' to see this list again."
     echo

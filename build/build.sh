@@ -132,7 +132,7 @@ fi
 
 is_victor_there_and_compatible
 
-if [[ "$BOT_TYPE" != "oskr" && "$BOT_TYPE" != "dev" && "$BOT_TYPE" != "prod" && "$BOT_TYPE" != "devcloudless" && "$BOT_TYPE" != "proddev" ]]; then
+if [[ "$BOT_TYPE" != "oskr" && "$BOT_TYPE" != "dev" && "$BOT_TYPE" != "prod" && "$BOT_TYPE" != "devcloudless" && "$BOT_TYPE" != "oskrcloudless" && "$BOT_TYPE" != "prodcloudless" && "$BOT_TYPE" != "proddev" ]]; then
     usage "BOT_TYPE (-bt) should be 'oskr', 'dev', 'devcloudless', prod, or proddev, got: $BOT_TYPE"
 fi
 
@@ -192,10 +192,10 @@ export BOOT_IMAGE_SIGNING_PASSWORD="${BOOT_PASSWORD}"
 
 ANKIDEV=1
 
-if [[ $BOT_TYPE == "oskr" ]]; then
+if [[ $BOT_TYPE == "oskr" || $BOT_TYPE == "oskrcloudless" ]]; then
     export BOOT_IMAGE_SIGNING_PASSWORD="${BOOT_PASSWORD}"
 	BOOT_MAKE_COMMAND="make oskrsign"
-elif [[ $BOT_TYPE == "prod" || $BOT_TYPE == "proddev" ]]; then
+elif [[ $BOT_TYPE == "prod" || $BOT_TYPE == "proddev" || $BOT_TYPE == "prodcloudless" ]]; then
     export BOOT_IMAGE_SIGNING_PASSWORD="${BOOT_PASSWORD}"
 	BOOT_MAKE_COMMAND="make prodsign"
 	ANKIDEV=0
