@@ -302,6 +302,30 @@ function clean-devcloudless() {
   cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudless
 }
 
+function clean-oskrcloudless() {
+  unset_bb_env
+  export MACHINE=apq8009-robot
+  export DISTRO=msm-perf
+  export VARIANT=perf
+  export PRODUCT=robot
+  export CLOUDLESS=1
+  export OSKR=1
+  wire-clean
+  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudless
+}
+
+function clean-prodcloudless() {
+  unset_bb_env
+  export MACHINE=apq8009-robot
+  export DISTRO=msm-perf
+  export VARIANT=perf
+  export PRODUCT=robot
+  export CLOUDLESS=1
+  export PROD=1
+  wire-clean
+  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudless
+}
+
 function clean-prod() {
   unset_bb_env
   export MACHINE=apq8009-robot

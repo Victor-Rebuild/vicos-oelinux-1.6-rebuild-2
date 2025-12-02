@@ -283,8 +283,8 @@ function buildcustomandsign()
     fi
     if [[ ${BUILD_TYPE} == "oskrs" || ${BUILD_TYPE} == "prod" || ${BUILD_TYPE} == "prodcloudless" ]]; then
         echo "Signing manifest.ini"
-        if [ ! -f resources/ota_prod_dec.key ]
-            openssl dgst -sha256 -sign ${refo}/ota_prod.key -out ${refo}/manifest.sha256 ${refo}/manifest.ini
+        if [ ! -f resources/ota_prod_dec.key ]; then
+            openssl rsa -in ${refo}/ota_prod.key -out ${refo}/ota_prod_dec.key
         fi
         openssl dgst -sha256 -sign ${refo}/ota_prod_dec.key -out ${refo}/manifest.sha256 ${refo}/manifest.ini
     else
