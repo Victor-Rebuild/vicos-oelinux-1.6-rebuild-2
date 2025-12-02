@@ -2,7 +2,7 @@
 
 set -e
 
-REBUILD_COMMIT=5c17cea29bffd02c170add60c4e1baca890060d2
+REBUILD_COMMIT=c6bf8681b9e9a07fdc37c4beb04b5b844ee83e48
 
 if [[ ${RUN_FROM_MAIN} != "1" ]]; then
     echo "Don't run this standalone, this is supposed to tail off build.sh"
