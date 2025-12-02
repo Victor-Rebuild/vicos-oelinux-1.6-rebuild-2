@@ -102,8 +102,8 @@ else
     exit 1
 fi
 
-echo "Hey, is this build going to the release or indev stack"
-echo -n "(Release/Indev): "
+echo "Do we want this build to force install?"
+echo -n "(yes/no): "
 read force_update
 
 if [[ ${force_update} == "yes" ]]; then
