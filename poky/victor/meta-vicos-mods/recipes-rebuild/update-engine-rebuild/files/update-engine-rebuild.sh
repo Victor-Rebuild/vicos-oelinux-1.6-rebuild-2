@@ -23,15 +23,6 @@ else
     logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
 fi
 
-if [ -f /anki-devtools ]; then
-    echo "Build has been deployed to, not auto updating"
-    logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
-    exit 0
-else
-    echo "Build is stock, auto updates allowed"
-    logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
-fi
-
 # Auto updates are enabled, clear to set some variables
 # In alphabetical order too!
 BUILDINF="$(cat /build.prop)"
@@ -49,11 +40,13 @@ if [ -f /etc/rebuild-indev ]; then
     echo "Indev ota detected, downloading from indev stack"
     logger -t rebuild-auto-updater "Indev ota detected, downloading from indev stack"
     TARGET_VERSION=$(curl $REBUILD_URL/indev/latest)
+    FORCE_INSTALL=$(curl $REBUILD_URL/indev/force_install)
     INDEV=1
 elif [ -f /etc/rebuild-release ]; then
     echo "Release ota detected, downloading from Release stack"
     logger -t rebuild-auto-updater "Release ota detected, downloading from Release stack"
     TARGET_VERSION=$(curl $REBUILD_URL/release/latest)
+    FORCE_INSTALL=$(curl $REBUILD_URL/indev/force_install)
     RELEASE=1
 else
     echo "Not indev or release, exiting"
@@ -85,16 +78,16 @@ if [[ ${EXTENSION} == $CURRENT_VERSION$DEV_BUILD_ID ]]; then
     logger -t rebuild-auto-updater "Build type is dev"
     CURRENT_BUILD_ID=d
     DEV=1
-elif [[ ${EXTENSION} == $CURRENT_VERSION$OSKR_BUILD_ID ]]; then
-	echo "Build type is OSKR"
-    logger -t rebuild-auto-updater "Build type is OSKR"
-    CURRENT_BUILD_ID=oskr
-    OSKR=1
 elif [[ ${EXTENSION} == $CURRENT_VERSION$DEV_CLOUDLESS_BUILD_ID ]]; then
 	echo "Build type is dev Cloudless"
     logger -t rebuild-auto-updater "Build type is dev Cloudless"
     CURRENT_BUILD_ID=dcldless
     DEV=1
+elif [[ ${EXTENSION} == $CURRENT_VERSION$OSKR_BUILD_ID ]]; then
+	echo "Build type is OSKR"
+    logger -t rebuild-auto-updater "Build type is OSKR"
+    CURRENT_BUILD_ID=oskr
+    OSKR=1
 elif [[ ${EXTENSION} == $CURRENT_VERSION$OSKR_CLOUDLESS_BUILD_ID ]]; then
 	echo "Build type is OSKR Cloudless"
     logger -t rebuild-auto-updater "Build type is OSKR Cloudless"
@@ -113,15 +106,33 @@ else
 fi
 
 if [[ $CURRENT_VERSION == $TARGET_VERSION ]]; then
-    echo "Rebuild up to date, exiting"
-    logger -t rebuild-auto-updater "Rebuild up to date, exiting"
-    exit 0
+    if [[ $FORCE_INSTALL == 1 ]]; then
+        echo "Force install set to 1 on server, must be a very important reason why"
+        logger -t rebuild-auto-updater "Force install set to 1 on server, must be a very important reason why"
+    else
+        echo "Rebuild up to date, exiting"
+        logger -t rebuild-auto-updater "Rebuild up to date, exiting"
+        exit 0
+    fi
+fi
+
+if [ -f /anki-devtools ]; then
+    if [[ $FORCE_INSTALL == 1 ]]; then
+        echo "Force install set to 1 on server, skipping devtool check"
+        logger -t rebuild-auto-updater "Force install set to 1 on server, skipping devtool check"
+    else
+        echo "Build has been deployed to, not auto updating"
+        logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
+        exit 0
+    fi
+else
+    echo "Build is stock, auto updates allowed"
+    logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
 fi
 
 if [[ $CURRENT_VERSION >= $TARGET_VERSION ]]; then
     echo "Downgrading versions, there was likely a bug in the latest version."
     logger -t rebuild-auto-updater "Downgrading versions, there was likely a bug in the latest version."
-    exit 0
 fi
 
 echo "Installing ota update to system slot $INSTALL_SLOT"
@@ -180,7 +191,7 @@ elif [[ ${OSKR} = 1 ]]; then
     fi
 elif [[ ${PROD} = 1 ]]; then
     if [[ ${INDEV} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${OSKR_CLOUDLESS_BUILD_ID} ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${PROD_CLOUDLESS_BUILD_ID} ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/indev/prodcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
             echo "Update URL $FINAL_REBUILD_URL"
             logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"

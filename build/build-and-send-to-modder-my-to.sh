@@ -102,6 +102,21 @@ else
     exit 1
 fi
 
+echo "Hey, is this build going to the release or indev stack"
+echo -n "(Release/Indev): "
+read force_update
+
+if [[ ${force_update} == "yes" ]]; then
+    echo "Update will force install"
+    export FORCE_INSTALL=1
+elif [[ ${force_update} == "no" ]]; then
+    echo "Not force installing"
+    export FORCE_INSTALL=0
+else
+    echo "That wasn't yes or no"
+    exit 1
+fi
+
 echo
 echo "Just so we're clear, this is gonna build a dev, prod, and oskr ota and send it to the $release_or_indev stack on anki2.ca"
 echo "Are we good with this?"
@@ -155,6 +170,11 @@ echo "Setting version as latest"
 echo 1.6.1.$VERSION_CODE > latest
 scp -P 44 -i ~/modder-my-key latest raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/latest
 rm latest
+
+echo "Setting force install flag to $FORCE_INSTALL"
+echo $FORCE_INSTALL > force_install
+scp -P 44 -i ~/modder-my-key force_install raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/force_install
+rm force_install
 
 echo
 echo "Unsetting variables"
