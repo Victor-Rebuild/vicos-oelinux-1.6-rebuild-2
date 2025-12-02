@@ -105,6 +105,20 @@ else
     PROD=1
 fi
 
+if [ -f /data/data/user-do-not-auto-update ]; then
+    if [[ $FORCE_INSTALL == 1 ]]; then
+        echo "Force install set to 1 on server, ignoring user auto update settings"
+        logger -t rebuild-auto-updater "Force install set to 1 on server, ignoring user auto update settings"
+    else
+        echo "Auto update disabled by user, falling out"
+        logger -t rebuild-auto-updater "Auto update disabled by user, falling out"
+        exit 0
+    fi
+else
+    echo "Auto updates are not disabled, continuing with updating"
+    logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
+fi
+
 if [[ $CURRENT_VERSION == $TARGET_VERSION ]]; then
     if [[ $FORCE_INSTALL == 1 ]]; then
         echo "Force install set to 1 on server, must be a very important reason why"
