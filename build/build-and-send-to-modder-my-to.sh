@@ -178,7 +178,7 @@ rm force_install
 
 echo
 echo "Unsetting variables"
-unset $VERSION_CODE $prod_boot_password $oskr_boot_password $OTA_PASS $ota_password $BUILD_STACK #$ELLIE
+unset $VERSION_CODE $prod_boot_password $oskr_boot_password $OTA_PASS $ota_password $BUILD_STACK $FORCE_INSTALL $force_update
 echo
 
 echo "Done! Builds should be at https://anki2.ca/otas/1.6-rebuild/$BUILD_STACK/"
