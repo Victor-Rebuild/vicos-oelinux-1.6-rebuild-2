@@ -3,3 +3,4 @@
 *.ota
 mounted/
 keys/
+resources/ota_prod_dec.key

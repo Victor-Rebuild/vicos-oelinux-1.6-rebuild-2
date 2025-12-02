@@ -118,6 +118,12 @@ if [[ $CURRENT_VERSION == $TARGET_VERSION ]]; then
     exit 0
 fi
 
+if [[ $CURRENT_VERSION >= $TARGET_VERSION ]]; then
+    echo "Downgrading versions, there was likely a bug in the latest version."
+    logger -t rebuild-auto-updater "Downgrading versions, there was likely a bug in the latest version."
+    exit 0
+fi
+
 echo "Installing ota update to system slot $INSTALL_SLOT"
 logger -t rebuild-auto-updater "Installing ota update to system slot $INSTALL_SLOT"
 if [[ ${DEV} = 1 ]]; then

@@ -2,7 +2,10 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
-## 1.6.1.0025 (2025/11/26)
+## 1.6.1.0025 (2025/12/02)
+Rename `rebuild-update-unengine` to `update-engine-rebuild` add oskr and prod cloudless builds, add auto update urls for cloudless, modify dvcbs-reloaded for dynamic build ids.
+
+## 1.6.1.0024 (2025/11/26)
 Update victor-1.6 to 5c17cea29bffd02c170add60c4e1baca890060d2, adjust timing of success/fail sound effect, fix nightly reboots staying awake.
 
 ## 1.6.1.0023 (2025/11/20)

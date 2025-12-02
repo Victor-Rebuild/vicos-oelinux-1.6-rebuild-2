@@ -120,17 +120,35 @@ fi
 echo "Starting build"
 #export ELLIE=1
 
-echo "Dev ota first"
+sudo -v
+echo "Dev"
 time ./build/build.sh -bt dev -v $VERSION_CODE
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/dev/
 
-echo "Now for OSKR"
+sudo -v
+echo "OSKR"
 time ./build/build.sh -bt oskr -bp $oskr_boot_password -v $VERSION_CODE
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskr/
 
-echo "And finally Prod"
+sudo -v
+echo "Prod"
 time ./build/build.sh -bt proddev -bp $prod_boot_password -v $VERSION_CODE
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prod/
+
+sudo -v
+echo "Dev Cloudless"
+time ./build/build.sh -bt devcloudless -v $VERSION_CODE
+scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/devcloudless/
+
+sudo -v
+echo "OSKR Cloudless"
+time ./build/build.sh -bt oskrcloudless -bp $oskr_boot_password -v $VERSION_CODE
+scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskrcloudless/
+
+sudo -v
+echo "Prod Cloudless"
+time ./build/build.sh -bt prodcloudless -bp $prod_boot_password -v $VERSION_CODE
+scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prodcloudless/
 
 echo
 echo "Setting version as latest"
