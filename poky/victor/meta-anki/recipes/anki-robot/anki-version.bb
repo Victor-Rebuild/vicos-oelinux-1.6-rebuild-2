@@ -68,6 +68,7 @@ do_install:append () {
     fi
     
     BASE_VERSION=$(cat ${S}/ANKI_VERSION)
+    echo ${INDEV_OR_RELEASE} > ${D}/etc/rebuild-dev-or-indev
     echo "${BASE_VERSION}.${ANKI_BUILD_VERSION}${ANKI_BUILD_TYPE}" > ${D}/etc/os-version
     chmod 0444 ${D}/etc/os-version
     
@@ -81,4 +82,5 @@ FILES:${PN} += "etc/os-version-base"
 FILES:${PN} += "etc/os-version-code"
 FILES:${PN} += "etc/os-version-rev"
 FILES:${PN} += "etc/os-version"
+FILES:${PN} += "etc/rebuild-dev-or-indev"
 FILES:${PN} += "etc/victor-compat-version"

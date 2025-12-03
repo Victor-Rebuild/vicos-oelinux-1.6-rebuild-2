@@ -1,6 +1,0 @@
-*.pub
-*.pem
-*.ota
-mounted/
-keys/
-resources/ota_prod_dec.key

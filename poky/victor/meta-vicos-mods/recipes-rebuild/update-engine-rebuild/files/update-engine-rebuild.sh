@@ -35,22 +35,27 @@ OSKR_BUILD_ID=oskr
 OSKR_CLOUDLESS_BUILD_ID=oskrcldless
 PROD_CLOUDLESS_BUILD_ID=cldless
 REBUILD_URL="http://anki2.ca/otas/1.6-rebuild"
+INDEV_OR_RELEASE="$(cat /etc/rebuild-dev-or-indev)"
 
-if [ -f /etc/rebuild-indev ]; then
+if [ ${INDEV_OR_RELEASE} == indev ]; then
     echo "Indev ota detected, downloading from indev stack"
     logger -t rebuild-auto-updater "Indev ota detected, downloading from indev stack"
     TARGET_VERSION=$(curl $REBUILD_URL/indev/latest)
     FORCE_INSTALL=$(curl $REBUILD_URL/indev/force_install)
     INDEV=1
-elif [ -f /etc/rebuild-release ]; then
+elif [ ${INDEV_OR_RELEASE} == release ]; then
     echo "Release ota detected, downloading from Release stack"
     logger -t rebuild-auto-updater "Release ota detected, downloading from Release stack"
     TARGET_VERSION=$(curl $REBUILD_URL/release/latest)
     FORCE_INSTALL=$(curl $REBUILD_URL/indev/force_install)
     RELEASE=1
+elif [ ${INDEV_OR_RELEASE} == internal ]; then
+    echo "Internal build, DON'T UPDATE"
+    logger -t rebuild-auto-updater "Internal build, DON'T UPDATE"
+    exit 1
 else
-    echo "Not indev or release, exiting"
-    logger -t rebuild-auto-updater "Not indev or release, exiting"
+    echo "Not indev, release, or internal, exiting"
+    logger -t rebuild-auto-updater "Not indev, release, or internal, exiting"
     exit 1
 fi
 
@@ -119,6 +124,15 @@ else
     logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
 fi
 
+if [ -f /etc/do-not-auto-update ]; then
+    echo "Auto update disabled in build, falling out"
+    logger -t rebuild-auto-updater "Auto update disabled in build, falling out"
+    exit 0
+else
+    echo "Auto updates are not disabled, continuing with updating"
+    logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
+fi
+
 if [[ $CURRENT_VERSION == $TARGET_VERSION ]]; then
     if [[ $FORCE_INSTALL == 1 ]]; then
         echo "Force install set to 1 on server, must be a very important reason why"
@@ -142,11 +156,6 @@ if [ -f /anki-devtools ]; then
 else
     echo "Build is stock, auto updates allowed"
     logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
-fi
-
-if [[ $CURRENT_VERSION >= $TARGET_VERSION ]]; then
-    echo "Downgrading versions, there was likely a bug in the latest version."
-    logger -t rebuild-auto-updater "Downgrading versions, there was likely a bug in the latest version."
 fi
 
 echo "Installing ota update to system slot $INSTALL_SLOT"

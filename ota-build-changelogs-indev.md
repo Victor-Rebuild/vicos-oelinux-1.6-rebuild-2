@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0026 (2025/12/02)
+FULL build system refactor, compile victor-1.6 within oelinux, refactor `update-engine-rebuild` a bit, huge ota size drop.
+
 ## 1.6.1.0025 (2025/12/02)
 Update victor-1.6 to c6bf8681b9e9a07fdc37c4beb04b5b844ee83e48, rename `rebuild-update-unengine` to `update-engine-rebuild` add oskr and prod cloudless builds, add auto update urls for cloudless, add downgrade support to `rebuild-update-engine`, add emergancy force install flag just in case.
 

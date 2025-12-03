@@ -8,14 +8,14 @@ set -e
 # Hidden env vars:
 # 1. AUTO_UPDATE: set to 1 if you want to inhibit the -au interaction
 
-CREATOR="Ellie"
+CREATOR="Emily"
 
-CURRENT_CONTAINER_NAME="rebuild-yocto-builder-7"
+CURRENT_CONTAINER_NAME="rebuild-yocto-builder-8"
 
 function usage() {
     echo "$1"
-    echo "Usage: ./build/build.sh -bt <dev/oskr/devcloudless> -s -op <OTA-pw> -bp <boot-passwd> -v <build-increment> -ui <ui-option>"
-    echo "Usage (no signing): ./build/build.sh -bt <dev/oskr/devcloudless> -bp <boot-passwd> -v <build-increment> -ui <ui-option>"
+    echo "Usage: ./build/build.sh -bt <dev/oskr/devcloudless> -s -op <OTA-pw> -bp <boot-passwd> -v <build-increment> -ir <indev/release> -ui <ui-option>"
+    echo "Usage (no signing): ./build/build.sh -bt <dev/oskr/devcloudless> -bp <boot-passwd> -v <build-increment> -ir <indev/release> -ui <ui-option>"
     echo "Valid UI options are: knotty, ncurses, taskexp_ncurses, or teamcity. Default is knotty."
     exit 1
 }
@@ -115,6 +115,7 @@ while [ $# -gt 0 ]; do
         -bp) BOOT_PASSWORD="$2"; shift ;;
         -s) DO_SIGN=1 ;;
         -v) BUILD_INCREMENT="$2"; shift ;;
+        -ir) STACK="$2"; shift ;;
         -au) are_you_wire; AUTO_UPDATE=1 ;;
         -ui) what_ui "$2"; shift ;;
         -nd) NO_DOCKER=1 ;;
@@ -154,6 +155,11 @@ fi
 
 if [[ ! $BUILD_INCREMENT =~ ^-?[0000-9999]+$ ]]; then
     usage "Build increment is not an int between 0-9999."
+fi
+
+if [[ ! "$STACK" == "indev" && ! "$STACK" == "release" ]]; then
+    echo $STACK
+    usage "Stack is not indev or release."
 fi
 
 if [[ "${NO_DOCKER}" != "1" && "$(uname -a)" == *"aarch64" ]]; then
@@ -234,6 +240,7 @@ FINAL_BUILD_INVOCATION="cd $(pwd)/poky && \
     source build/conf/set_bb_env.sh && \
     export ANKI_BUILD_VERSION=$BUILD_INCREMENT && \
     export AUTO_UPDATE=${AUTO_UPDATE} && \
+    export INDEV_OR_RELEASE=${STACK} && \
     ${YOCTO_CLEAN_COMMAND} && \
     sleep 2 && \
     ${YOCTO_BUILD_COMMAND} && \
@@ -251,7 +258,7 @@ else
     run_with_docker "${FINAL_BUILD_INVOCATION}"
 fi
 
-RUN_FROM_MAIN=1 INCREMENT=$BUILD_INCREMENT PRODorOSKR=$BOT_TYPE ./build/inject-anki.sh
+#RUN_FROM_MAIN=1 INCREMENT=$BUILD_INCREMENT PRODorOSKR=$BOT_TYPE ./build/inject-anki.sh
 
 echo
 echo -e "\033[1;32mCompleted successfully. Output is in ./_build.\033[0m"

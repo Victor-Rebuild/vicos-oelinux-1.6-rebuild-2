@@ -33,7 +33,7 @@ function run_in_docker() {
 		-v $(pwd)/anki-deps:${HOME}/.anki \
 		-v $(pwd):$(pwd) \
 		-v $(pwd)/build/cache:${HOME}/.ccache \
-		vic-yocto-builder-7 bash -c "$@"
+		rebuild-yocto-builder-8 bash -c "$@"
 }
 
 CMDTORUN="cd $(pwd)/poky && source build/conf/set_bb_env.sh && MACHINE=apq8009-robot VARIANT=perf DISTRO=msm-${VARI} PRODUCT=robot bitbake -c cleanall $@"
