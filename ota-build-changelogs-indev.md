@@ -2,7 +2,7 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
-## 1.6.1.0026 (2025/12/02)
+## 1.6.1.0026 (2025/12/03)
 FULL build system refactor, compile victor-1.6 within oelinux, refactor `update-engine-rebuild` a bit, huge ota size drop.
 
 ## 1.6.1.0025 (2025/12/02)
