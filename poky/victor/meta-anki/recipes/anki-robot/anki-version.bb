@@ -61,6 +61,9 @@ do_install:append () {
             ANKI_BUILD_TYPE="ud"
         elif [ "${ANKI_RESOURCE_ESCAPEPOD}" = "1" ]; then
             ANKI_BUILD_TYPE="ep"
+        elif [ "${PROD}" = "1" ]; then
+            # empty for prod builds
+            ANKI_BUILD_TYPE=""
         else
             # empty for user (release) builds
             ANKI_BUILD_TYPE=""

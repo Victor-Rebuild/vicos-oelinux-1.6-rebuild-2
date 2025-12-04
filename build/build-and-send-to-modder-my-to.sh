@@ -11,6 +11,8 @@ function ctrl_c() {
     exit 1
 }
 
+set +e
+
 clear
 
 echo "Hey, is this build going to the release or indev stack"
