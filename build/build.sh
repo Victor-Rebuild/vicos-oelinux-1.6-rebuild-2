@@ -76,11 +76,12 @@ function errorMsg() {
 }
 
 function is_victor_there_and_compatible() {
-	if [[ ! -d anki/victor/engine ]]; then
-		errorMsg "anki/victor/engine not found. You likely don't have the victor submodule correctly configured."
+	if [[ ! -d anki/victor-1.6/engine ]]; then
+		errorMsg "anki/victor-1.6/engine not found. Recloning victor-1.6."
+        git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild anki/victor-1.6/
 		exit 1
 	fi
-	VICTOR_COMPAT="$(cat anki/victor/VICTOR_COMPAT_VERSION)"
+	VICTOR_COMPAT="$(cat anki/victor-1.6/VICTOR_COMPAT_VERSION)"
 	OELINUX_COMPAT="$(cat VICTOR_COMPAT_VERSION)"
 	if [[ ! "${VICTOR_COMPAT}" == "${OELINUX_COMPAT}" ]]; then
 		errorMsg "OELinux and victor compat versions are not the same."
@@ -157,9 +158,9 @@ if [[ ! $BUILD_INCREMENT =~ ^-?[0000-9999]+$ ]]; then
     usage "Build increment is not an int between 0-9999."
 fi
 
-if [[ ! "$STACK" == "indev" && ! "$STACK" == "release" ]]; then
+if [[ ! "$STACK" == "indev" && ! "$STACK" == "release" && ! "$STACK" == "internal" ]]; then
     echo $STACK
-    usage "Stack is not indev or release."
+    usage "Stack is not indev, release, or internal. Pick internal if this is a one-off ota."
 fi
 
 if [[ "${NO_DOCKER}" != "1" && "$(uname -a)" == *"aarch64" ]]; then
