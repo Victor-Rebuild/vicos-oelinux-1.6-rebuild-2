@@ -3,7 +3,7 @@
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
 ## 1.6.1.0029 (2025/12/06)
-Upgrade victor-1.6 to `a9904f16dcf46564051ea04434aabf20a5e035e7`, new custom server environment up at https://anki2.ca/1.6/, new concheck endpoint to not stress froggitti's server, slightly faster build time.
+Upgrade victor-1.6 to `ca9d49bbc1a0a418d8b63531df32eb09e674a9db`, new custom server environment up at https://anki2.ca/1.6/, new concheck endpoint to not stress froggitti's server, slightly faster build time.
 
 ## 1.6.1.0028 (2025/12/05)
 Fix build id again
