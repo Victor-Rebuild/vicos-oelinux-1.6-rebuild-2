@@ -2,6 +2,12 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0029 (2025/12/06)
+Upgrade victor-1.6 to `a9904f16dcf46564051ea04434aabf20a5e035e7`, new custom server environment up at https://anki2.ca/1.6/, new concheck endpoint to not stress froggitti's server, slightly faster build time.
+
+## 1.6.1.0028 (2025/12/05)
+Fix build id again
+
 ## 1.6.1.0027 (2025/12/03)
 Set prod build id correctly to fix auto updates
 
