@@ -10,7 +10,7 @@ set -e
 
 CREATOR="Emily"
 
-CURRENT_CONTAINER_NAME="rebuild-yocto-builder-8"
+CURRENT_CONTAINER_NAME="vic-yocto-builder-7"
 
 function usage() {
     echo "$1"

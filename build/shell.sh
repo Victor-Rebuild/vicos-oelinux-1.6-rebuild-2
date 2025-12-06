@@ -19,4 +19,4 @@ docker run -it --rm \
     -v $(pwd)/anki-deps:${HOME}/.anki \
     -v $(pwd):$(pwd) \
     -v $(pwd)/build/cache:${HOME}/.ccache \
-    rebuild-yocto-builder-8 bash
+    vic-yocto-builder-7 bash

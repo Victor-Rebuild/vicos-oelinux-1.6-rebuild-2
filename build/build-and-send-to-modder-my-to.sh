@@ -137,15 +137,14 @@ fi
 echo "Starting build"
 export AUTO_UPDATE=1
 
-
 sudo -v
 echo "Dev"
-time ./build/build.sh -bt dev -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt dev -s -op $OTA_PASS -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/dev/
 
 sudo -v
 echo "OSKR"
-time ./build/build.sh -bt oskr -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt oskr -s -op $OTA_PASS -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskr/
 
 sudo -v
@@ -155,12 +154,12 @@ scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/
 
 sudo -v
 echo "Dev Cloudless"
-time ./build/build.sh -bt devcloudless -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt devcloudless -s -op $OTA_PASS -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/devcloudless/
 
 sudo -v
 echo "OSKR Cloudless"
-time ./build/build.sh -bt oskrcloudless -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt oskrcloudless -s -op $OTA_PASS -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskrcloudless/
 
 sudo -v
