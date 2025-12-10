@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0031 (2025/12/09)
+Release tommorow, change rampost to show the new website
+
 ## 1.6.1.0030 (2025/12/06)
 Updated submodules for bitbake, openembedded-core, and meta-openembedded.
 
