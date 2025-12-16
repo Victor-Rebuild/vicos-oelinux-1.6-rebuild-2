@@ -47,7 +47,7 @@ elif [ ${INDEV_OR_RELEASE} == release ]; then
     echo "Release ota detected, downloading from Release stack"
     logger -t rebuild-auto-updater "Release ota detected, downloading from Release stack"
     TARGET_VERSION=$(curl $REBUILD_URL/release/latest)
-    FORCE_INSTALL=$(curl $REBUILD_URL/indev/force_install)
+    FORCE_INSTALL=$(curl $REBUILD_URL/release/force_install)
     RELEASE=1
 elif [ ${INDEV_OR_RELEASE} == internal ]; then
     echo "Internal build, DON'T UPDATE"
