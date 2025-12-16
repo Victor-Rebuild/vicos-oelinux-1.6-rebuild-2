@@ -156,20 +156,20 @@ time ./build/build.sh -bt proddev -s -op $OTA_PASS -bp $prod_boot_password -v $V
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prod/
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prod/latest
 
-echo "Dev Cloudless"
-time ./build/build.sh -bt devcloudless -s -op $OTA_PASS -v $VERSION_CODE -ir $BUILD_STACK -au
-scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/devcloudless/
-scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/devcloudless/latest
+#echo "Dev Cloudless"
+#time ./build/build.sh -bt devcloudless -s -op $OTA_PASS -v $VERSION_CODE -ir $BUILD_STACK -au
+#scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/devcloudless/
+#scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/devcloudless/latest
 
-echo "OSKR Cloudless"
-time ./build/build.sh -bt oskrcloudless -s -op $OTA_PASS -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
-scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskrcloudless/
-scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskrcloudless/latest
+#echo "OSKR Cloudless"
+#time ./build/build.sh -bt oskrcloudless -s -op $OTA_PASS -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
+#scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskrcloudless/
+#scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskrcloudless/latest
 
-echo "Prod Cloudless"
-time ./build/build.sh -bt prodcloudless -s -op $OTA_PASS -bp $prod_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
-scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prodcloudless/
-scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prodcloudless/latest
+#echo "Prod Cloudless"
+#time ./build/build.sh -bt prodcloudless -s -op $OTA_PASS -bp $prod_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
+#scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prodcloudless/
+#scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prodcloudless/latest
 
 echo
 echo "Setting version as latest"
