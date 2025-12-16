@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0033 (2025/12/16)
+Fix nightly reboots waking up instead of starting asleep. Identical to release.
+
 ## 1.6.1.0032 (2025/12/10)
 Release today, add reonboard option, update victor-1.6 to f0ba9987427026ab1a765346b86315d7f1b5c867
 
