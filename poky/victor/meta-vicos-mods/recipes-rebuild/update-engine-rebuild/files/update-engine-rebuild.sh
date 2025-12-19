@@ -14,9 +14,18 @@ else
     logger -t rebuild-auto-updater "No updates pending, continuing..."
 fi
 
-if [ -f /data/data/user-do-not-auto-update ]; then
-    echo "Auto update disabled by user, falling out"
-    logger -t rebuild-auto-updater "Auto update disabled by user, falling out"
+if [ -f /anki-devtools ]; then
+    echo "Build has been deployed to, not auto updating"
+    logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
+    exit 0
+else
+    echo "Build is stock, auto updates allowed"
+    logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
+fi
+
+if [ -f /data/data/user-do-not-auto-update ] || [ -f /etc/do-not-auto-update ]; then
+    echo "Auto updates disabled, falling out"
+    logger -t rebuild-auto-updater "Auto updates disabled, falling out"
     exit 0
 else
     echo "Auto updates are not disabled, continuing with updating"
@@ -24,30 +33,33 @@ else
 fi
 
 # Auto updates are enabled, clear to set some variables
-# In alphabetical order too!
+
+# Build ids
+DEV_BUILD_ID=d
+DEV_CLOUDLESS_BUILD_ID=dcldless
+OSKR_BUILD_ID=oskr
+OSKR_CLOUDLESS_BUILD_ID=oskrcldless
+PROD_BUILD_ID=
+PROD_CLOUDLESS_BUILD_ID=cldless
+
+# Essential things for this to work
 BUILDINF="$(cat /build.prop)"
 CMDLINE="$(cat /proc/cmdline)"
 CURRENT_VERSION=$(getprop ro.anki.version)
-DEV_BUILD_ID=d
-DEV_CLOUDLESS_BUILD_ID=dcldless
-EXTENSION=$(getprop ro.build.id)
-OSKR_BUILD_ID=oskr
-OSKR_CLOUDLESS_BUILD_ID=oskrcldless
-PROD_CLOUDLESS_BUILD_ID=cldless
-REBUILD_URL="http://anki2.ca/otas/1.6-rebuild"
+REBUILD_URL="http://http.anki2.ca/otas/1.6-rebuild"
 INDEV_OR_RELEASE="$(cat /etc/rebuild-dev-or-indev)"
 
 if [ ${INDEV_OR_RELEASE} == indev ]; then
     echo "Indev ota detected, downloading from indev stack"
     logger -t rebuild-auto-updater "Indev ota detected, downloading from indev stack"
-    TARGET_VERSION=$(curl $REBUILD_URL/indev/latest)
-    FORCE_INSTALL=$(curl $REBUILD_URL/indev/force_install)
+    TARGET_VERSION=$(curl -s -s $REBUILD_URL/indev/latest)
+    FORCE_INSTALL=$(curl -s $REBUILD_URL/indev/force_install)
     INDEV=1
 elif [ ${INDEV_OR_RELEASE} == release ]; then
     echo "Release ota detected, downloading from Release stack"
     logger -t rebuild-auto-updater "Release ota detected, downloading from Release stack"
-    TARGET_VERSION=$(curl $REBUILD_URL/release/latest)
-    FORCE_INSTALL=$(curl $REBUILD_URL/release/force_install)
+    TARGET_VERSION=$(curl -s $REBUILD_URL/release/latest)
+    FORCE_INSTALL=$(curl -s $REBUILD_URL/release/force_install)
     RELEASE=1
 elif [ ${INDEV_OR_RELEASE} == internal ]; then
     echo "Internal build, DON'T UPDATE"
@@ -62,11 +74,11 @@ fi
 echo "Checking active slot"
 logger -t rebuild-auto-updater "Checking active slot"
 if [[ ${CMDLINE} == *"androidboot.slot_suffix=_b"* ]]; then
-	echo "Current slot is b, update will install to a."
+    echo "Current slot is b, update will install to a."
     INSTALL_SLOT=a
     logger -t rebuild-auto-updater "Current slot is b, update will install to a."
 else
-	echo "Current slot is a, update will install to b."
+    echo "Current slot is a, update will install to b."
     INSTALL_SLOT=b
     logger -t rebuild-auto-updater "Current slot is a, update will install to b."
 fi
@@ -78,62 +90,39 @@ logger -t rebuild-auto-updater "Current firmware version: $CURRENT_VERSION"
 echo "Target update version is $TARGET_VERSION"
 logger -t rebuild-auto-updater "Target update version is $TARGET_VERSION"
 
-if [[ ${EXTENSION} == $CURRENT_VERSION$DEV_BUILD_ID ]]; then
-	echo "Build type is dev"
+if [[ ${CURRENT_VERSION} == *$DEV_BUILD_ID ]]; then
+    echo "Build type is dev"
     logger -t rebuild-auto-updater "Build type is dev"
     CURRENT_BUILD_ID=d
     DEV=1
-elif [[ ${EXTENSION} == $CURRENT_VERSION$DEV_CLOUDLESS_BUILD_ID ]]; then
-	echo "Build type is dev Cloudless"
+elif [[ ${CURRENT_VERSION} == *$DEV_CLOUDLESS_BUILD_ID ]]; then
+    echo "Build type is dev Cloudless"
     logger -t rebuild-auto-updater "Build type is dev Cloudless"
     CURRENT_BUILD_ID=dcldless
     DEV=1
-elif [[ ${EXTENSION} == $CURRENT_VERSION$OSKR_BUILD_ID ]]; then
-	echo "Build type is OSKR"
+elif [[ ${CURRENT_VERSION} == *$OSKR_BUILD_ID ]]; then
+    echo "Build type is OSKR"
     logger -t rebuild-auto-updater "Build type is OSKR"
     CURRENT_BUILD_ID=oskr
     OSKR=1
-elif [[ ${EXTENSION} == $CURRENT_VERSION$OSKR_CLOUDLESS_BUILD_ID ]]; then
-	echo "Build type is OSKR Cloudless"
+elif [[ ${CURRENT_VERSION} == *$OSKR_CLOUDLESS_BUILD_ID ]]; then
+        echo "Build type is OSKR Cloudless"
     logger -t rebuild-auto-updater "Build type is OSKR Cloudless"
     CURRENT_BUILD_ID=oskrcldless
     OSKR=1
-elif [[ ${EXTENSION} == $CURRENT_VERSION$PROD_CLOUDLESS_BUILD_ID ]]; then
-	echo "Build type is PROD Cloudless"
+elif [[ ${CURRENT_VERSION} == *$PROD_CLOUDLESS_BUILD_ID ]]; then
+    echo "Build type is PROD Cloudless"
     logger -t rebuild-auto-updater "Build type is PROD Cloudless"
     CURRENT_BUILD_ID=cldless
     PROD=1
 else
-	echo "Build type is production"
+    echo "Build type is production"
     logger -t rebuild-auto-updater "Build type is production"
     CURRENT_BUILD_ID=
     PROD=1
 fi
 
-if [ -f /data/data/user-do-not-auto-update ]; then
-    if [[ $FORCE_INSTALL == 1 ]]; then
-        echo "Force install set to 1 on server, ignoring user auto update settings"
-        logger -t rebuild-auto-updater "Force install set to 1 on server, ignoring user auto update settings"
-    else
-        echo "Auto update disabled by user, falling out"
-        logger -t rebuild-auto-updater "Auto update disabled by user, falling out"
-        exit 0
-    fi
-else
-    echo "Auto updates are not disabled, continuing with updating"
-    logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
-fi
-
-if [ -f /etc/do-not-auto-update ]; then
-    echo "Auto update disabled in build, falling out"
-    logger -t rebuild-auto-updater "Auto update disabled in build, falling out"
-    exit 0
-else
-    echo "Auto updates are not disabled, continuing with updating"
-    logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
-fi
-
-if [[ $CURRENT_VERSION == $TARGET_VERSION ]]; then
+if [[ $CURRENT_VERSION == $TARGET_VERSION$CURRENT_BUILD_ID ]]; then
     if [[ $FORCE_INSTALL == 1 ]]; then
         echo "Force install set to 1 on server, must be a very important reason why"
         logger -t rebuild-auto-updater "Force install set to 1 on server, must be a very important reason why"
@@ -142,20 +131,6 @@ if [[ $CURRENT_VERSION == $TARGET_VERSION ]]; then
         logger -t rebuild-auto-updater "Rebuild up to date, exiting"
         exit 0
     fi
-fi
-
-if [ -f /anki-devtools ]; then
-    if [[ $FORCE_INSTALL == 1 ]]; then
-        echo "Force install set to 1 on server, skipping devtool check"
-        logger -t rebuild-auto-updater "Force install set to 1 on server, skipping devtool check"
-    else
-        echo "Build has been deployed to, not auto updating"
-        logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
-        exit 0
-    fi
-else
-    echo "Build is stock, auto updates allowed"
-    logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
 fi
 
 echo "Installing ota update to system slot $INSTALL_SLOT"
