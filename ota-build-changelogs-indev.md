@@ -2,6 +2,12 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0035 (2025/12/25)
+Christmas update! Update victor to `ca5e652b69472d22e3a4e8acd55a5c709ca92694`, add Bot Naming in :8080, you can ask Vector "What's your name" and Vector will say whatever nickname you set, Vector 2.0 no longer gets overclocked when weather or blackjack happens, fix weather crashes that seem to happen whenever weather is in the negatives, update all submodules.
+
+## 1.6.1.0034 (2025/12/19)
+Update Victor to `0472bc1c3b4d011dbb149cf432c906045ef71eb2`, Reonboarding clears wirepod server status, full mute/unmute animation plays for mics, 2.0 now has the correct screen pixel count, vcs should work better since mics are more sensitive now, fix update engine weirdness.
+
 ## 1.6.1.0033 (2025/12/16)
 Fix nightly reboots waking up instead of starting asleep. Identical to release.
 
