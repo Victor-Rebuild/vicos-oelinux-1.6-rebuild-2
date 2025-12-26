@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0036 (2025/12/26)
+Update victor to `ce361379d862afa70c34f09c902ac71d34f87af5`, new onboarding animation.
+
 ## 1.6.1.0035 (2025/12/25)
 Christmas update! Update victor to `ca5e652b69472d22e3a4e8acd55a5c709ca92694`, add Bot Naming in :8080, you can ask Vector "What's your name" and Vector will say whatever nickname you set, Vector 2.0 no longer gets overclocked when weather or blackjack happens, fix weather crashes that seem to happen whenever weather is in the negatives, change kernel name in neofetch, update all submodules.
 
