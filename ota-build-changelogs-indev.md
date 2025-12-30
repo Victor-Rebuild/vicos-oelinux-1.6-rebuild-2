@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0037 (2025/12/30)
+Update victor to `ac1c77e7affae8e815cf1ee3e3c29e87b28ff0c6`, extremely fast knowledge graph, add system slot switch option to ccis, fix error 914, fix mirrormode, identical to release 1.6.1.3
+
 ## 1.6.1.0036 (2025/12/26)
 Update victor to `ce361379d862afa70c34f09c902ac71d34f87af5`, new onboarding animation.
 
