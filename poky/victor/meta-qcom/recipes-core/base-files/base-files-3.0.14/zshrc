@@ -1,0 +1,76 @@
+# Zsh profile, to some extent provided by MimoAW and some from kali linux
+
+
+PATH="/usr/local/bin:/usr/bin:/bin"
+EDITOR="vim"			# needed for packages like cron, git-commit
+[ "$TERM" ] || TERM="vt100"	# Basic terminal capab. For screen etc.
+
+# Add /sbin & co to $PATH for the root user
+PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+
+# Set zsh prompt color
+PROMPT='%F{magenta}%B[%n%f%F{red}%B@%m %F{green}%1~%F{blue}]%#%f%b '
+
+if [ -d /etc/profile.d ]; then
+    for i in /etc/profile.d/*.sh; do
+        if [ -f "$i" -a -r "$i" ]; then
+            . "$i"
+        fi
+    done
+    unset i
+fi
+
+
+if [ ! -d /data/.config/ ]; then
+    mkdir -p /data/.config/
+fi
+
+# Make sure we are on a serial console (i.e. the device used starts with
+# /dev/tty[A-z]), otherwise we confuse e.g. the eclipse launcher which tries do
+# use ssh
+case $(tty 2>/dev/null) in
+    /dev/tty[A-z]*) [ -x @BINDIR@/resize ] && @BINDIR@/resize >/dev/null;;
+esac
+
+# Aliases
+alias ls="ls --color=auto"
+alias ll='ls -alF --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+alias btop="btop --force-utf"
+alias grep='grep --color=auto'
+alias recovery="/sbin/reboot recovery & exit"
+alias neofetch="neofetch --ascii_colors 2 --ascii /etc/vector-ascii"
+alias voff="voff && exit"
+alias mrw="mount -o rw,remount /"
+alias stop_robot="systemctl stop anki-robot.target"
+alias start_robot="systemctl start anki-robot.target"
+alias vi='vim'
+
+# Functions
+reboot() {
+    /sbin/reboot $1 &
+    exit
+}
+
+umask 022
+
+# History
+HISTFILE=/data/.config/.zsh_history
+HISTSIZE=1000
+SAVEHIST=2000
+setopt hist_expire_dups_first # Delete duplicates first
+setopt hist_ignore_dups       # Ignore duplicated commands
+setopt hist_ignore_space      # Ignore commands that start with space
+setopt hist_verify            # Show command with history expansion before running it
+
+# Enable helpful zsh features
+setopt autocd              # Change directory just by typing its name
+setopt interactivecomments # Allow comments in interactive mode
+setopt magicequalsubst     # Filename expansion for 'anything=expression'
+setopt nonomatch           # Hide error message if there is no pattern match
+setopt notify              # Report status of background jobs immediately
+setopt numericglobsort     # Sort filenames numerically
+setopt promptsubst         # Enable command substitution in prompt
+setopt correct
+autoload -Uz compinit && compinit

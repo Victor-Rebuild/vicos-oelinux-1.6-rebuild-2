@@ -2,7 +2,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:"
 DEPENDS = "base-passwd"
 
 SRC_URI:append = "file://fstab \
-                  file://profile"
+                  file://profile \ 
+                  file://zshrc"
 
 #dirs755:append = " /media/cf /media/net /media/ram \
 #            /media/union /media/realroot /media/hdd /media/mmc1"
@@ -29,18 +30,22 @@ do_install[prefuncs] += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', '',
 
 # Don't install fstab for systemd targets
 do_install:append() {
-    # kercre123 - install custom profile
+    # kercre123 - install custom bash profile
     install -m 0755 ${WORKDIR}/sources/profile ${D}${sysconfdir}/profile
-
-    # Switch-modder - We can't save configs such as neofetch and btop's configs to / because it's set to ro.
-    # To get around that we'll symlink the .config folder so that it saves to by default to /data/.config
-    mkdir -p ${D}/root/
-    ln -s /data/.config ${D}/root/.config
 
     # kercre123 - we use connman
     #install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants
     #ln -s /lib/systemd/system/systemd-resolved.service ${D}${sysconfdir}/systemd/system/dbus-org.freedesktop.resolve1.service
     #ln -s /lib/systemd/system/systemd-resolved.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/systemd-resolved.service
+
+    # Switch-modder - Install zsh profile
+    install -d ${D}${sysconfdir}/zsh
+    install -m 0644 ${WORKDIR}/sources/zshrc ${D}${sysconfdir}/zsh/zshrc
+
+    # Switch-modder - We can't save configs such as neofetch and btop's configs to / because it's set to ro.
+    # To get around that we'll symlink the .config folder so that it saves to by default to /data/.config
+    mkdir -p ${D}/root/
+    ln -s /data/.config ${D}/root/.config
 }
 
 do_install:append_sdm845 () {

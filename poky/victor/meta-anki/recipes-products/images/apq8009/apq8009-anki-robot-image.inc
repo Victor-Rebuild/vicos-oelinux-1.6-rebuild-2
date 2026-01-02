@@ -55,5 +55,8 @@ IMAGE_INSTALL += "bzip2"
 #IMAGE_INSTALL += "python3-protobuf"
 #IMAGE_INSTALL += "paycheck"
 
+# Install zsh
+IMAGE_INSTALL += "zsh"
+
 IMAGE_INSTALL += "${@oe.utils.conditional('USER_BUILD', '1', '', 'wireutils', d)}"
 
