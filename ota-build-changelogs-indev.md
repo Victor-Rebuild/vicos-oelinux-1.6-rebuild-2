@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0039 (2026/01/02)
+Update victor to `326780cc7341344b8161993dd8b6a75beabe33a2`, fix blackjack and weather positions on Vector 2.0, make crashes reboot faster, 2.0 can now show low battery / overheated battery images correctly, ANKI_VERIFY won't kill the bot with 914 anymore, restore unused holiday lights anim.
+
 ## 1.6.1.0038 (2025/12/30)
 Update victor to `13491153f40c922b85a8df5ceced9af4b09e9c35`, add wp detection logic to select the correct link. This WILL be the real 1.6.1.3.
 
