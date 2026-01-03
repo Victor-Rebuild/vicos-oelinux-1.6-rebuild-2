@@ -2,6 +2,9 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 ## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
 
+## 1.6.1.0040 (2026/01/03)
+Update victor to `fe7d1625abd5b53bc98d758ee05ae2a94ec1a1fc`, update OpenCV to 4.13, make backtraces work, add pet detection, prevent log spam from body tracks being locked.
+
 ## 1.6.1.0039 (2026/01/02)
 Update victor to `326780cc7341344b8161993dd8b6a75beabe33a2`, fix blackjack and weather positions on Vector 2.0, make crashes reboot faster, 2.0 can now show low battery / overheated battery images correctly, ANKI_VERIFY won't kill the bot with 914 anymore, restore unused holiday lights anim.
 
