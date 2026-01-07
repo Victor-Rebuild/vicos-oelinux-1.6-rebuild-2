@@ -1,6 +1,8 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
-## If you want to use 1.6-rebuild do NOT use these images, use the release ones instead
+
+## 1.6.1.0041 (2026/01/06)
+Update victor to `a174420402e561c6250fbf01e9d59559f65e4eac`, fix more 914 errors, new charger leaving loosepixel animation, make Vector play more and go to charger less, mainline OpenCV, indev builds now have vic-verbose for the boot anim.
 
 ## 1.6.1.0040 (2026/01/03)
 Update victor to `5561c89c85a1ddede69e4cb735965b36e20f4076`, update OpenCV to 4.13, make backtraces work, add pet detection, prevent log spam from body tracks being locked.
