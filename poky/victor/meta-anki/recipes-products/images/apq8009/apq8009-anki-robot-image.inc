@@ -41,6 +41,7 @@ IMAGE_INSTALL += "fault-code"
 
 # Rebuild related
 IMAGE_INSTALL += "update-engine-rebuild"
+IMAGE_INSTALL += "vic-verbose"
 
 #IMAGE_INSTALL += "python3-netclient"
 #IMAGE_INSTALL += "python3-compression"

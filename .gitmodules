@@ -14,3 +14,6 @@
 [submodule "anki/vic-cloudless"]
 	path = anki/vic-cloudless
 	url = https://github.com/Switch-modder/vic-cloud-and-cloudless
+[submodule "anki/vic-verbose"]
+	path = anki/vic-verbose
+	url = https://github.com/Victor-Rebuild/vic-verbose
