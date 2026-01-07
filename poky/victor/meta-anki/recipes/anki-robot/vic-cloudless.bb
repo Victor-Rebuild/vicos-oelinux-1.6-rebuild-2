@@ -142,6 +142,7 @@ do_install() {
 
     install -m 0440 ${WORKSPACE}/anki/vic-cloudless/extra/cloud.sudoers ${D}/etc/sudoers.d/cloud
     install -m 0755 ${WORKSPACE}/anki/vic-cloudless/extra/setfreq ${D}/usr/sbin/
+    touch ${D}/etc/forceCloudless
 }
 
 do_package_qa[noexec] = "1"
@@ -155,3 +156,4 @@ FILES:${PN} += "anki/lib"
 FILES:${PN} += "anki/data/assets/cozmo_resources/cloudless"
 FILES:${PN} += "usr/sbin"
 FILES:${PN} += "etc/sudoers.d"
+FILES:${PN} += "etc/forceCloudless"

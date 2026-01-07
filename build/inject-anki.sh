@@ -2,33 +2,39 @@
 
 set -e
 
-REBUILD_COMMIT=0b916a6fe7291a1dae66cc7d371c174952066532
+REBUILD_COMMIT=c6bf8681b9e9a07fdc37c4beb04b5b844ee83e48
 
 if [[ ${RUN_FROM_MAIN} != "1" ]]; then
-    echo "Don't run this standalone, this is supposed to tail off docker-ota-build or vm-ota-build"
+    echo "Don't run this standalone, this is supposed to tail off build.sh"
     exit 1
 else
     unset $RUN_FROM_MAIN
 fi
 
-if [[ ${PRODorOSKR} == "proddev" ]]; then
+if [[ ${PRODorOSKR} == "proddev" || ${PRODorOSKR} == "prod" ]]; then
     export BUILD_TYPE=prod
     export FINAL_BUILD_TYPE=
 elif [[ ${PRODorOSKR} == "epdev" ]]; then
     export BUILD_TYPE=prod
-    export FINAL_BUILD_TYPE=
-elif [[ ${PRODorOSKR} == "prod" ]]; then
-    export BUILD_TYPE=prod
-    export FINAL_BUILD_TYPE=
+    export FINAL_BUILD_TYPE=epd
 elif [[ ${PRODorOSKR} == "ep" ]]; then
     export BUILD_TYPE=prod
-    export FINAL_BUILD_TYPE=
+    export FINAL_BUILD_TYPE=ep
 elif [[ ${PRODorOSKR} == "oskr" ]]; then
     export BUILD_TYPE=oskr
     export FINAL_BUILD_TYPE=oskr
 elif [[ ${PRODorOSKR} == "dev" ]]; then
     export BUILD_TYPE=dev
     export FINAL_BUILD_TYPE=d
+elif [[ ${PRODorOSKR} == "devcloudless" ]]; then
+    export BUILD_TYPE=devcloudless
+    export FINAL_BUILD_TYPE=dcldless
+elif [[ ${PRODorOSKR} == "oskrcloudless" ]]; then
+    export BUILD_TYPE=oskrcloudless
+    export FINAL_BUILD_TYPE=oskrcldless
+elif [[ ${PRODorOSKR} == "prodcloudless" ]]; then
+    export BUILD_TYPE=prodcloudless
+    export FINAL_BUILD_TYPE=cldless
 fi
 
 if [[ ! -d anki/victor-1.6/project ]]; then
@@ -40,16 +46,16 @@ cd anki/victor-1.6
 
 #if [[ ${ELLIE} = "1" ]]; then
     git checkout Main
-    git pull
+    git pull --recurse-submodules
     git checkout $REBUILD_COMMIT
-    cd EXTERNALS
-    git pull
-    cd ../
 #fi
 
 echo "Building Victor"
-./build/build-v.sh
-./project/victor/scripts/stage.sh -c Release
+#if [[ ! -f built ]]; then
+#    touch built
+    ./build/build-v.sh
+    ./project/victor/scripts/stage.sh -c Release
+#fi
 
 cd ../dvcbs-reloaded
 sudo mkdir -p mounted/

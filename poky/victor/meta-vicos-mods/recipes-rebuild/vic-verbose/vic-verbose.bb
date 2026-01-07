@@ -1,39 +1,22 @@
-DESCRIPTION = "Silly wire daemon for training wakeword and setting performance profile"
+DESCRIPTION = "Victor Boot Animator Verbose"
 LICENSE = "Anki-Inc.-Proprietary"                                                                   
 LIC_FILES_CHKSUM = "file://${COREBASE}/../victor/meta-qcom/files/anki-licenses/\                           
 Anki-Inc.-Proprietary;md5=4b03b8ffef1b70b13d869dbce43e8f09"
 
-SERVICE_FILE = "wired.service"
-
-SRC_URI = "file://${SERVICE_FILE}"
 S = "${UNPACKDIR}"
 #UNPACKDIR = "${S}"
 
-inherit systemd
-
-do_install:append () {
-   if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-       install -d ${D}${systemd_unitdir}/system/
-       install -m 0644 ${S}/${SERVICE_FILE} -D ${D}${systemd_unitdir}/system/${SERVICE_FILE}
-   fi
-}
-
-RDEPENDS:${PN} += "victor"
-DEPENDS += "victor"
-FILES:${PN} += "${systemd_unitdir}/system/"
-SYSTEMD_SERVICE:${PN} = "${SERVICE_FILE}"
+DEPENDS = "pkgconfig-native"
 
 inherit externalsrc
 
-EXTERNALSRC = "${WORKSPACE}/anki/wired"
+EXTERNALSRC = "${WORKSPACE}/anki/vic-verbose"
 
-do_clean:append () {
-    dir = bb.data.expand("${EXTERNALSRC}", d)
-    os.system('cd "%s" && rm build/wired && rm build/libvector-gobot.so && rm vector-gobot/build/*' % dir)
+do_clean:append() {
+    os.system('cd $EXTERNALSRC && git clean -ffdx && git submodule foreach --recursive git clean -ffdx')
 }
 
-
-run_victor() {
+build_verbose() {
   export -n CCACHE_DISABLE
   export CCACHE_DIR="${HOME}/.ccache"
   env \
@@ -100,30 +83,29 @@ run_victor() {
     -u systemd_unitdir \
     -u systemd_user_unitdir \
     -u userfsdatadir \
-    -i PATH=/usr/bin:/bin:/usr/sbin:/sbin HOME=$HOME PWD="${WORKSPACE}/anki/wired" \
+    -i PATH=/usr/bin:/bin:/usr/sbin:/sbin HOME=$HOME PWD="${EXTERNALSRC}" \
     "$@"
 }
 
 do_compile[pseudo] = "0"
-do_compile[network] = "1"
 
 do_compile() {
     cd "${EXTERNALSRC}"
-    run_victor make
+    build_verbose ./build.sh
 }
 
-do_install () {
-    install -d ${D}/usr/bin
-    install -d ${D}/etc/wired
-    install -p -m 0755 ${WORKSPACE}/anki/wired/build/wired ${D}/usr/bin/
-    cp -R --no-dereference --preserve=mode,links -v ${WORKSPACE}/anki/wired/webroot ${D}/etc/wired/webroot
+do_install() {
+    install -d ${D}/bin
+    install -d ${D}/lib
+
+    install -m 0755 ${WORKSPACE}/anki/vic-verbose/build/vic-* ${D}/bin/vic-verbose
+    install -m 0644 ${WORKSPACE}/anki/vic-verbose/build/lib* ${D}/lib/
 }
 
-FILES:${PN} += "usr/bin/wired"
-FILES:${PN} += "etc/wired/webroot"
-
-FILES:${PN}-dev = ""
 do_package_qa[noexec] = "1"
 
 INSANE_SKIP:${PN} = " already-stripped ldflags dev-elf"
 EXCLUDE_FROM_SHLIBS = "1"
+
+FILES:${PN} += "bin/"
+FILES:${PN} += "lib/"

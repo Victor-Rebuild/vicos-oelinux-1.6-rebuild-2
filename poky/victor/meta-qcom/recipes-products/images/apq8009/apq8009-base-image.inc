@@ -44,10 +44,10 @@ IMAGE_INSTALL += "volatile-binds"
 # data
 IMAGE_INSTALL += "iproute2"
 IMAGE_INSTALL += "iptables"
-IMAGE_INSTALL += "dnsmasq"
+#IMAGE_INSTALL += "dnsmasq"
 IMAGE_INSTALL += "ebtables"
 IMAGE_INSTALL += "ethtool"
-IMAGE_INSTALL += "dhcpcd"
+#IMAGE_INSTALL += "dhcpcd"
 IMAGE_INSTALL += "tcpdump"
 
 # drones
@@ -146,13 +146,15 @@ do_makesystem() {
     ## -> The minor number corresponds to the partition number (counting from 1)
     ## -> We assume the boot partition is always on the first MMC block device
  
-    if [ "${FACTORY}" == "1" ] || [ "${USER_BUILD}" == "1" ]; then
+    # if [ "${FACTORY}" == "1" ] || [ "${USER_BUILD}" == "1" ]; then
         # Enable dm-verity for any FACTORY build or if we are making a USER build
-        KERNEL_CMD_PARAMS="${@ d.getVar("KERNEL_CMD_PARAMS") }"
-    else
+    #     KERNEL_CMD_PARAMS="${@ d.getVar("KERNEL_CMD_PARAMS") }"
+    # else
         # Disable dm-verity for Developer builds
-        KERNEL_CMD_PARAMS="${@ d.getVar("KERNEL_CMD_PARAMS") }"
-    fi
+    #     KERNEL_CMD_PARAMS="${@ d.getVar("KERNEL_CMD_PARAMS") }"
+    # fi
+
+    KERNEL_CMD_PARAMS="${@ d.getVar("KERNEL_CMD_PARAMS") }"
 
     RAMDISK="/dev/null"
     if [ ! -z "${INITRAMFS_IMAGE}" ]; then
