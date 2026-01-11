@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0042 (2026/01/11)
+Update victor to `efc6fdd96204e7f19ff0d89b9a91b1c85f385e8e`, fix more 914 agaiiiin.
+
 ## 1.6.1.0041 (2026/01/06)
 Update victor to `a174420402e561c6250fbf01e9d59559f65e4eac`, fix more 914 errors, new charger leaving loosepixel animation, make Vector play more and go to charger less, mainline OpenCV, indev builds now have vic-verbose for the boot anim.
 
