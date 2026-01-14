@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0043 (2026/01/13)
+Update victor to `2119d31c9a034ccdeb91e8d63d29ed66ae358a56`, fix botname not showing full name, more 914s killed, new wired interface from WireOS, fix multilanguage support.
+
 ## 1.6.1.0042 (2026/01/11)
 Update victor to `efc6fdd96204e7f19ff0d89b9a91b1c85f385e8e`, fix more 914 agaiiiin.
 
