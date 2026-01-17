@@ -160,7 +160,8 @@ fi
 
 if [[ ! "$STACK" == "indev" && ! "$STACK" == "release" && ! "$STACK" == "internal" ]]; then
     echo $STACK
-    usage "Stack is not indev, release, or internal. Pick internal if this is a one-off ota."
+    echo "Stack is not indev, release, or internal. Assuming internal, one-off build."
+    STACK="internal"
 fi
 
 if [[ "${NO_DOCKER}" != "1" && "$(uname -a)" == *"aarch64" ]]; then

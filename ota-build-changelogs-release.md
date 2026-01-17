@@ -1,6 +1,9 @@
 # Release ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/release/
 
+## 1.6.1.5 (2026/01/17)
+Update victor to `fa16d8816d27524bad9703dfc277ceecedefae84`, add PurplPKG, add gamma correction, add Wire's 2.0 cam fixes. Identical to 1.6.1.0045.
+
 ## 1.6.1.4 (2026/01/16)
 Update victor to `3ecd4f59f347dae89ec5642f2baca0d05b8a6a73`, finish multilanguage support, now french, german, and japanese have proper translated strings, albeit google translated, OpenCV updated to `6950bedb5ce1827bc025bea7c1b23df6e947a437`, fix more 914/915s, new wired interface, new charger leaving loosepixel animation, make Vector play more and go to charger less, add pet detection, fix blackjack and weather positions on Vector 2.0, make crashes reboot faster, 2.0 can now show low battery / overheated battery images correctly, restore unused holiday lights anim.
 
