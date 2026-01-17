@@ -2,9 +2,7 @@
 
 ## Prebuilt OTA:
 
-Not yet
-
-The actual latest dev OTA is available here: [http://ota.pvic.xyz/vic/latest/dev.ota](http://ota.pvic.xyz/vic/latest/dev.ota)
+Check here!: [https://anki2.ca/1.6-rebuild](https://anki2.ca/1.6-rebuild)
 
 ## Build
 
