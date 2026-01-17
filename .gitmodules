@@ -17,3 +17,6 @@
 [submodule "anki/vic-verbose"]
 	path = anki/vic-verbose
 	url = https://github.com/Victor-Rebuild/vic-verbose
+[submodule "external/purplpkg"]
+	path = external/purplpkg
+	url = https://github.com/purpl-org/purplpkg

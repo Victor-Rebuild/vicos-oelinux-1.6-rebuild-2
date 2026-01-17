@@ -8,9 +8,5 @@ cd anki/vic-cloudless
 git pull origin vic-cloud-and-cloudless
 cd ../wired
 git pull origin main
-cd ../../poky/bitbake
-git pull origin master
-cd ../meta-openembedded
-git pull origin master
-cd ../openembedded-core
-git pull origin master
+cd external/purplpkg
+git pull origin main
