@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0046 (2026/01/18)
+Update victor to `efc92b1ce8771befcb326fe44ae349083c3a42e4`, remove denoising function.
+
 ## 1.6.1.0045 (2026/01/17)
 Update victor to `fa16d8816d27524bad9703dfc277ceecedefae84`, add PurplPKG, add gamma correction, add Wire's 2.0 cam fixes.
 
