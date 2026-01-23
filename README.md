@@ -6,7 +6,7 @@ Check here!: [https://anki2.ca/1.6-rebuild](https://anki2.ca/1.6-rebuild)
 
 ## Build
 
-- WireOS must be built on Linux, either x86_64 or aarch64.
+- 1.6-rebuild must be built on Linux, either x86_64 or aarch64.
 - Minimum specs:
     -   x86_64 or aarch64 CPU
     -   4 cores
@@ -18,9 +18,9 @@ Check here!: [https://anki2.ca/1.6-rebuild](https://anki2.ca/1.6-rebuild)
     -   16 or more GB of RAM
     -   200 or more GB of free storage
 - A minimum spec machine might take up to 3 hours to build a full OTA. A beefy one takes around half an hour.
-- It is recommended to build WireOS on an x86_64 CPU via the Docker method.
+- It is recommended to build 1.6-rebuild on an x86_64 CPU via the Docker method.
 - If you want to build on aarch64, you have to go the bare metal route. The Docker method cannot be used for aarch64 build machines yet.
-- **Asahi Linux cannot be used to build WireOS.** 99% of the build happens, but it fails during one of the final in-image configuration stages due to an Asahi-specific issue with `qemu-arm`.
+- **Asahi Linux cannot be used to build 1.6-rebuild.** 99% of the build happens, but it fails during one of the final in-image configuration stages due to an Asahi-specific issue with `qemu-arm`.
     -   I had success building WireOS in a Debian VM on my M3 Macbook Air using UTM. A QEMU+KVM VM in Asahi would probably work too.
 - **Click an option below.**
 

@@ -8,5 +8,5 @@ cd anki/vic-cloudless
 git pull origin vic-cloud-and-cloudless
 cd ../wired
 git pull origin main
-cd external/purplpkg
+cd ../../external/purplpkg
 git pull origin main
