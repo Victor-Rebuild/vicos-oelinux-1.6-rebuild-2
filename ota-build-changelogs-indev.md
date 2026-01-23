@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0047 (2026/01/23)
+Update victor to `ed6ac69b0e2b68505a5b59a34cdc59667488f47a`, add rebuild eyes as the new eye color, rainbow eyes voice command, custom eye color now plays the transition animation, timer works up to 1 day now, you can see what server Vector is connected to for voice commands within ccis, vic-cloud is now built instead of copied in.
+
 ## 1.6.1.0046 (2026/01/18)
 Update victor to `efc92b1ce8771befcb326fe44ae349083c3a42e4`, remove denoising function.
 
