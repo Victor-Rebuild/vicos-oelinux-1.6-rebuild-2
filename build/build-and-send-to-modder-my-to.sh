@@ -11,7 +11,7 @@ function ctrl_c() {
     exit 1
 }
 
-set +e
+set -e
 
 clear
 
