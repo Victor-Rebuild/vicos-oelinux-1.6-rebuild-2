@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0048 (2026/01/24)
+Update victor to `d39ee530283e6b419db7c248ef1dfb961b8baf54`, update opencv, adjust the rebuild eyes schedule to be almost matching with the PS3.
+
 ## 1.6.1.0047 (2026/01/23)
 Update victor to `ed6ac69b0e2b68505a5b59a34cdc59667488f47a`, add rebuild eyes as the new eye color, rainbow eyes voice command, custom eye color now plays the transition animation, timer works up to 1 day now, you can see what server Vector is connected to for voice commands within ccis, vic-cloud is now built instead of copied in.
 
