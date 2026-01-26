@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0049 (2026/01/24)
+Update victor to `46259d0c5e1a9d38f5cfebbdb32732d4346fd378`, just a tiny little hack to "fix" put down 914"
+
 ## 1.6.1.0048 (2026/01/24)
 Update victor to `d39ee530283e6b419db7c248ef1dfb961b8baf54`, update opencv, adjust the rebuild eyes schedule to be almost matching with the PS3.
 
