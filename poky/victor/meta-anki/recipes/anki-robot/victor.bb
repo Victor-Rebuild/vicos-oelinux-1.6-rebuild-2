@@ -190,11 +190,11 @@ do_compile () {
 
   cd victor-1.6/
 
-  git checkout Main
+  #git checkout Main
 
-  git pull --recurse-submodules
+  #git pull --recurse-submodules
 
-  git checkout $REBUILD_COMMIT
+  #git checkout $REBUILD_COMMIT
 
   TOPLEVEL=$(run_victor bash -c 'source ./project/victor/envsetup.sh && gettop')
   export TOPLEVEL

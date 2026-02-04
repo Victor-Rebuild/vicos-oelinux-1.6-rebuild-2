@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0050 (2026/02/04)
+Restart victor-1.6, all previous features have remained intact, repo still private. Vector runs at 60fps now, saturaton on 2.0 is more accurate to 1.0, set vc timing back to 1.5's timing, stop tracks from moving when unexpected, port 1.7's held on palm edge reactions, more sensitive cliff detection, fix explore vc being ignored, better scale robot name and pin for 1.0 and 2.0.
+
 ## 1.6.1.0049 (2026/01/24)
 Update victor to `46259d0c5e1a9d38f5cfebbdb32732d4346fd378`, just a tiny little hack to "fix" put down 914"
 
