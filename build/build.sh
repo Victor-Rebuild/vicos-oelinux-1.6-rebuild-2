@@ -12,6 +12,8 @@ CREATOR="Emily"
 
 CURRENT_CONTAINER_NAME="vic-yocto-builder-7"
 
+REBUILD_COMMIT="$(cat anki/victor-1.6-version)"
+
 function usage() {
     echo "$1"
     echo "Usage: ./build/build.sh -bt <dev/oskr/devcloudless> -s -op <OTA-pw> -bp <boot-passwd> -v <build-increment> -ir <indev/release> -ui <ui-option>"
@@ -117,6 +119,12 @@ function is_victor_there_and_compatible() {
 		exit 1
 	fi
 	echo "OELinux and victor compat versions are the same"
+    echo "Pulling victor"
+    cd anki/victor-1.6
+    git checkout main
+    git pull --recurse-submodules
+    git checkout $REBUILD_COMMIT
+    cd ../../
 }
 
 #knotty, ncurses, taskexp_ncurses or teamcity - default knotty
