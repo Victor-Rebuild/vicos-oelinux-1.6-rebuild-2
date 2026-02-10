@@ -284,6 +284,9 @@ RampostErr dfu_sequence(const char* dfu_file, bool force_update)
     DAS_LOG(DAS_EVENT, "dfu.success", "ignoring DevBuild");
     return err_OK;
   }
+  if (installed_version && strstr((const char*)installed_version, "Ws00000009c263e")) {
+    return err_DFU_NO_VERSION;
+  }
   if (!installed_version) {
     return err_DFU_NO_VERSION;
   }
