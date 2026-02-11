@@ -1,7 +1,7 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
-## 1.6.1.0050 (2026/02/10)
+## 1.6.1.0051 (2026/02/10)
 Update victor-1.6(-private) to `e2f8fc20162af484a724392ec9edeb385fb9fc74`, lessen screen tearing on 2.0, make pet detection trigger less, fix petting lights from showing up when they aren't supposed to, put held in palm in webViz, fix video in 8890, use 1.6 syscon firmware for better compatibility.
 
 ## 1.6.1.0050 (2026/02/04)
