@@ -199,7 +199,7 @@ do_compile () {
   TOPLEVEL=$(run_victor bash -c 'source ./project/victor/envsetup.sh && gettop')
   export TOPLEVEL
 
-  run_victor ./project/victor/scripts/victor_build_release.sh
+  run_victor ./project/victor/scripts/victor_build_release.sh -g Ninja
 }
 
 do_compile[nostamp] = "1"
