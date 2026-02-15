@@ -104,7 +104,7 @@ function errorMsg() {
 function is_victor_there_and_compatible() {
 	if [[ ! -d anki/victor-1.6/engine ]]; then
 		errorMsg "anki/victor-1.6/engine not found. Recloning victor-1.6."
-        git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild anki/victor-1.6/
+        git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild-2 anki/victor-1.6/
 		exit 1
 	fi
 	VICTOR_COMPAT="$(cat anki/victor-1.6/VICTOR_COMPAT_VERSION)"
@@ -121,7 +121,7 @@ function is_victor_there_and_compatible() {
 	echo "OELinux and victor compat versions are the same"
     echo "Pulling victor"
     cd anki/victor-1.6
-    git checkout main
+    git checkout master
     git pull --recurse-submodules
     git checkout $REBUILD_COMMIT
     cd ../../
