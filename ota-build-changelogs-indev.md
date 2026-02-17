@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0053 (2026/02/16)
+Update victor to `fe0b958215ef3c3002447016250ae1af048c7423`, skip body overheat check on Vector 2.0, restart chrony when Vector connects to wifi, fix 914 when telling Vector to explore.
+
 ## 1.6.1.0052 (2026/02/14)
 Switch to victor-1.6 public, update to commit `eca0a2ed1c7fd479855c589cb7948afddc9526f7`. Implement the oneoff charger docking animations to decrease the chances of loosepixel or binaryeyes when leaving charger in a way similar to how anki would have done it, allow more range when running over a object, changes to the age finding system: First try to get the age from `/data/persist`, if the age from `/data/persist` is older than 2016 fall back to the onboarding state file, if that's still older than 2016 rely on `onboardingState.json`, and if it doesn't exist just use the stats tracker. Rebuild (XMB) eyes uses less system resources as it now refreshes every 3/4ths of a second instead of every 1/2 of a second, upgrade mpg123 library, restore pet detection timing to 6 events, much more clearer pairing screen.
 
