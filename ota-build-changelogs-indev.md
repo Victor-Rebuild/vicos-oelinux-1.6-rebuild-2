@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0054 (2026/02/17)
+Update victor to `8354726adbb1e00f5d067fabc223c837cbffc8f2`, more clear pairing screen.
+
 ## 1.6.1.0053 (2026/02/16)
 Update victor to `fe0b958215ef3c3002447016250ae1af048c7423`, skip body overheat check on Vector 2.0, restart chrony when Vector connects to wifi, fix 914 when telling Vector to explore.
 
