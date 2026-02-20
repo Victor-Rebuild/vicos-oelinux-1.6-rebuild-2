@@ -37,6 +37,7 @@ IMAGE_INSTALL += "anki-update-engine"
 IMAGE_INSTALL += "fault-code"
 
 # Rebuild related
+IMAGE_INSTALL += "save-eye-color"
 IMAGE_INSTALL += "update-engine-rebuild"
 IMAGE_INSTALL += "vic-verbose"
 

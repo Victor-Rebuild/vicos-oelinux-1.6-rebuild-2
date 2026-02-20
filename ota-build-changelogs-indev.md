@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0055 (2026/02/19)
+Update victor to `064e3f748430e1a8c68f2e88e2de64ae14e263d1`, make rebuild eyes persist colors through reboots.
+
 ## 1.6.1.0054 (2026/02/17)
 Update victor to `8354726adbb1e00f5d067fabc223c837cbffc8f2`, more clear pairing screen.
 
