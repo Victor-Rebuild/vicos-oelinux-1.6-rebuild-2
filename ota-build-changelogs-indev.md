@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0057 (2026/02/23)
+Update victor to `287a5d0dcf1b187afb418919cc71af4eaec5b55f`, pure green bootup backpack lights, opencv has compiler optimizations now to speed things up, scanlines work, old onboarding wakeup anim, a much better Rebuild Eyes implementation for keeping eye color through reboots [here](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/commit/ef89b337970e3729f36906667c4a62bed321c09b).
+
 ## 1.6.1.0056 (2026/02/21)
 Update victor to `258e4c699c713246d78dbd2e478106037333b6d8`, make performances happen more again, port true evil bump from Viccyware, bump max photos to 300 photos, show a animation if photo storage is full, fix timer cancel countdown on Vector 2.0. Update vic-verbose: Remove random lights, make init faster, set lights to green while logging, make em blue when starting processes, remove unneeded date string.
 
