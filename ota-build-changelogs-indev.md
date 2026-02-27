@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0058 (2026/02/26)
+Update victor to `41ab2cb9847bff833212f6be6943593a81550f54`, can now ask Vector `What's the date` and Vector will give you the date, bit rushed but it'll prolly be fiine.
+
 ## 1.6.1.0057 (2026/02/23)
 Update victor to `287a5d0dcf1b187afb418919cc71af4eaec5b55f`, pure green bootup backpack lights, opencv has compiler optimizations now to speed things up, scanlines work, old onboarding wakeup anim, a much better Rebuild Eyes implementation for keeping eye color through reboots [here](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/commit/ef89b337970e3729f36906667c4a62bed321c09b).
 
