@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0059 (2026/03/05)
+Update victor to `ce34cbce3fccbef129296dbc89349a2e84b9ae0f`, Vector can have his ssh key downloaded from logs again, fix `/` in date intent showing up as `:`, new go-to-sleep and low battery animations, mic info CCIS screen now shows the correct circle size on Vector 2.0, add option to toggle WireOS lights in CCIS, add a new `CONFIGURATION` screen to CCIS, add reboot to recovery screen in CCIS, move rebuild-specific stuff to `/data/data/rebuild/` from `/data/data/`.
+
 ## 1.6.1.0058 (2026/02/26)
 Update victor to `41ab2cb9847bff833212f6be6943593a81550f54`, can now ask Vector `What's the date` and Vector will give you the date, bit rushed but it'll prolly be fiine.
 
