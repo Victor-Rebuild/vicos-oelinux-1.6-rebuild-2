@@ -1,8 +1,11 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0061 (2026/03/16)
+Update victor to `203dbad471b7ef2de4f5f1a2962fc9cf78400e1a`, add performance profile changing to CCIS, add auto update toggle to CCIS, add day of week to date voice command, localize date behavior, fix BLE text position on Vector 1.0, custom backpack lights in the same way as I implemented into WireOS, add ability for DTTB to randomize eye color when dancing using a toggle in CCIS.
+
 ## 1.6.1.0060 (2026/03/05)
-Emergancy patch, Update victor to `52c9f0f28f5d25178a4ba16506b45118fe128c33`, ACTUALLY FIX COLON, fix `/data/data/rebuild/` not being created, point name vc to new path.
+Emergency patch, Update victor to `52c9f0f28f5d25178a4ba16506b45118fe128c33`, ACTUALLY FIX COLON, fix `/data/data/rebuild/` not being created, point name vc to new path.
 
 ## 1.6.1.0059 (2026/03/05)
 Update victor to `ce34cbce3fccbef129296dbc89349a2e84b9ae0f`, Vector can have his ssh key downloaded from logs again, fix `/` in date intent showing up as `:`, new go-to-sleep and low battery animations, mic info CCIS screen now shows the correct circle size on Vector 2.0, add option to toggle WireOS lights in CCIS, add a new `CONFIGURATION` screen to CCIS, add reboot to recovery screen in CCIS, move rebuild-specific stuff to `/data/data/rebuild/` from `/data/data/`.
