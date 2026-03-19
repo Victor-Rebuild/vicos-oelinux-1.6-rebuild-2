@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0062 (2026/03/19)
+Update victor to `9bcf11e4e4c982126a6512c845b01a6989df8518`, fix day of week, increase the chance of performances when leaving charger, make update-engine-rebuild emulate the original auto update implementation.
+
 ## 1.6.1.0061 (2026/03/16)
 Update victor to `203dbad471b7ef2de4f5f1a2962fc9cf78400e1a`, add performance profile changing to CCIS, add auto update toggle to CCIS, add day of week to date voice command, localize date behavior, fix BLE text position on Vector 1.0, custom backpack lights in the same way as I implemented into WireOS, add ability for DTTB to randomize eye color when dancing using a toggle in CCIS.
 

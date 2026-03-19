@@ -14,7 +14,7 @@ else
     logger -t rebuild-auto-updater "No updates pending, continuing..."
 fi
 
-if [ -f /anki-devtools ]; then
+if [ -d /anki-devtools ]; then
     echo "Build has been deployed to, not auto updating"
     logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
     exit 0
@@ -219,4 +219,5 @@ sync
 echo
 echo "Update Done"
 logger -t rebuild-auto-updater "Update Done"
+reboot
 exit 0
