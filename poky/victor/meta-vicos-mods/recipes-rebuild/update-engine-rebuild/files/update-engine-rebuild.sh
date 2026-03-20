@@ -219,5 +219,4 @@ sync
 echo
 echo "Update Done"
 logger -t rebuild-auto-updater "Update Done"
-reboot
 exit 0
