@@ -1,6 +1,12 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0064 (2026/03/29)
+Update victor to `404d7018a212df9ab5956db139c16f7a2161ba58`. Rebuild eyes is no longer default due to a big crash that it causes on first time setup. CCIS text for Dance to the Beat rainbow eyes changed from `DTTB RANDOM COLORS` to `DTTB RANDOM EYES`. Blackjack now gives Vector more autonomy by allowing him to play on/off the charger depending on how he feels, if Vector wants to stay on the charger we skip looking for faces, no need for it since we're on the charger, if Vector wants to leave normal flow will happen (Leave --> Search for faces --> Play blackjack). A Bunch of unused animations for wheelstands were reimplemented. 
+
+## 1.6.1.0063 (2026/03/20)
+Emergancy update to fix the bootloop
+
 ## 1.6.1.0062 (2026/03/19)
 Update victor to `9bcf11e4e4c982126a6512c845b01a6989df8518`, fix day of week, increase the chance of performances when leaving charger, make update-engine-rebuild emulate the original auto update implementation.
 
