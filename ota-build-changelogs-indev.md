@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0065 (2026/04/06)
+Update victor to `9566988d4a728a442f241d05fcb093339ad762be`. Reacttohand is more forgiving on the angle Vector is at, new image for when Vector can't calibrate his gyro, update opencv, more optimized with -O3 and faster libjpeg-turbo for better camera performance.
+
 ## 1.6.1.0064 (2026/03/29)
 Update victor to `404d7018a212df9ab5956db139c16f7a2161ba58`. Rebuild eyes is no longer default due to a big crash that it causes on first time setup. CCIS text for Dance to the Beat rainbow eyes changed from `DTTB RANDOM COLORS` to `DTTB RANDOM EYES`. Blackjack now gives Vector more autonomy by allowing him to play on/off the charger depending on how he feels, if Vector wants to stay on the charger we skip looking for faces, no need for it since we're on the charger, if Vector wants to leave normal flow will happen (Leave --> Search for faces --> Play blackjack). A Bunch of unused animations for wheelstands were reimplemented. 
 
