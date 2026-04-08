@@ -28,19 +28,109 @@ function ctrl_c() {
     exit 1
 }
 
-BASE_URL=`grep UPDATE_ENGINE_BASE_URL= /anki/etc/update-engine.env | awk -F= '{print $NF;}'`
-BASE_URL_LATEST=`grep UPDATE_ENGINE_BASE_URL_LATEST /anki/etc/update-engine.env | awk -F= '{print $NF;}'`
-if [ -z "${BASE_URL_LATEST}" ]; then
-    BASE_URL_LATEST="${BASE_URL}"
+# Rebuild things... just copy pasted from my other shitty script, aaaaa
+# Build ids
+DEV_BUILD_ID=d
+DEV_CLOUDLESS_BUILD_ID=dcldless
+OSKR_BUILD_ID=oskr
+OSKR_CLOUDLESS_BUILD_ID=oskrcldless
+PROD_BUILD_ID=
+PROD_CLOUDLESS_BUILD_ID=cldless
+
+# Essential things for this to work
+BUILDINF="$(cat /build.prop)"
+CURRENT_VERSION=$(getprop ro.anki.version)
+REBUILD_URL="http://http.anki2.ca/otas/1.6-rebuild"
+INDEV_OR_RELEASE="$(cat /etc/rebuild-dev-or-indev)"
+
+if [ ${INDEV_OR_RELEASE} == indev ]; then
+    TARGET_VERSION=$(curl -s -s $REBUILD_URL/indev/latest)
+    INDEV=1
+elif [ ${INDEV_OR_RELEASE} == release ]; then
+    TARGET_VERSION=$(curl -s $REBUILD_URL/release/latest)
+    RELEASE=1
+elif [ ${INDEV_OR_RELEASE} == internal ]; then
+    # put em on indev
+    TARGET_VERSION=$(curl -s -s $REBUILD_URL/indev/latest)
+    INDEV=1
+else
+    # here too
+    TARGET_VERSION=$(curl -s -s $REBUILD_URL/indev/latest)
+    INDEV=1
 fi
-URL="${BASE_URL}full/lkg.ota"
+
+if [[ ${CURRENT_VERSION} == *$DEV_BUILD_ID ]]; then
+    CURRENT_BUILD_ID=d
+    DEV=1
+elif [[ ${CURRENT_VERSION} == *$DEV_CLOUDLESS_BUILD_ID ]]; then
+    CURRENT_BUILD_ID=dcldless
+    DEV=1
+elif [[ ${CURRENT_VERSION} == *$OSKR_BUILD_ID ]]; then
+    CURRENT_BUILD_ID=oskr
+    OSKR=1
+elif [[ ${CURRENT_VERSION} == *$OSKR_CLOUDLESS_BUILD_ID ]]; then
+    CURRENT_BUILD_ID=oskrcldless
+    OSKR=1
+elif [[ ${CURRENT_VERSION} == *$PROD_CLOUDLESS_BUILD_ID ]]; then
+    CURRENT_BUILD_ID=cldless
+    PROD=1
+else
+    CURRENT_BUILD_ID=
+    PROD=1
+fi
+
+if [[ ${DEV} = 1 ]]; then
+    if [[ ${INDEV} = 1 ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${DEV_CLOUDLESS_BUILD_ID} ]]; then
+            FINAL_REBUILD_URL=$REBUILD_URL/indev/devcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        else
+            FINAL_REBUILD_URL=$REBUILD_URL/indev/dev/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        fi
+    elif [[ ${RELEASE} = 1 ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${DEV_CLOUDLESS_BUILD_ID} ]]; then
+            FINAL_REBUILD_URL=$REBUILD_URL/release/devcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        else
+            FINAL_REBUILD_URL=$REBUILD_URL/release/dev/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        fi
+    fi
+elif [[ ${OSKR} = 1 ]]; then
+    if [[ ${INDEV} = 1 ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${OSKR_CLOUDLESS_BUILD_ID} ]]; then
+            FINAL_REBUILD_URL=$REBUILD_URL/indev/oskrcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        else
+            FINAL_REBUILD_URL=$REBUILD_URL/indev/oskr/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        fi
+    elif [[ ${RELEASE} = 1 ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${OSKR_CLOUDLESS_BUILD_ID} ]]; then
+            FINAL_REBUILD_URL=$REBUILD_URL/release/oskrcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        else
+            FINAL_REBUILD_URL=$REBUILD_URL/release/oskr/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        fi
+    fi
+elif [[ ${PROD} = 1 ]]; then
+    if [[ ${INDEV} = 1 ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${PROD_CLOUDLESS_BUILD_ID} ]]; then
+            FINAL_REBUILD_URL=$REBUILD_URL/indev/prodcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        else
+            FINAL_REBUILD_URL=$REBUILD_URL/indev/prod/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        fi
+    elif [[ ${RELEASE} = 1 ]]; then
+        if [[ ${CURRENT_BUILD_ID} = ${PROD_CLOUDLESS_BUILD_ID} ]]; then
+            FINAL_REBUILD_URL=$REBUILD_URL/release/prodcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        else
+            FINAL_REBUILD_URL=$REBUILD_URL/release/prod/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
+        fi
+    fi
+fi
+
+URL=$FINAL_REBUILD_URL
 if [ $# -gt 0 ]; then
     case "$1" in
 	-h)
 	    usage
 	    ;;
 	latest)
-	    URL="${BASE_URL}full/latest.ota"
+	    URL=$FINAL_REBUILD_URL
 	    ;;
         delta-latest)
             URL="${BASE_URL_LATEST}diff/`getprop ro.anki.version | tr -d '[a-z]'`.ota"

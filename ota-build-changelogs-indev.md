@@ -1,6 +1,9 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0066 (2026/04/08)
+Update victor to `32bf9fef7589d42bedb31cc3021c50025192b062`. Different animation for hooking Vector up to wirepod, update submodules... I think it's finally ready...
+
 ## 1.6.1.0065 (2026/04/06)
 Update victor to `9566988d4a728a442f241d05fcb093339ad762be`. Reacttohand is more forgiving on the angle Vector is at, new image for when Vector can't calibrate his gyro, update opencv, more optimized with -O3 and faster libjpeg-turbo for better camera performance.
 
