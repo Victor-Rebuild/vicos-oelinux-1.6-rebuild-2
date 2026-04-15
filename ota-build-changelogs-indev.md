@@ -1,6 +1,16 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0067 (2026/04/14)
+Update victor to `7a28490220e639bf5f7eb77fb475b33a0af9b9ab`:
+- Add toggle for 60 or 30 fps to the CCIS config menu.
+- Beta alexa has been restored and can also be enabled in the CCIS config menu.
+- CONF / CONFIGURATION is now the last option in CCIS to keep the size in order on Vector 1.0.
+- Explore VC now works again and Vector leaves the charger more often.
+- SSID won't show on the main CCIS screen if Vector has a set name.
+- Options that previously required a reboot in CCIS except clearing user data now restart just anki-robot processes.
+- Options can also be changed in bulk and will apply when you exit the config menu.
+
 ## 1.6.1.0066 (2026/04/08)
 Update victor to `32bf9fef7589d42bedb31cc3021c50025192b062`. Different animation for hooking Vector up to wirepod, update submodules... I think it's finally ready...
 
