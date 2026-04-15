@@ -12,25 +12,48 @@ Update victor to `7a28490220e639bf5f7eb77fb475b33a0af9b9ab`:
 - Options can also be changed in bulk and will apply when you exit the config menu.
 
 ## 1.6.1.0066 (2026/04/08)
-Update victor to `32bf9fef7589d42bedb31cc3021c50025192b062`. Different animation for hooking Vector up to wirepod, update submodules... I think it's finally ready...
+Update victor to `32bf9fef7589d42bedb31cc3021c50025192b062`:
+- Different animation for hooking Vector up to wirepod.
+- Update poky submodules
+- I think it's finally ready...
 
 ## 1.6.1.0065 (2026/04/06)
-Update victor to `9566988d4a728a442f241d05fcb093339ad762be`. Reacttohand is more forgiving on the angle Vector is at, new image for when Vector can't calibrate his gyro, update opencv, more optimized with -O3 and faster libjpeg-turbo for better camera performance.
+Update victor to `9566988d4a728a442f241d05fcb093339ad762be`:
+- Reacttohand is more forgiving on the angle Vector is at.
+- New image for when Vector can't calibrate his gyro.
+- Update opencv: more optimized with -O3 and faster libjpeg-turbo for better camera performance.
 
 ## 1.6.1.0064 (2026/03/29)
-Update victor to `404d7018a212df9ab5956db139c16f7a2161ba58`. Rebuild eyes is no longer default due to a big crash that it causes on first time setup. CCIS text for Dance to the Beat rainbow eyes changed from `DTTB RANDOM COLORS` to `DTTB RANDOM EYES`. Blackjack now gives Vector more autonomy by allowing him to play on/off the charger depending on how he feels, if Vector wants to stay on the charger we skip looking for faces, no need for it since we're on the charger, if Vector wants to leave normal flow will happen (Leave --> Search for faces --> Play blackjack). A Bunch of unused animations for wheelstands were reimplemented. 
+Update victor to `404d7018a212df9ab5956db139c16f7a2161ba58`.
+- Rebuild eyes is no longer default due to a big crash that it causes on first time setup.
+- CCIS text for Dance to the Beat rainbow eyes changed from `DTTB RANDOM COLORS` to `DTTB RANDOM EYES`.
+- Blackjack now gives Vector more autonomy by allowing him to play on/off the charger depending on how he feels, if Vector wants to stay on the charger we skip looking for faces, no need for it since we're on the charger, if Vector wants to leave normal flow will happen (Leave --> Search for faces --> Play blackjack).
+- A Bunch of unused animations for wheelstands were reimplemented. 
 
 ## 1.6.1.0063 (2026/03/20)
-Emergancy update to fix the bootloop
+- Emergancy update to fix the bootloop
 
 ## 1.6.1.0062 (2026/03/19)
-Update victor to `9bcf11e4e4c982126a6512c845b01a6989df8518`, fix day of week, increase the chance of performances when leaving charger, make update-engine-rebuild emulate the original auto update implementation.
+Update victor to `9bcf11e4e4c982126a6512c845b01a6989df8518`:
+- Fix day of week, increase the chance of performances when leaving charger.
+- Make update-engine-rebuild emulate the original auto update implementation.
 
 ## 1.6.1.0061 (2026/03/16)
-Update victor to `203dbad471b7ef2de4f5f1a2962fc9cf78400e1a`, add performance profile changing to CCIS, add auto update toggle to CCIS, add day of week to date voice command, localize date behavior, fix BLE text position on Vector 1.0, custom backpack lights in the same way as I implemented into WireOS, add ability for DTTB to randomize eye color when dancing using a toggle in CCIS.
+Update victor to `203dbad471b7ef2de4f5f1a2962fc9cf78400e1a`.
+- Add performance profile changing to CCIS.
+- Add auto update toggle to CCIS.
+- Add day of week to date voice command.
+- Localize date behavior.
+- Fix BLE text position on Vector 1.0.
+- Custom backpack lights in the same way as I implemented into WireOS.
+- Add ability for DTTB to randomize eye color when dancing using a toggle in CCIS.
 
 ## 1.6.1.0060 (2026/03/05)
-Emergency patch, Update victor to `52c9f0f28f5d25178a4ba16506b45118fe128c33`, ACTUALLY FIX COLON, fix `/data/data/rebuild/` not being created, point name vc to new path.
+Emergency patch:
+- Update victor to `52c9f0f28f5d25178a4ba16506b45118fe128c33`.
+- ACTUALLY FIX COLON.
+- Fix `/data/data/rebuild/` not being created.
+- point name vc to new path.
 
 ## 1.6.1.0059 (2026/03/05)
 Update victor to `ce34cbce3fccbef129296dbc89349a2e84b9ae0f`, Vector can have his ssh key downloaded from logs again, fix `/` in date intent showing up as `:`, new go-to-sleep and low battery animations, mic info CCIS screen now shows the correct circle size on Vector 2.0, add option to toggle WireOS lights in CCIS, add a new `CONFIGURATION` screen to CCIS, add reboot to recovery screen in CCIS, move rebuild-specific stuff to `/data/data/rebuild/` from `/data/data/`.
