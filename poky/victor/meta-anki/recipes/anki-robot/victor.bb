@@ -182,13 +182,13 @@ run_victor() {
 }
 
 do_compile () {
-  cd ${WORKSPACE}/anki/
+  cd ${WORKSPACE}/anki/victor-1.6
 
-	if [[ ! -d victor-1.6 ]]; then
-    git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild victor-1.6/
-	fi
+  #if [[ ! -d victor-1.6 ]]; then
+  #  git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild victor-1.6/
+  #fi
 
-  cd victor-1.6/
+  #cd victor-1.6/
 
   #git checkout Main
 
