@@ -1,6 +1,18 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0068 (2026/04/21)
+### Victor side changes:
+- Update victor to `bd80b055567d682ee88ffd9ef8a8c01f84137842`.
+- Can now disable or enable snoring at night within the CCIS config menu.
+- Fix spine-select error (898) ([Anki commit](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/commit/f570a7dc580bb50dcb7ff413c36da4053b7c1192))
+- More accurate weather conditions (1.6-rebuild VC server only)
+- More range for held in palm
+
+### OE-Linux side changes:
+- Use 2.0.1.6076's syscon.dfu, a bot was erroring and having charging issues with 1.6's syscon.dfu.
+- Have update-engine-rebuild do a random delay of up to a hour so my server doesn't hurt when every Vector hits the update server at once.
+
 ## 1.6.1.0067 (2026/04/14)
 Update victor to `7a28490220e639bf5f7eb77fb475b33a0af9b9ab`:
 - Add toggle for 60 or 30 fps to the CCIS config menu.
