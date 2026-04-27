@@ -1,6 +1,10 @@
 # Release ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/release/
 
+## 1.6.1.7 (no eta)
+### aaaaaa this is a load of barnacles, I hope bots don't break when they update to this.
+This is in a seperate readme, it is NOT fitting in here: [1.6.1.7 changelog](./Release-1.6.1.7.md)
+
 ## 1.6.1.6 (2026/01/18)
 Update victor to `efc92b1ce8771befcb326fe44ae349083c3a42e4`, remove denoising function. Identical to 1.6.1.0046.
 
