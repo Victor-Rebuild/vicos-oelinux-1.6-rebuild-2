@@ -1,6 +1,19 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0069 (nice) (2026/04/27) 
+-# aaaa someone stop me
+### Victor side changes
+- Update victor to `492063e0f2b2489cc8c1b95d67504acb4e48baec`.
+- Fix config submenu not defaulting to page 1.
+- Restore Anki's text spacing for CCIS screen 2. (network)
+- Change conncheck address to the real conncheck.
+- Custom preset eye color support. (copy `/anki/data/assets/cozmo_resources/config/engine/eye_color_config.json` to `/data/data/rebuild/eye_color_config.json` and make your changes)
+- Rebuild eyes are a little more saturated on 2.0. (+ 0.15 instead of + 0.1)
+- Can now mute volume, rebuild servers only. (Hey Vector, Volume Mute)
+- Reenable older 1.4 reacttohand animations
+- Fix rebuild eyes crash when no internet is available and Vector is waiting for onboarding, make them default again as well.
+
 ## 1.6.1.0068 (2026/04/21)
 ### Victor side changes:
 - Update victor to `bd80b055567d682ee88ffd9ef8a8c01f84137842`.
