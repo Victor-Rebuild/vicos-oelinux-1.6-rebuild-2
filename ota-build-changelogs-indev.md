@@ -1,6 +1,17 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0070 (2026/05/03)
+### Victor side changes;
+- Update victor to `0cbf5519bb1c2f0e842db5f74dcd1a0c9b3dbe0f`.
+- Power off and reboot voice command (rebuild voice server only).
+- Can change/set custom eye color from the `:8080` webserver.
+- Reimplement anki pairing screen
+
+### oelinux side changes:
+- Update wired for the :8080 webserver changes.
+- Bump victor compat
+
 ## 1.6.1.0069 (nice) (2026/04/27) 
 -# aaaa someone stop me
 ### Victor side changes
