@@ -1,14 +1,35 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0071 (2026/05/11)
+### The optimization update
+
+### Victor side changes:
+Update Victor to `5b40d9f64263041fc5ad0fe43c0218833425eeca`:
+- Don't play the eye color transition anim if the target eye color is the same as current.
+- Ram the cube out of the way of the charger since it seems to work a bit better than pickup.
+
+Small optimizations and cleanup applied in a bunch of places:
+- Change it everywhere so that animProcess doesn't check for 30/60fps every LCD draw and instead only checks on start.
+- Have a global static cast value for `proceduralFace.cpp` instead of having a new one for each use.
+- Rebuild eyes code in `settingsManager.cpp` is cleaner and easier to read.
+- Remove a bunch of extra `emrHelper.h`'s since they're dupes due to `cozmoConfig.h` and other headers that are included containing it.
+- Date intent is now it's own folder but still shares some parts of timer.
+
+- Don't try to generate ready text for intent graph, fixes Japanese intent graph.
+- ^^^^ DDL's implementation was to just make the ready text blank and ask the TTS to generate the blank text, this used up extra processing time and made the Japanese TTS not work right since at the end of each TTS utterance it adds a little extra sound when there should be none. I skipped generating the TTS upon intent graph and kept the default flow for non-intent-graph requests.
+
+### oelinux side changes:
+- Wired now saves the botname in `/data/data/rebuild/customBotName` instead of `/data/data/customBotName`.
+
 ## 1.6.1.0070 (2026/05/03)
-### Victor side changes;
+### Victor side changes:
 - Update victor to `0cbf5519bb1c2f0e842db5f74dcd1a0c9b3dbe0f`.
 - Power off and reboot voice command (rebuild voice server only).
-- Can change/set custom eye color from the `:8080` webserver.
 - Reimplement anki pairing screen
 
 ### oelinux side changes:
+- Can change/set custom eye color from the `:8080` webserver.
 - Update wired for the :8080 webserver changes.
 - Bump victor compat
 
