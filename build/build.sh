@@ -103,8 +103,7 @@ function errorMsg() {
 
 function is_victor_there_and_compatible() {
 	if [[ ! -d anki/victor-1.6/engine ]]; then
-		errorMsg "anki/victor-1.6/engine not found. Recloning victor-1.6."
-        git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild-2 anki/victor-1.6/
+		errorMsg "anki/victor-1.6/engine not found. Please properly reclone this repository or run `git submodule update --init --recursive` in the root of this repo."
 		exit 1
 	fi
 	VICTOR_COMPAT="$(cat anki/victor-1.6/VICTOR_COMPAT_VERSION)"
