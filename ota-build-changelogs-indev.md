@@ -1,6 +1,18 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0072 (2026/05/19)
+### Victor side changes:
+Update Victor to `48b1bdfdb1f35bcb8ae28608e4f80c8852285edb`:
+- Cozmo cube support by AmyMC.
+- Prototype "eyes" charger support (Mostly AmyMC, I put some supporting code in).
+- Weather no longer bugs and plays the starry anim when it's sunny.
+- Vector no longer plays the snowglobe anim when shaken since it's basically summer now.
+- Show enabled/disabled status of auto updates in CCIS.
+
+### oelinux side changes:
+- Build system is a bit cleaner as victor-1.6 is now a submodule (Didn't work last time but seems to work now).
+
 ## 1.6.1.0071 (2026/05/11)
 ### The optimization update
 
