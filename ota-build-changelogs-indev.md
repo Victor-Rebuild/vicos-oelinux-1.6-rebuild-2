@@ -1,6 +1,16 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0073 (2026/05/22)
+(Mostly just stability and cleaned up code)
+### Victor side changes
+Update Victor to `bfe02a40488cb609bd951e61f368e819d32deed5`:
+- More code cleanup throughout the codebase.
+- On inital setup, instead of showing Vector's ID plus the link, it now shows "Setup Robot at:" plus the link, the ID still shows on the pairing screen.
+- Rebuild eyes now only updates every 30 seconds instead of every 45 milliseconds like before, seems a bit more efficient.
+- Rebuild eyes also no longer hangs vic-engine when switching to/from it.
+- CCIS now shows if the current base build is indev or release, shows branch if it is a deployed build
+
 ## 1.6.1.0072 (2026/05/19)
 ### Victor side changes:
 Update Victor to `48b1bdfdb1f35bcb8ae28608e4f80c8852285edb`:
