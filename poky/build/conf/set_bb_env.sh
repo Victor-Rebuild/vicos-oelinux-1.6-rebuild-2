@@ -270,8 +270,8 @@ function wire-clean() {
 		rm -f ${WS}/wire-cleaning
 	fi
 	if [[ -d "${WS}/poky/build/downloads" ]]; then
-		if [[ "$(ls ${WS}/poky/build/downloads)" == *'release.2.41.master'* ]]; then
-			echo "Walnascar build detected - removing build folders..."
+		if [[ "$(ls ${WS}/poky/build/downloads)" == *'release.2.42.master'* ]]; then
+			echo "Whinlatter build detected - removing build folders..."
 			sudo rm -rf ${WS}/poky/build/cache ${WS}/poky/build/sstate-cache ${WS}/poky/build/tmp-glibc ${WS}/poky/build/downloads
 		fi
 	fi

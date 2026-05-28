@@ -34,6 +34,8 @@ FILES:${PN}     += "${libdir}/lib*.so"
 FILES:${PN}     += "${sbindir}/*"
 FILES:${PN}-doc += "${mandir}/*"
 
+EXTRA_OEMAKE:append = " CFLAGS='${CFLAGS} -Wno-error=discarded-qualifiers'"
+
 do_configure() {
         :
 }
