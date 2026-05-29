@@ -27,7 +27,3 @@
 	path = kernel/linux-vector
 	url = https://github.com/os-vector/linux
 	branch = wirework-7.1.0
-[submodule "poky/meta-smartphone"]
-	path = poky/meta-smartphone
-	url = https://github.com/shr-distribution/meta-smartphone.git
-	branch = whinlatter

@@ -1,0 +1,25 @@
+From b7cfb2a21fcb73daf6497f2f3a0395d71b91def0 Mon Sep 17 00:00:00 2001
+From: Christophe Chapuis <chris.chapuis@gmail.com>
+Date: Sat, 13 Apr 2019 08:10:13 +0000
+Subject: [PATCH] tenderloin: Fix userdata mount options
+
+Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Upstream-Status: Inappropriate [specific to tenderloin usecase]
+---
+ scripts/halium | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/halium b/scripts/halium
+index e903819..f78fc2a 100644
+--- a/scripts/halium
++++ b/scripts/halium
+@@ -467,7 +467,7 @@ mountroot() {
+ 	# Mount the data partition to a temporary mount point
+ 	# FIXME: data=journal used on ext4 as a workaround for bug 1387214
+ 	[ "x$(blkid $path -o value -s TYPE)" = "xext4" ] && OPTIONS="data=journal,"
+-	mount -o discard,$OPTIONS $path /tmpmnt
++	mount  $path /tmpmnt
+ 
+ 	# Set $_syspart if it is specified as systempart= on the command line
+ 	if grep -q systempart= /proc/cmdline; then

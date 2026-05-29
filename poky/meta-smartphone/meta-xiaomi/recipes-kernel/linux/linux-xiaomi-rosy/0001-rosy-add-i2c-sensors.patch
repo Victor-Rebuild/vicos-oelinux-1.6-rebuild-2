@@ -1,0 +1,62 @@
+From 631805dab2b87971f7a25b06deffc2b14939acdf Mon Sep 17 00:00:00 2001
+From: Christophe Chapuis <chris.chapuis@gmail.com>
+Date: Sun, 19 May 2024 14:13:34 +0000
+Subject: [PATCH] rosy: add i2c sensors
+
+The rosy device has these sensors:
+ * AKM AK09918 magnetometer
+ * Sensortek stk3x1x light and proximity sensor
+ * BOSCH BMI120 accelerometer
+
+Upstream-Status: Submitted
+
+Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
+---
+ .../boot/dts/qcom/sdm450-xiaomi-rosy.dts      | 34 +++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sdm450-xiaomi-rosy.dts b/arch/arm64/boot/dts/qcom/sdm450-xiaomi-rosy.dts
+index 74aec8001c4c..e93736f1fb60 100644
+--- a/arch/arm64/boot/dts/qcom/sdm450-xiaomi-rosy.dts
++++ b/arch/arm64/boot/dts/qcom/sdm450-xiaomi-rosy.dts
+@@ -31,6 +31,40 @@ cont_splash_mem: cont-splash@90001000 {
+ 			no-map;
+ 		};
+ 	};
++
++	i2c-sensors {
++		compatible = "i2c-gpio";
++		sda-gpios = <&tlmm 14 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
++		scl-gpios = <&tlmm 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
++		i2c-gpio,delay-us = <2>; /* ~100 kHz */
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		magnetometer@c {
++			compatible = "asahi-kasei,ak09918";
++			reg = <0x0c>;
++
++			vdd-supply = <&pm8953_l10>;
++			vid-supply = <&pm8953_l6>;
++		};
++
++		light@48 {
++			compatible = "sensortek,stk3311";
++			reg = <0x48>;
++		};
++
++		imu@68 {
++			compatible = "bosch,bmi120";
++			reg = <0x68>;
++
++			vdd-supply = <&pm8953_l10>;
++			vddio-supply = <&pm8953_l6>;
++
++			mount-matrix = "1", "0", "0",
++					"0", "-1", "0",
++					"0", "0", "1";
++		};
++	};
+ };
+ 
+ &aw2013_led {

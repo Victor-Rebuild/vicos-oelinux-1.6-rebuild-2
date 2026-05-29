@@ -1,0 +1,12 @@
+DESCRIPTION = "Android Bluetooth firmware loader"
+SECTION = "devel"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c19179f3430fd533888100ab6616e114"
+
+SRCREV = "69371f6ecc82ed44e1292eae7d92313a5bfa68a8"
+PV = "4.1.1+git"
+
+SRC_URI = "${FREESMARTPHONE_GIT}/utilities.git;protocol=https;branch=master"
+S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}/android/brcm_patchram_plus"
+
+inherit autotools
