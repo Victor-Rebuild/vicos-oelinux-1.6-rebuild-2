@@ -1,9 +1,20 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0074 (2026/05/30)
+End of may yayyyyyyy, hopefully this should be the build that goes to main.
+### Victor side changes:
+Update Victor to `a7351991849b82dec39f624dee7cfc69a48b386f`:
+- Victor side change to allow you to enroll faces in the Wired UI (<vector-ip>:8080 in a web browser).
+- Better alexa pairing text scaling on Vector 2.0 since it was really small.
+- Rebuild eyes are now never fully white and always have a tint of the color.
+- Fix trying to leave charger trying to activate when not on charger resulting in looping causing Vector to sit still.
+- Fix Vector not wanting to interact with cubes.
+- Fix path planner constantly looping.
+
 ## 1.6.1.0073 (2026/05/22)
 (Mostly just stability and cleaned up code)
-### Victor side changes
+### Victor side changes:
 Update Victor to `bfe02a40488cb609bd951e61f368e819d32deed5`:
 - More code cleanup throughout the codebase.
 - On inital setup, instead of showing Vector's ID plus the link, it now shows "Setup Robot at:" plus the link, the ID still shows on the pairing screen.
