@@ -96,14 +96,7 @@ USERADD_PARAM:${PN} = " -u ${UID_ANKI} -g ${GID_ANKI} -s /bin/false anki; \
 do_package_qa[noexec] = "1"
 
 do_clean:append() {
-    dir = bb.data.expand("${S}", d)
-    os.chdir(dir)
-    os.system('git clean -Xfd')
-}
-
-do_clean:append() {
-    s = d.getVar('S')
-    os.system('git -C "%s" clean -Xfd' % s)
+    os.system('cd $EXTERNALSRC && git clean -ffdx && git submodule foreach --recursive git clean -ffdx')
 }
 
 do_compile[pseudo] = "0"
