@@ -1,6 +1,16 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0075 (2026/06/04)
+### Victor side changes:
+Update Victor to `ed9539500dd610c605b6fedb9b42b7145956c053`
+- Fix indev/release showing ? in CCIS.
+- Remove custom weather implementation, might return.
+- [Black desk compatibility mode](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/commit/c93e933691f04880d60cc0bf0a17d6e459e7ff3d)
+- Space daydream is now colored
+- Bring SDK support in line with firmware 2.0.1
+- Make Vector go home on "I am satisfied with my care" intent (rebuild server only)
+
 ## 1.6.1.0074 (2026/05/30)
 End of may yayyyyyyy, hopefully this should be the build that goes to main.
 ### Victor side changes:
