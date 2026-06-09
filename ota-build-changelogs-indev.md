@@ -1,6 +1,13 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0076 (2026/06/08)
+### Victor side changes:
+Update Victor to `eb9b86fec1d31d79dca4d1e1961552e4a486fe82`
+- Fix drive off charger bugs.
+- Daydream no longer colored to fix crashes.
+- General code cleanup.
+
 ## 1.6.1.0075 (2026/06/04)
 ### Victor side changes:
 Update Victor to `ed9539500dd610c605b6fedb9b42b7145956c053`
