@@ -1,16 +1,23 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0077 (2026/06/11)
+### Victor side changes:
+Update Victor to `82a408c848ca58b23d7c96e05efca7966bccaec6`:
+- Add the ability to activate keepaway using a Voice Command.
+- Add Cubedrive.
+- Be able to trigger cubedrive via a Voice Command.
+
 ## 1.6.1.0076 (2026/06/08)
 ### Victor side changes:
-Update Victor to `eb9b86fec1d31d79dca4d1e1961552e4a486fe82`
+Update Victor to `eb9b86fec1d31d79dca4d1e1961552e4a486fe82`:
 - Fix drive off charger bugs.
 - Daydream no longer colored to fix crashes.
 - General code cleanup.
 
 ## 1.6.1.0075 (2026/06/04)
 ### Victor side changes:
-Update Victor to `ed9539500dd610c605b6fedb9b42b7145956c053`
+Update Victor to `ed9539500dd610c605b6fedb9b42b7145956c053`:
 - Fix indev/release showing ? in CCIS.
 - Remove custom weather implementation, might return.
 - [Black desk compatibility mode](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/commit/c93e933691f04880d60cc0bf0a17d6e459e7ff3d)
