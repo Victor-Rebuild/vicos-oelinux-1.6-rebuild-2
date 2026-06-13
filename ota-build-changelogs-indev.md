@@ -1,6 +1,14 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0078 (2026/06/13)
+### Victor side changes:
+Update Victor to `0af18cc3d651361f9637fe706aeb3cb89333c899`:
+- Rainbow eyes no longer hangs vic-engine
+
+### oelinux side changes:
+- Go back to my original rebooter implementation where it's all self-contained in the service.
+
 ## 1.6.1.0077 (2026/06/11)
 ### Victor side changes:
 Update Victor to `82a408c848ca58b23d7c96e05efca7966bccaec6`:
