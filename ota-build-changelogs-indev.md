@@ -1,6 +1,15 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0079 (2026/06/23)
+### Victor side changes:
+Update Victor to `420bd7c8691971e5b8d48b3b821165965c85985a`
+- New Eye color: Mystery Eyes! Eye color is randomly set every time it's chosen and every boot.
+- Fully functional rock paper scissors! (Play by asking Vector to "Play rock paper scissors").
+- Fix SDK display image on Vector 2.0
+- Can now load custom TTS config from `/data/data/rebuild/tts_config.json`.
+- TTS pitch and shaping have had their limits increased to 1k.
+
 ## 1.6.1.0078 (2026/06/13)
 ### Victor side changes:
 Update Victor to `0af18cc3d651361f9637fe706aeb3cb89333c899`:
