@@ -119,11 +119,11 @@ function is_victor_there_and_compatible() {
 	fi
 	echo "OELinux and victor compat versions are the same"
     echo "Pulling victor"
-    cd anki/victor-1.6
-    git checkout master
-    git pull --recurse-submodules
-    git checkout $REBUILD_COMMIT
-    cd ../../
+    #cd anki/victor-1.6
+    #git checkout master
+    #git pull --recurse-submodules
+    #git checkout $REBUILD_COMMIT
+    #cd ../../
 }
 
 #knotty, ncurses, taskexp_ncurses or teamcity - default knotty

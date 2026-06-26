@@ -1,9 +1,15 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0080 (2026/06/26)
+### Victor side changes:
+Update Victor to `2bbebe7c9889d86f40b3badd71a03d4eaaa3075b`:
+- Restore pitch values for TTS to their normal defaults.
+- Fix the robot sometimes saying the name wrong.
+
 ## 1.6.1.0079 (2026/06/23)
 ### Victor side changes:
-Update Victor to `420bd7c8691971e5b8d48b3b821165965c85985a`
+Update Victor to `420bd7c8691971e5b8d48b3b821165965c85985a`:
 - New Eye color: Mystery Eyes! Eye color is randomly set every time it's chosen and every boot.
 - Fully functional rock paper scissors! (Play by asking Vector to "Play rock paper scissors").
 - Fix SDK display image on Vector 2.0
