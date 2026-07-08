@@ -1,6 +1,15 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0081 (2026/07/8)
+### Victor side changes:
+Update Victor to `47211e07243f11ed6b1cd66da97c48f3273b62b2`:
+- Pronouns behavior is implemented, not callable yet via voice command or Wired.
+- Fix starry night weather not working correctly.
+- Older 1.4-era voice command idk timings
+- Bump 2.0 eye saturation again
+- Going home now has dynamic brightness so that older Vectors with their original batteries can get home better.
+
 ## 1.6.1.0080 (2026/06/26)
 ### Victor side changes:
 Update Victor to `2bbebe7c9889d86f40b3badd71a03d4eaaa3075b`:
