@@ -1,7 +1,14 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
-## 1.6.1.0081 (2026/07/8)
+## 1.6.1.0082 (2026/07/15)
+### Victor side changes:
+Update Victor to `eb0c10791fa14a10541c60dbff68595706d262e4`:
+- Fixed server information screen in CCIS when using a custom server config.
+- Added the ability to disable check for person / react to sound check when sleeping to [CCIS](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/blob/master/CONFIG_MENU.md).
+- Building with newer cmake, go, protoc, and upx versions.
+
+## 1.6.1.0081 (2026/07/08)
 ### Victor side changes:
 Update Victor to `47211e07243f11ed6b1cd66da97c48f3273b62b2`:
 - Pronouns behavior is implemented, not callable yet via voice command or Wired.
