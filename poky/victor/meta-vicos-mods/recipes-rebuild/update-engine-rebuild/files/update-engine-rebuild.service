@@ -1,6 +1,6 @@
 [Unit]
 Description=Hourly checks for update, made by Emily for 1.6 rebuild
-After=network.target
+After=network-online.target
 
 [Service]
 Type=simple

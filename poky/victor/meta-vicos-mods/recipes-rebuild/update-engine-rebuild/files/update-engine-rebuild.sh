@@ -4,219 +4,213 @@
 
 logger -t rebuild-auto-updater "Starting 1.6-rebuild auto update service"
 
-
-if [ -f /run/rebuild-updated ]; then
-    echo "An update is already pending, waiting until nightly reboot"
-    logger -t rebuild-auto-updater "An update is already pending, waiting until nightly reboot"
-    exit 0
-else
-    echo "No updates pending, continuing..."
-    logger -t rebuild-auto-updater "No updates pending, continuing..."
-fi
-
-if [ -d /anki-devtools ]; then
-    echo "Build has been deployed to, not auto updating"
-    logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
-    exit 0
-else
-    echo "Build is stock, auto updates allowed"
-    logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
-fi
-
-if [ -f /data/data/user-do-not-auto-update ] || [ -f /etc/do-not-auto-update ]; then
-    echo "Auto updates disabled, falling out"
-    logger -t rebuild-auto-updater "Auto updates disabled, falling out"
-    exit 0
-else
-    echo "Auto updates are not disabled, continuing with updating"
-    logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
-fi
-
-# Auto updates are enabled, clear to set some variables
-
 # Build ids
 DEV_BUILD_ID=d
-DEV_CLOUDLESS_BUILD_ID=dcldless
 OSKR_BUILD_ID=oskr
-OSKR_CLOUDLESS_BUILD_ID=oskrcldless
 PROD_BUILD_ID=
-PROD_CLOUDLESS_BUILD_ID=cldless
 
 # Essential things for this to work
 BUILDINF="$(cat /build.prop)"
 CMDLINE="$(cat /proc/cmdline)"
 CURRENT_VERSION=$(getprop ro.anki.version)
-REBUILD_URL="http://http.anki2.ca/otas/1.6-rebuild"
 INDEV_OR_RELEASE="$(cat /etc/rebuild-dev-or-indev)"
+REBUILD_URL="http://http.anki2.ca/otas/1.6-rebuild"
+VERBOSE=0
 
-if [ ${INDEV_OR_RELEASE} == indev ]; then
-    echo "Indev ota detected, downloading from indev stack"
-    logger -t rebuild-auto-updater "Indev ota detected, downloading from indev stack"
-    TARGET_VERSION=$(curl -s -s $REBUILD_URL/indev/latest)
-    FORCE_INSTALL=$(curl -s $REBUILD_URL/indev/force_install)
-    INDEV=1
-elif [ ${INDEV_OR_RELEASE} == release ]; then
-    echo "Release ota detected, downloading from Release stack"
-    logger -t rebuild-auto-updater "Release ota detected, downloading from Release stack"
-    TARGET_VERSION=$(curl -s $REBUILD_URL/release/latest)
-    FORCE_INSTALL=$(curl -s $REBUILD_URL/release/force_install)
-    RELEASE=1
-elif [ ${INDEV_OR_RELEASE} == internal ]; then
-    echo "Internal build, DON'T UPDATE"
-    logger -t rebuild-auto-updater "Internal build, DON'T UPDATE"
-    exit 1
-else
-    echo "Not indev, release, or internal, exiting"
-    logger -t rebuild-auto-updater "Not indev, release, or internal, exiting"
-    exit 1
-fi
-
-echo "Checking active slot"
-logger -t rebuild-auto-updater "Checking active slot"
-if [[ ${CMDLINE} == *"androidboot.slot_suffix=_b"* ]]; then
-    echo "Current slot is b, update will install to a."
-    INSTALL_SLOT=a
-    logger -t rebuild-auto-updater "Current slot is b, update will install to a."
-else
-    echo "Current slot is a, update will install to b."
-    INSTALL_SLOT=b
-    logger -t rebuild-auto-updater "Current slot is a, update will install to b."
-fi
-
-
-echo "Current firmware version: $CURRENT_VERSION"
-logger -t rebuild-auto-updater "Current firmware version: $CURRENT_VERSION"
-
-echo "Target update version is $TARGET_VERSION"
-logger -t rebuild-auto-updater "Target update version is $TARGET_VERSION"
-
-if [[ ${CURRENT_VERSION} == *$DEV_BUILD_ID ]]; then
-    echo "Build type is dev"
-    logger -t rebuild-auto-updater "Build type is dev"
-    CURRENT_BUILD_ID=d
-    DEV=1
-elif [[ ${CURRENT_VERSION} == *$DEV_CLOUDLESS_BUILD_ID ]]; then
-    echo "Build type is dev Cloudless"
-    logger -t rebuild-auto-updater "Build type is dev Cloudless"
-    CURRENT_BUILD_ID=dcldless
-    DEV=1
-elif [[ ${CURRENT_VERSION} == *$OSKR_BUILD_ID ]]; then
-    echo "Build type is OSKR"
-    logger -t rebuild-auto-updater "Build type is OSKR"
-    CURRENT_BUILD_ID=oskr
-    OSKR=1
-elif [[ ${CURRENT_VERSION} == *$OSKR_CLOUDLESS_BUILD_ID ]]; then
-        echo "Build type is OSKR Cloudless"
-    logger -t rebuild-auto-updater "Build type is OSKR Cloudless"
-    CURRENT_BUILD_ID=oskrcldless
-    OSKR=1
-elif [[ ${CURRENT_VERSION} == *$PROD_CLOUDLESS_BUILD_ID ]]; then
-    echo "Build type is PROD Cloudless"
-    logger -t rebuild-auto-updater "Build type is PROD Cloudless"
-    CURRENT_BUILD_ID=cldless
-    PROD=1
-else
-    echo "Build type is production"
-    logger -t rebuild-auto-updater "Build type is production"
-    CURRENT_BUILD_ID=
-    PROD=1
-fi
-
-if [[ $CURRENT_VERSION == $TARGET_VERSION$CURRENT_BUILD_ID ]]; then
-    if [[ $FORCE_INSTALL == 1 ]]; then
-        echo "Force install set to 1 on server, must be a very important reason why"
-        logger -t rebuild-auto-updater "Force install set to 1 on server, must be a very important reason why"
-    else
-        echo "Rebuild up to date, exiting"
-        logger -t rebuild-auto-updater "Rebuild up to date, exiting"
+function checkIfUpdatesAreBlocked() {
+    if [ -f /run/rebuild-updated ]; then
+        echo "An update is already pending, waiting until nightly reboot"
+        logger -t rebuild-auto-updater "An update is already pending, waiting until nightly reboot"
         exit 0
+    else
+        echo "No updates pending, continuing..."
+        logger -t rebuild-auto-updater "No updates pending, continuing..."
     fi
-fi
 
-echo "Installing ota update to system slot $INSTALL_SLOT"
-logger -t rebuild-auto-updater "Installing ota update to system slot $INSTALL_SLOT"
-if [[ ${DEV} = 1 ]]; then
-    if [[ ${INDEV} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${DEV_CLOUDLESS_BUILD_ID} ]]; then
-            FINAL_REBUILD_URL=$REBUILD_URL/indev/devcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
+    if [ -d /anki-devtools ]; then
+        echo "Build has been deployed to, not auto updating"
+        logger -t rebuild-auto-updater "Build has been deployed to, not auto updating"
+        exit 0
+    else
+        echo "Build is stock, auto updates allowed"
+        logger -t rebuild-auto-updater "Build is stock, auto updates allowed"
+    fi
+
+    if [ -f /data/data/user-do-not-auto-update ] || [ -f /etc/do-not-auto-update ]; then
+        echo "Auto updates disabled, falling out"
+        logger -t rebuild-auto-updater "Auto updates disabled, falling out"
+        exit 0
+    else
+        echo "Auto updates are not disabled, continuing with updating"
+        logger -t rebuild-auto-updater "Auto updates are not disabled, continuing with updating"
+    fi
+}
+
+# Auto updates are enabled, clear to continue
+function checkForUpdate () {
+    if [ ${INDEV_OR_RELEASE} == indev ]; then
+        if [ $VERBOSE = 1 ]; then
+            echo "Indev ota detected, downloading from indev stack"
+        fi
+        logger -t rebuild-auto-updater "Indev ota detected, downloading from indev stack"
+        TARGET_VERSION=$(curl -s -s $REBUILD_URL/indev/latest)
+        FORCE_INSTALL=$(curl -s $REBUILD_URL/indev/force_install)
+        INDEV=1
+    elif [ ${INDEV_OR_RELEASE} == release ]; then
+        if [ $VERBOSE = 1 ]; then
+            echo "Release ota detected, downloading from Release stack"
+        fi
+        logger -t rebuild-auto-updater "Release ota detected, downloading from Release stack"
+        TARGET_VERSION=$(curl -s $REBUILD_URL/release/latest)
+        FORCE_INSTALL=$(curl -s $REBUILD_URL/release/force_install)
+        RELEASE=1
+    elif [ ${INDEV_OR_RELEASE} == internal ]; then
+        echo "Internal build, DON'T UPDATE"
+        logger -t rebuild-auto-updater "Internal build, DON'T UPDATE"
+        exit 1
+    else
+        echo "Not indev, release, or internal, exiting"
+        logger -t rebuild-auto-updater "Not indev, release, or internal, exiting"
+        exit 1
+    fi
+
+    if [ $VERBOSE = 1 ]; then
+        echo "Checking active slot"
+    fi
+    logger -t rebuild-auto-updater "Checking active slot"
+    if [[ ${CMDLINE} == *"androidboot.slot_suffix=_b"* ]]; then
+        if [ $VERBOSE = 1 ]; then
+            echo "Current slot is b, update will install to a."
+        fi
+        logger -t rebuild-auto-updater "Current slot is b, update will install to a."
+        INSTALL_SLOT=a
+    else
+        if [ $VERBOSE = 1 ]; then
+            echo "Current slot is a, update will install to b."
+        fi
+        logger -t rebuild-auto-updater "Current slot is a, update will install to b."
+        INSTALL_SLOT=b
+    fi
+
+
+    if [ $VERBOSE = 1 ]; then
+        echo "Current firmware version: $CURRENT_VERSION"
+    fi
+    logger -t rebuild-auto-updater "Current firmware version: $CURRENT_VERSION"
+
+    if [ $VERBOSE = 1 ]; then
+        echo "Target update version is $TARGET_VERSION"
+    fi
+    logger -t rebuild-auto-updater "Target update version is $TARGET_VERSION"
+
+    if [[ ${CURRENT_VERSION} == *$DEV_BUILD_ID ]]; then
+        if [ $VERBOSE = 1 ]; then
+            echo "Build type is dev"
+        fi
+        logger -t rebuild-auto-updater "Build type is dev"
+        CURRENT_BUILD_ID=d
+        DEV=1
+    elif [[ ${CURRENT_VERSION} == *$OSKR_BUILD_ID ]]; then
+        if [ $VERBOSE = 1 ]; then
+            echo "Build type is OSKR"
+        fi
+        logger -t rebuild-auto-updater "Build type is OSKR"
+        CURRENT_BUILD_ID=oskr
+        OSKR=1
+    else
+        if [ $VERBOSE = 1 ]; then
+            echo "Build type is production"
+        fi
+        logger -t rebuild-auto-updater "Build type is production"
+        CURRENT_BUILD_ID=
+        PROD=1
+    fi
+
+    if [[ $CURRENT_VERSION == $TARGET_VERSION$CURRENT_BUILD_ID ]]; then
+        if [[ $FORCE_INSTALL == 1 ]]; then
+            if [ $VERBOSE = 1 ]; then
+                echo "Force install set to 1 on server, must be a very important reason why"
+            fi
+            logger -t rebuild-auto-updater "Force install set to 1 on server, must be a very important reason why"
+            rm /run/rebuild/dont-need-update
+            touch /run/rebuild/needs-update
         else
+            echo "Rebuild up to date, exiting"
+            logger -t rebuild-auto-updater "Rebuild up to date, exiting"
+            rm -f /run/rebuild/needs-update
+            rm -f /run/rebuild/target-ver
+            touch /run/rebuild/dont-need-update
+            exit 0
+        fi
+    else 
+        echo "Rebuild needs updating"
+        rm -f /run/rebuild/dont-need-update
+        touch /run/rebuild/needs-update
+        echo -n $TARGET_VERSION$CURRENT_BUILD_ID > /run/rebuild/target-ver
+    fi
+}
+
+function install-update() {
+    if [ $VERBOSE = 1 ]; then
+        echo "Installing ota update to system slot $INSTALL_SLOT"
+    fi
+    logger -t rebuild-auto-updater "Installing ota update to system slot $INSTALL_SLOT"
+    if [[ ${DEV} = 1 ]]; then
+        if [[ ${INDEV} = 1 ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/indev/dev/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        fi
-    elif [[ ${RELEASE} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${DEV_CLOUDLESS_BUILD_ID} ]]; then
-            FINAL_REBUILD_URL=$REBUILD_URL/release/devcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        else
+        elif [[ ${RELEASE} = 1 ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/release/dev/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
         fi
-    fi
-elif [[ ${OSKR} = 1 ]]; then
-    if [[ ${INDEV} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${OSKR_CLOUDLESS_BUILD_ID} ]]; then
-            FINAL_REBUILD_URL=$REBUILD_URL/indev/oskrcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        else
+    elif [[ ${OSKR} = 1 ]]; then
+        if [[ ${INDEV} = 1 ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/indev/oskr/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        fi
-    elif [[ ${RELEASE} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${OSKR_CLOUDLESS_BUILD_ID} ]]; then
-            FINAL_REBUILD_URL=$REBUILD_URL/release/oskrcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        else
+        elif [[ ${RELEASE} = 1 ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/release/oskr/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
         fi
-    fi
-elif [[ ${PROD} = 1 ]]; then
-    if [[ ${INDEV} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${PROD_CLOUDLESS_BUILD_ID} ]]; then
-            FINAL_REBUILD_URL=$REBUILD_URL/indev/prodcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        else
+    elif [[ ${PROD} = 1 ]]; then
+        if [[ ${INDEV} = 1 ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/indev/prod/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        fi
-    elif [[ ${RELEASE} = 1 ]]; then
-        if [[ ${CURRENT_BUILD_ID} = ${PROD_CLOUDLESS_BUILD_ID} ]]; then
-            FINAL_REBUILD_URL=$REBUILD_URL/release/prodcloudless/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
-        else
+        elif [[ ${RELEASE} = 1 ]]; then
             FINAL_REBUILD_URL=$REBUILD_URL/release/prod/vicos-$TARGET_VERSION$CURRENT_BUILD_ID.ota
-            echo "Update URL $FINAL_REBUILD_URL"
-            logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
-            /sbin/rebuild-update-os $FINAL_REBUILD_URL
         fi
     fi
+
+    if [ $VERBOSE = 1 ]; then
+        echo "Update URL $FINAL_REBUILD_URL"
+    fi
+    logger -t rebuild-auto-updater "Update URL $FINAL_REBUILD_URL"
+    /sbin/rebuild-update-os $FINAL_REBUILD_URL
+
+    sync
+    echo
+
+    if [ $VERBOSE = 1 ]; then
+      echo "Update Done"
+    fi
+    logger -t rebuild-auto-updater "Update Done"
+}
+
+if [[ $1 = -v ]]; then
+    VERBOSE=1
 fi
 
-sync
-echo
-echo "Update Done"
-logger -t rebuild-auto-updater "Update Done"
+mkdir -p /run/rebuild/
+
+if [[ $1 = -v ]]; then
+    VERBOSE=1
+fi
+
+if [[ $1 = -c ]]; then
+    checkForUpdate
+    exit 0
+fi
+
+checkIfUpdatesAreBlocked
+checkForUpdate
+install-update
+
+if [[ $1 = -r ]]; then
+    reboot -f
+fi
+
 exit 0

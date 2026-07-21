@@ -20,6 +20,7 @@ do_install () {
     install -m 0755 ${UNPACKDIR}/update-engine-rebuild.sh ${D}/usr/sbin/update-engine-rebuild
     install -m 0644 ${UNPACKDIR}/update-engine-rebuild.service ${D}${systemd_unitdir}/system/update-engine-rebuild.service
     install -m 0644 ${UNPACKDIR}/update-engine-rebuild.timer ${D}${systemd_unitdir}/system/update-engine-rebuild.timer
+    install -m 0644 ${UNPACKDIR}/update-engine-rebuild-victor-only.service ${D}${systemd_unitdir}/system/update-engine-rebuild-victor-only.service
 }
 
 FILES:${PN} += " \
