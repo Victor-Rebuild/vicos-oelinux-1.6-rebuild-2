@@ -1,6 +1,20 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0083 (2026/07/21)
+### Victor side changes:
+Update Victor to `e5cf2e7d10c9528734595516f9f092c05b29841e`:
+- 60fps bootanims.
+- Working pronouns implementation. (Managed in `vector-ip:8080` in a web browser)
+- Add a way to manually update Vector from within CCIS.
+- Bump compat ver
+
+### oelinux side changes
+- `update-engine-rebuild` has been cleaned up.
+- `update-engine-rebuild` now runs only when the network is actually online.
+- A new service was added so that victor can reboot the bot once `update-engine-rebuild` finished when triggered in CCIS.
+- Bump compat ver
+
 ## 1.6.1.0082 (2026/07/15)
 ### Victor side changes:
 Update Victor to `eb0c10791fa14a10541c60dbff68595706d262e4`:

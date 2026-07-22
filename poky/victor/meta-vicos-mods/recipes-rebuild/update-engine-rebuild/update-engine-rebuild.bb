@@ -9,6 +9,7 @@ SRC_URI += " \
     file://update-engine-rebuild.sh \
     file://update-engine-rebuild.service \
     file://update-engine-rebuild.timer \
+    file://update-engine-rebuild-victor-only.service \
 "
 
 S = "${UNPACKDIR}"
@@ -27,6 +28,7 @@ FILES:${PN} += " \
     /usr/sbin/update-engine-rebuild \
     ${systemd_unitdir}/system/update-engine-rebuild.service \
     ${systemd_unitdir}/system/update-engine-rebuild.timer \
+    ${systemd_unitdir}/system/update-engine-rebuild-victor-only.service \
 "
 
 SYSTEMD_SERVICE:${PN} = "update-engine-rebuild.timer"
