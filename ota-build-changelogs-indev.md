@@ -1,12 +1,21 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0084 (2026/07/22)
+### Victor side changes:
+Update Victor to `f47347a3eff50af711e1a1692a1577eb68317c6f`:
+- Fix vic-robot crashing due to anim freezing.
+- Fix CCIS screen 1 taking a long time to draw.
+- Make mic mute/unmute anim render in eye hue again.
+
 ## 1.6.1.0083 (2026/07/21)
 ### Victor side changes:
 Update Victor to `e5cf2e7d10c9528734595516f9f092c05b29841e`:
 - 60fps bootanims.
 - Working pronouns implementation. (Managed in `vector-ip:8080` in a web browser)
 - Add a way to manually update Vector from within CCIS.
+- Remove WiFi SSID from screen 1 of CCIS, still in screen 2.
+- With the extra space the ESN can be shown on screen 1 along with the bot name.
 - Bump compat ver
 
 ### oelinux side changes
