@@ -2,6 +2,10 @@
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
 ## 1.6.1.0085 (2026/07/27)
+## Victor side changes:
+Update Victor to `925036318b72f05f52c212e710a7892c3050f36d`:
+Different backpack lights when the bot is overheating.
+
 ### oelinux side changes:
 - Actually apply the pronouns implementation in Wired, my bad.
 
