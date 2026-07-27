@@ -1,6 +1,10 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0085 (2026/07/27)
+### oelinux side changes:
+- Actually apply the pronouns implementation in Wired, my bad.
+
 ## 1.6.1.0084 (2026/07/22)
 ### Victor side changes:
 Update Victor to `f47347a3eff50af711e1a1692a1577eb68317c6f`:
