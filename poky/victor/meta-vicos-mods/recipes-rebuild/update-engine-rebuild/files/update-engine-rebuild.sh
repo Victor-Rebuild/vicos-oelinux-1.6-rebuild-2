@@ -67,6 +67,7 @@ function checkForUpdate () {
     elif [ ${INDEV_OR_RELEASE} == internal ]; then
         echo "Internal build, DON'T UPDATE"
         logger -t rebuild-auto-updater "Internal build, DON'T UPDATE"
+        touch /run/rebuild/dont-need-update
         exit 1
     else
         echo "Not indev, release, or internal, exiting"

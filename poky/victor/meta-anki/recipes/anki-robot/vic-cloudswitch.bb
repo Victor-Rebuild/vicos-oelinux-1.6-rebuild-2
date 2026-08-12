@@ -26,7 +26,7 @@ SYSTEMD_SERVICE:${PN} = "${SERVICE_FILE}"
 
 inherit externalsrc
 
-EXTERNALSRC = "${WORKSPACE}/anki/vic-cloudless"
+EXTERNALSRC = "${WORKSPACE}/anki/vic-cloudswitch"
 
 GID_ANKI      = '2901'
 GID_CLOUD     = '888'
@@ -37,7 +37,7 @@ UID_CLOUD     = "${GID_CLOUD}"
 
 do_clean:append() {
     s = d.getVar('S')
-    os.system('cd "%s" && rm -rf build/vic-cloud build/vic-gateway build/libvosk.so build/libopus*' % s)
+    os.system('cd "%s" && rm -rf build/' % s)
 }
 
 run_victor() {
@@ -112,6 +112,7 @@ run_victor() {
 }
 
 do_compile[pseudo] = "0"
+do_compile[network] = "1"
 
 do_compile() {
     # mkdir -p "${GOPATH}"
@@ -126,22 +127,39 @@ do_compile() {
     # export GOPATH="${GOPATH}"
     # export PATH="${GOEXEPATH}/go/bin:${PATH}"
     # using system Go
+
+    if [ ! -f "${EXTERNALSRC}/build/sherpa-shared-citrinet/.unzipped" ]; then
+        wget https://github.com/kercre123/vic-cloudless/releases/download/v0.0.1/sherpa-shared-citrinet.tar.gz
+        mkdir -p "${EXTERNALSRC}/build"
+        tar -zxf "${EXTERNALSRC}/sherpa-shared-citrinet.tar.gz" -C "${EXTERNALSRC}"
+        mv "${EXTERNALSRC}/sherpa-shared-citrinet" "${EXTERNALSRC}/build/"
+        rm -f "${EXTERNALSRC}/sherpa-shared-citrinet.tar.gz"
+        touch "${EXTERNALSRC}/build/sherpa-shared-citrinet/.unzipped"
+    fi
+
+    mkdir -p "${EXTERNALSRC}/build/en-US"
+    wget -q --show-progress -O build/en-US/en-US.json https://github.com/Victor-Rebuild/cavalier-1.6/raw/refs/heads/main/intent-data/en-US.json
+
     run_victor make
 }
 
 do_install() {
     install -d ${D}/anki/bin
     install -d ${D}/anki/lib
-    install -d ${D}/anki/data/assets/cozmo_resources/cloudless
+    install -d ${D}/anki/data/cloudswitch
+    install -d ${D}/anki/data/cloudswitch/sherpa
     install -d ${D}/etc/sudoers.d
-    install -d ${D}/usr/sbin
 
-    install -m 0755 ${WORKSPACE}/anki/vic-cloudless/build/vic-* ${D}/anki/bin/
-    install -m 0644 ${WORKSPACE}/anki/vic-cloudless/build/lib* ${D}/anki/lib/
-    cp -r ${WORKSPACE}/anki/vic-cloudless/build/en-US ${D}/anki/data/assets/cozmo_resources/cloudless/
+    install -m 0755 ${WORKSPACE}/anki/vic-cloudswitch/build/vic-* ${D}/anki/bin/
+    install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/lib* ${D}/anki/lib/
+    install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libonnxruntime.so.1 ${D}/anki/lib/
+    install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libsherpa-onnx-c-api.so ${D}/anki/lib/
+    install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libonnxruntime_providers_shared.so ${D}/anki/lib/
+    cp -r ${WORKSPACE}/anki/vic-cloudswitch/build/en-US ${D}/anki/data/cloudswitch/
+    cp -r ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/citrinet-256-ls ${D}/anki/data/cloudswitch/sherpa/
 
-    install -m 0440 ${WORKSPACE}/anki/vic-cloudless/extra/cloud.sudoers ${D}/etc/sudoers.d/cloud
-    install -m 0755 ${WORKSPACE}/anki/vic-cloudless/extra/setfreq ${D}/usr/sbin/
+    install -m 0440 ${WORKSPACE}/anki/vic-cloudswitch/extra/cloud.sudoers ${D}/etc/sudoers.d/cloud
+    install -m 0755 ${WORKSPACE}/anki/vic-cloudswitch/extra/setfreq ${D}/anki/bin/
     touch ${D}/etc/forceCloudless
 }
 
@@ -151,9 +169,8 @@ INSANE_SKIP:${PN} = " already-stripped ldflags dev-elf"
 EXCLUDE_FROM_SHLIBS = "1"
 
 FILES:${PN} += "anki/bin"
-FILES:${PN} += "anki/bin"
 FILES:${PN} += "anki/lib"
-FILES:${PN} += "anki/data/assets/cozmo_resources/cloudless"
-FILES:${PN} += "usr/sbin"
+FILES:${PN} += "anki/data/cloudswitch"
+FILES:${PN} += "anki/data/cloudswitch/sherpa"
 FILES:${PN} += "etc/sudoers.d"
 FILES:${PN} += "etc/forceCloudless"

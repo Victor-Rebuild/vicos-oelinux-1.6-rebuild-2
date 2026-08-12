@@ -299,7 +299,7 @@ function clean-devcloudless() {
   export PRODUCT=robot
   export CLOUDLESS=1
   wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudless
+  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudswitch
 }
 
 function clean-oskrcloudless() {
@@ -311,7 +311,7 @@ function clean-oskrcloudless() {
   export CLOUDLESS=1
   export OSKR=1
   wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudless
+  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudswitch
 }
 
 function clean-prodcloudless() {
@@ -323,7 +323,7 @@ function clean-prodcloudless() {
   export CLOUDLESS=1
   export PROD=1
   wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudless
+  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudswitch
 }
 
 function clean-prod() {
