@@ -1,6 +1,11 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0087 (2026/08/16)
+### Victor side changes:
+Update Victor to `5448a3624b592421d6956d33086fcc1f2768692a`:
+- Add way to disable the blinking circle light by sshing in and running `touch /data/data/rebuild/do-not-blink-circle-light` and then restarting robot processes.
+
 ## 1.6.1.0086 (2026/08/15)
 ### Victor side changes:
 Update Victor to `d9d487fe6cf530642b7b40870da318713da5ebe6`:
