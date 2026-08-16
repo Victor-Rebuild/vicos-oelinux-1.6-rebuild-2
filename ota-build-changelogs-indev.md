@@ -1,10 +1,30 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0086 (2026/08/15)
+### Victor side changes:
+Update Victor to `d9d487fe6cf530642b7b40870da318713da5ebe6`:
+- Let Vector choose to socialize or explore in Dance To The Beat.
+- Fistbump Voice Command now looks for face.
+- Keepaway can now randomly activate via the `Do a trick` voice command.
+- Fix custom and WireOS backpack lights
+- Make the code in vic-anim for checking for updates crash vic-robot less
+- Make the code in vic-anim only check for updates if connected to the internet.
+- Add a option to set robot locale in `:8888/consolevars` --> `RobotSettings` tab.
+- Stop vic-engine from crashing if Vector boots up at midnight with `Rebuild Eyes` enabled.
+- Make the backpack circle light blink always. (Restores behavior of old bodyboard firmwares)
+- Add a toggle for vic-cloudless in CCIS.
+- General code cleanup.
+
+### oelinux side changes:
+- Bundle my fork of vic-cloudless in builds, off by default but can be enabled in CCIS config menu.
+- Fix hanging in internal built otas (non release/indev)
+- Add pigz to the system image
+
 ## 1.6.1.0085 (2026/07/27)
 ## Victor side changes:
 Update Victor to `925036318b72f05f52c212e710a7892c3050f36d`:
-Different backpack lights when the bot is overheating.
+- Different backpack lights when the bot is overheating.
 
 ### oelinux side changes:
 - Actually apply the pronouns implementation in Wired, my bad.
