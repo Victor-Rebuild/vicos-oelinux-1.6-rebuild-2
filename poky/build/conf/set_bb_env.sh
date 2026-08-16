@@ -268,7 +268,7 @@ function build-prod() {
 }
 
 # cleared every time
-cleanList=(victor wired vic-cloud core-image-anki-initramfs rampost anki-version update-os update-engine-rebuild machine-robot-image system-conf extra-conf vic-engine vic-robot update-os update-engine wireutils wlan-opensource wcnss base-passwd mm-camera initscript-anki vic-verbose adreno adsprpc vic-anim vic-switchboard vic-gateway-cert base-files libpvictor syslog-ng fake-hwclock purplpkg rebooter)
+cleanList=(victor wired vic-cloud core-image-anki-initramfs rampost anki-version update-os update-engine-rebuild machine-robot-image system-conf extra-conf vic-engine vic-robot update-os update-engine wireutils wlan-opensource wcnss base-passwd mm-camera initscript-anki vic-verbose adreno adsprpc vic-anim vic-switchboard vic-gateway-cert base-files libpvictor syslog-ng fake-hwclock purplpkg rebooter vic-cloudswitch)
 
 function clean-oskr() {
   unset_bb_env
@@ -299,7 +299,7 @@ function clean-devcloudless() {
   export PRODUCT=robot
   export CLOUDLESS=1
   wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudswitch
+  cdbitbake ${@} -c cleanall ${cleanList[@]}
 }
 
 function clean-oskrcloudless() {
@@ -311,7 +311,7 @@ function clean-oskrcloudless() {
   export CLOUDLESS=1
   export OSKR=1
   wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudswitch
+  cdbitbake ${@} -c cleanall ${cleanList[@]}
 }
 
 function clean-prodcloudless() {
@@ -323,7 +323,7 @@ function clean-prodcloudless() {
   export CLOUDLESS=1
   export PROD=1
   wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]} vic-cloudswitch
+  cdbitbake ${@} -c cleanall ${cleanList[@]}
 }
 
 function clean-prod() {

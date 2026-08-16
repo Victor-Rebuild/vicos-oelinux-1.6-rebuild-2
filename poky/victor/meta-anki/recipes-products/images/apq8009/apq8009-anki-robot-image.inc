@@ -11,7 +11,7 @@ IMAGE_INSTALL += "wipe-all-wifi-configs"
 
 # Victor stuff
 IMAGE_INSTALL += "vic-anim"
-IMAGE_INSTALL += "${@oe.utils.conditional('CLOUDLESS', '1', 'vic-cloudswitch', 'vic-cloud', d)}"
+IMAGE_INSTALL += "vic-cloudswitch"
 IMAGE_INSTALL += "vic-engine"
 IMAGE_INSTALL += "vic-gateway-cert"
 IMAGE_INSTALL += "vic-init"

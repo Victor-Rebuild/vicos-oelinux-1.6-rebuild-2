@@ -160,7 +160,10 @@ do_install() {
 
     install -m 0440 ${WORKSPACE}/anki/vic-cloudswitch/extra/cloud.sudoers ${D}/etc/sudoers.d/cloud
     install -m 0755 ${WORKSPACE}/anki/vic-cloudswitch/extra/setfreq ${D}/anki/bin/
-    touch ${D}/etc/forceCloudless
+
+    if [ "${CLOUDLESS}" = "1" ]; then
+        touch ${D}/etc/forceCloudless
+    fi
 }
 
 do_package_qa[noexec] = "1"
@@ -172,5 +175,4 @@ FILES:${PN} += "anki/bin"
 FILES:${PN} += "anki/lib"
 FILES:${PN} += "anki/data/cloudswitch"
 FILES:${PN} += "anki/data/cloudswitch/sherpa"
-FILES:${PN} += "etc/sudoers.d"
-FILES:${PN} += "etc/forceCloudless"
+FILES:${PN} += "etc/"
