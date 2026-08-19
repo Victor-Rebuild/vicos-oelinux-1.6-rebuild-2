@@ -1,6 +1,14 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0088 (2026/08/18)
+### Victor side changes:
+Update Victor to `d2fb86bf139ae564b8241e7193cf87ef2025581f`
+- 1.6-rebuild settings are now located in a json at `/data/data/rebuild/settings.json`
+- Backpack dot light options:
+    - Enable/Disable it blinking blue/green (Disabled by default)
+    - Enable/Disable it fading between blue/green when blinking is enabled (Disabled by default)
+
 ## 1.6.1.0087 (2026/08/16)
 ### Victor side changes:
 Update Victor to `5448a3624b592421d6956d33086fcc1f2768692a`:
