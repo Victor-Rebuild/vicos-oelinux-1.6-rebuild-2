@@ -1,9 +1,18 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0089 (2026/08/28)
+### Victor side changes:
+Update Victor to `c85f47e94e7b7a5cb5848b2b5f85965f1c48af67`:
+- Config menu navigation changes:
+    - You now use the backpack button to navigate the config menu.
+    - 5 pages were condensed down to 3.
+- New animations for rock paper scissors made by toastito
+- Potentially fix gazedirection looping issue.
+
 ## 1.6.1.0088 (2026/08/18)
 ### Victor side changes:
-Update Victor to `d2fb86bf139ae564b8241e7193cf87ef2025581f`
+Update Victor to `d2fb86bf139ae564b8241e7193cf87ef2025581f`:
 - 1.6-rebuild settings are now located in a json at `/data/data/rebuild/settings.json`
 - Backpack dot light options:
     - Enable/Disable it blinking blue/green (Disabled by default)
