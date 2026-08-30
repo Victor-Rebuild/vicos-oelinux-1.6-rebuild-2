@@ -1,6 +1,12 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0090 (2026/08/29)
+### Victor side changes:
+Update Victor to `a509aa16a116eb703b4ea6558275edcd4de82bb7`:
+- Actually implement toastito's rock paper scissors anims.
+- Add snake game to Vector, it's been made to activate rarely so that it's actually special instead of being common.
+
 ## 1.6.1.0089 (2026/08/28)
 ### Victor side changes:
 Update Victor to `c85f47e94e7b7a5cb5848b2b5f85965f1c48af67`:
