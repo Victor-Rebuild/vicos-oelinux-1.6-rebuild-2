@@ -1,6 +1,14 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0091 (2026/09/01)
+### Victor side changes:
+Update Victor to `2f2d62f8e15705a01a4302dfd56ed6b9794684d2`:
+- Make snake activate slightly more.
+- Add a command to ask Vector his snake high score.
+- Make charger docking more reliable.
+- Fix asking Vector for the date.
+
 ## 1.6.1.0090 (2026/08/29)
 ### Victor side changes:
 Update Victor to `a509aa16a116eb703b4ea6558275edcd4de82bb7`:
