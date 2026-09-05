@@ -1,6 +1,14 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0092 (2026/09/04)
+### Victor side changes:
+Update Victor to `1dfb5bd1b389a0bcc68edfadc1e84908766b8eaf`:
+- Fix gazedirection.
+- Rebuild eyes now saves every 3 hours instead of 5.
+- CCIS now has some nice colored text.
+- Network screen now shows status of my server.
+
 ## 1.6.1.0091 (2026/09/01)
 ### Victor side changes:
 Update Victor to `2f2d62f8e15705a01a4302dfd56ed6b9794684d2`:
