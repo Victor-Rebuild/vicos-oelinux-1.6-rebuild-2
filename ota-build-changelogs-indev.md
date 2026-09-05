@@ -1,6 +1,17 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0093 (2026/09/05)
+### Victor side changes:
+Update Victor to `1ca901bb1ea07db0993386c2e55124edab5cdcc8`:
+- Adjust some colors in the CCIS config menu.
+- Make vic-robot not crash when running updates from CCIS.
+
+### oelinux side changes:
+- Bump `VICTOR_COMPAT_VERSION`
+- `update-engine-rebuild` now slightly overclocks Vector to install updates faster.
+- Add new systemd service required to fix victor side crashing.
+
 ## 1.6.1.0092 (2026/09/04)
 ### Victor side changes:
 Update Victor to `1dfb5bd1b389a0bcc68edfadc1e84908766b8eaf`:
