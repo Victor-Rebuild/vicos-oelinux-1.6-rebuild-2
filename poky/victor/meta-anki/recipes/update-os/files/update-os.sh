@@ -33,7 +33,7 @@ BASE_URL_LATEST=`grep UPDATE_ENGINE_BASE_URL_LATEST /anki/etc/update-engine.env 
 if [ -z "${BASE_URL_LATEST}" ]; then
     BASE_URL_LATEST="${BASE_URL}"
 fi
-URL="${BASE_URL}full/lkg.ota"
+URL=""
 if [ $# -gt 0 ]; then
     case "$1" in
 	-h)
@@ -56,6 +56,11 @@ if [ $# -gt 0 ]; then
     esac
 fi
 
+if [ "${URL}" = "" ]; then
+    echo "Give a ota to download"
+    echo "Or use "update-engine-rebuild" if you're trying to update rebuild"
+    exit 1
+fi
 
 systemctl -q stop update-engine
 
