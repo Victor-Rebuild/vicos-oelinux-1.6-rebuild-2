@@ -10,7 +10,7 @@ SRC_URI += " \
     file://update-engine-rebuild.service \
     file://update-engine-rebuild.timer \
     file://update-engine-rebuild-victor-only.service \
-    file://update-engine-rebuild-check.service
+    file://update-engine-rebuild-check.service \
 "
 
 S = "${UNPACKDIR}"
