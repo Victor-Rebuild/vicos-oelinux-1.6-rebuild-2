@@ -10,6 +10,7 @@ SRC_URI += " \
     file://update-engine-rebuild.service \
     file://update-engine-rebuild.timer \
     file://update-engine-rebuild-victor-only.service \
+    file://update-engine-rebuild-check.service
 "
 
 S = "${UNPACKDIR}"
@@ -22,6 +23,7 @@ do_install () {
     install -m 0644 ${UNPACKDIR}/update-engine-rebuild.service ${D}${systemd_unitdir}/system/update-engine-rebuild.service
     install -m 0644 ${UNPACKDIR}/update-engine-rebuild.timer ${D}${systemd_unitdir}/system/update-engine-rebuild.timer
     install -m 0644 ${UNPACKDIR}/update-engine-rebuild-victor-only.service ${D}${systemd_unitdir}/system/update-engine-rebuild-victor-only.service
+install -m 0644 ${UNPACKDIR}/update-engine-rebuild-victor-only.service ${D}${systemd_unitdir}/system/update-engine-rebuild-check.service
 }
 
 FILES:${PN} += " \
@@ -29,6 +31,7 @@ FILES:${PN} += " \
     ${systemd_unitdir}/system/update-engine-rebuild.service \
     ${systemd_unitdir}/system/update-engine-rebuild.timer \
     ${systemd_unitdir}/system/update-engine-rebuild-victor-only.service \
+    ${systemd_unitdir}/system/update-engine-rebuild-check.service \
 "
 
 SYSTEMD_SERVICE:${PN} = "update-engine-rebuild.timer"

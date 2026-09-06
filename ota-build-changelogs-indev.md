@@ -1,6 +1,11 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0094 (2026/09/05
+### HOTFIX
+### oelinux side change:
+- Actually add the needed update-engine-rebuild service.
+
 ## 1.6.1.0093 (2026/09/05)
 ### Victor side changes:
 Update Victor to `1ca901bb1ea07db0993386c2e55124edab5cdcc8`:
