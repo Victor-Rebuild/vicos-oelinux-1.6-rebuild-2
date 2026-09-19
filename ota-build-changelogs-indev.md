@@ -1,7 +1,17 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
-## 1.6.1.0094 (2026/09/05
+## 1.6.1.0095 (2026/09/19)
+### Victor side changes:
+Update Victor to `581096b9fea676c459b7bc5bc17dbc418218ac2e`:
+- Add a option in `DATA OPTIONS/DATA` in CCIS to skip onboarding.
+- Old pre-0.13 sunny weather animation re-added.
+- Blackjack drive off charger now drives towards your face.
+- GazeDirection has been disabled.
+- Point stats for rock paper scissors saves point stats.
+- OpenCV has been upgraded to 4.14 release from 4.14-prerelease.
+
+## 1.6.1.0094 (2026/09/05)
 ### HOTFIX
 ### oelinux side change:
 - Actually add the needed update-engine-rebuild service.
