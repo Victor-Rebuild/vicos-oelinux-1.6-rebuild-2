@@ -32,7 +32,8 @@ TARGET_NUM = "${@('0' if d.getVar('DEV') == '1' else '1' if d.getVar('OSKR') == 
 WHAT_OS_AM_I = "wire-os_wire_os"
 
 # VV | CFW DEVS, CHANGE THIS | VV
-PRETTY_OS_NAME = "WireOS"
+PRETTY_OS_NAME = "1.6-rebuild"
+PRETTY_OS_NAME_INTERNAL = "1.6-rebuild-internal-test"
 
 gen_buildprop:append() {
    mkdir -p ${IMAGE_ROOTFS}/cache
@@ -110,5 +111,9 @@ gen_buildprop:append() {
 
    echo "ro.build.os.cfw.name=${WHAT_OS_AM_I}" >> ${IMAGE_ROOTFS}/build.prop
 
-   echo "ro.build.os.cfw.prettyname=${PRETTY_OS_NAME}" >> ${IMAGE_ROOTFS}/build.prop
+   if [ "${INDEV_OR_RELEASE}" = "internal" ]; then
+      echo "ro.build.os.cfw.prettyname=${PRETTY_OS_NAME_INTERNAL}" >> ${IMAGE_ROOTFS}/build.prop
+   else
+      echo "ro.build.os.cfw.prettyname=${PRETTY_OS_NAME}" >> ${IMAGE_ROOTFS}/build.prop
+   fi
 }
