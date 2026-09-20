@@ -268,7 +268,7 @@ function build-prod() {
 }
 
 # cleared every time
-cleanList=(victor wired vic-cloud core-image-anki-initramfs rampost anki-version update-os update-engine-rebuild machine-robot-image system-conf extra-conf vic-engine vic-robot update-os update-engine wireutils wlan-opensource wcnss base-passwd mm-camera initscript-anki vic-verbose adreno adsprpc vic-anim vic-switchboard vic-gateway-cert base-files libpvictor syslog-ng fake-hwclock purplpkg rebooter vic-cloudswitch)
+cleanList=(victor wired vic-cloud core-image-anki-initramfs rampost anki-version update-os update-engine-rebuild machine-robot-image extra-conf vic-engine vic-robot update-os update-engine wireutils wcnss base-passwd mm-camera initscript-anki vic-verbose adreno adsprpc vic-anim vic-switchboard vic-gateway-cert base-files libpvictor syslog-ng fake-hwclock purplpkg rebooter vic-cloudswitch)
 
 function clean-oskr() {
   unset_bb_env

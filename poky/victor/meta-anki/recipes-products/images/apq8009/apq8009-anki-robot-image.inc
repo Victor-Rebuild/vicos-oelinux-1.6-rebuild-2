@@ -55,4 +55,5 @@ IMAGE_INSTALL += "bzip2"
 #IMAGE_INSTALL += "paycheck"
 
 IMAGE_INSTALL += "${@oe.utils.conditional('USER_BUILD', '1', '', 'wireutils', d)}"
+IMAGE_INSTALL += "${@oe.utils.conditional('USER_BUILD', '1', '', 'vector-motd', d)}"
 
