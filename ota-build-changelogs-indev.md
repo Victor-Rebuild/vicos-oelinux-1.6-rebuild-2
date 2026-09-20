@@ -1,6 +1,19 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0096 (2026/09/20)
+### Victor side changes:
+Update Victor to `3ed98e78ff935bf7d8f8110331be1d5a8148f3e9`:
+- Revert OpenCV version to 4.14-prerelease.
+  - Caused issues navigating.
+
+### oelinux side changes
+Merged from WireOS:
+- Logging into ssh now shows system stats plus cfw name.
+Rebuild-specific changes:
+- Made cloudswitch much smaller.
+- Make OTA size smaller by removing some extra stuff.
+
 ## 1.6.1.0095 (2026/09/19)
 ### Victor side changes:
 Update Victor to `581096b9fea676c459b7bc5bc17dbc418218ac2e`:
