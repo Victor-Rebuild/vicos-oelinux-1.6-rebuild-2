@@ -82,3 +82,8 @@ IMAGE_INSTALL += "logrotate"
 IMAGE_INSTALL += "connman"
 IMAGE_INSTALL += "connman-client"
 #IMAGE_INSTALL += "kernel-module-ramoops"
+
+IMAGE_INSTALL += "kernel-modules"
+
+IMAGE_INSTALL += "rampost"
+IMAGE_INSTALL += "initscript-anki"

@@ -11,6 +11,7 @@ BUILDSRC = "${S}/_build/vicos/Release"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 inherit externalsrc
+inherit pkgconfig
 EXTERNALSRC = "${WORKSPACE}/anki/victor-1.6"
 
 export SSH_AUTH_SOCK

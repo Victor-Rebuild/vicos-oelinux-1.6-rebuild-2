@@ -24,3 +24,6 @@ latest
 /filesystems/bin/target/mtd-utils/ubi-tests/mkvol_paral
 /filesystems/bin/target/mtd-utils/ubi-tests/rsvol
 /filesystems/bin/target/mtd-utils/ubi-tests/volrefcnt
+*.o
+*.o.d
+*.o.cmd
