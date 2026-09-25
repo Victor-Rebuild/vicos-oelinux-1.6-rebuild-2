@@ -1,5 +1,9 @@
 /*
+<<<<<<<< HEAD:kernel/msm-4.9/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gp104.c
  * Copyright 2016 Red Hat Inc.
+========
+ * Copyright 2015 Red Hat Inc.
+>>>>>>>> WireOS:kernel/msm-4.9/drivers/gpu/drm/nouveau/nvkm/subdev/ibus/gm200.c
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -21,6 +25,7 @@
  *
  * Authors: Ben Skeggs <bskeggs@redhat.com>
  */
+<<<<<<<< HEAD:kernel/msm-4.9/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gp104.c
 #include "gf100.h"
 #include "ram.h"
 
@@ -40,4 +45,22 @@ int
 gp104_fb_new(struct nvkm_device *device, int index, struct nvkm_fb **pfb)
 {
 	return gf100_fb_new_(&gp104_fb, device, index, pfb);
+========
+#include "priv.h"
+
+static const struct nvkm_subdev_func
+gm200_ibus = {
+	.intr = gk104_ibus_intr,
+};
+
+int
+gm200_ibus_new(struct nvkm_device *device, int index,
+	       struct nvkm_subdev **pibus)
+{
+	struct nvkm_subdev *ibus;
+	if (!(ibus = *pibus = kzalloc(sizeof(*ibus), GFP_KERNEL)))
+		return -ENOMEM;
+	nvkm_subdev_ctor(&gm200_ibus, device, index, ibus);
+	return 0;
+>>>>>>>> WireOS:kernel/msm-4.9/drivers/gpu/drm/nouveau/nvkm/subdev/ibus/gm200.c
 }

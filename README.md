@@ -113,4 +113,75 @@ cd wire-os
 
 I don't have any donations, please donate to wire via the link below instead
 
+<<<<<<< HEAD
 [![Buy Wire A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/kercre123)
+=======
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/kercre123)
+
+## Differences compared to normal Vector FW
+
+-   New OS base
+    -   Yocto Wrynose rather than Jethro
+        -   glibc 2.43 (2026-era)
+	-   Current latest LTS release of Yocto
+    -   hardfp calling convention rather than softfp
+-   Absolute latest downstream kernel from Qualcomm
+    -   Linux 4.9.277, LF.UM.8.7
+    -   Last updated by Qualcomm in September 2021
+-   `victor` software compiled with Clang 20.1.8 rather than 5.0.1
+    -	The code is properly fixed so there are no compile warnings
+-   Rainbow eye color
+    -   Can be activated in :8888/demo.html
+-   Some Anki-era PRs have been merged
+    -   Performances
+        -   He will somewhat randomly do loosepixel and binaryeyes
+    -   Better camera gamma correction
+        -   He handles too-bright situations much better now
+-   Picovoice Porcupine (1.5) wakeword engine
+    -   Custom wake words in :8080 webserver!
+-   YuNet + MobileFaceNet facial detection+recognition
+    -   Replacing the proprietary Okao libraries
+-   `htop` and `rsync` are embedded
+-   No more Python - update-engine was rewritten in C++
+-   General bug fixes - for instance, now he won't read the EMR partition upon every single screen draw (DDL bug)
+-   :8080 webserver for configuring things I don't want to integrate into a normal app
+-   New Anki boot animation, new pre-boot-anim splash screen, rainbow backpack light animations
+-   TensorFlow Lite has been updated to v2.19.0 (a modern 2025 release)
+	-  Gives us XNNPACK and an OpenCL delegate
+-   OpenCV has been updated to 4.12.0 (latest as of 11-2025)
+  	-  Much better SDK streaming performance
+-   [Face overlays](https://www.reddit.com/r/AnkiVector/comments/1lteb3m/_/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+        -  How to activate: [wire-os-victor PR #17](https://github.com/os-vector/wire-os-victor/pull/17)
+-   Global SSH key: ([ssh_root_key](https://raw.githubusercontent.com/kercre123/unlocking-vector/refs/heads/main/ssh_root_key))
+
+## Helpful scripts / aliases
+
+-	`ddn [on/off]`
+	-	Turns on/off DevDoNothing, which makes the bot stand still until shaken.
+-	`reonboard`
+	-	Puts him back into onboarding mode without fully clearing user data
+-	`vmesg [-c|-t] <grep args>`
+	-	A wrapper for cat/tail /var/log/messages.
+-	`temper`
+	-	Simple script which tells you CPU temps
+-	`voff`
+	-	Shuts the bot off, closes your SSH session before doing so
+		-	(the shutdown command just restarts the bot, this is different)
+-	`mrw`
+	-	mount -o rw,remount /
+
+## Proprietary software notes
+
+-	This repo contains lots of proprietary Qualcomm code and prebuilt software.
+-	After a stupid amount of work, I have most HAL programs compiling with Yocto's GCC 16. It wasn't terribly difficult since it's generally all autotools, but some jank is still involved, and it was still time-consuming.
+-	The camera programs and *some* of the BLE programs/libraries are being copied in rather than compiled.
+	-	Why not compile camera programs? Because I would have to add 2GB to the repo, and we'd have to link against blobs anyway.
+	-	Why not compile those BLE programs? `ankibluetoothd` and `hci_qcomm_init` are able to compile under GCC 16, but there is some weird low-level issue which makes them unable to properly communicate with a BLE library. So, for now, I am just copying pre-compiled ones in. I will probably try to fix this at some point.
+        -       If we have to rebuild either of them, [vicos-oelinux-nosign](https://github.com/kercre123/vicos-oelinux-nosign) is a thing we can use.
+
+## How this upgrade was done
+
+-	Much work upgrading Yocto recipes.
+-	All of the software is compiling with Yocto's GCC 16 or the Clang 20.1.8 vicos-sdk toolchain, with a couple of tiny exceptions.
+-	Some recipes are still somewhat old - these include wpa_supplicant and connman (I had issues with SAE - he's able to recognize SAE networks, but his WLAN driver and kernel don't know how to actually connect to it, and I was unable to disable it in modern wpa_supplicant and connman)
+>>>>>>> WireOS
