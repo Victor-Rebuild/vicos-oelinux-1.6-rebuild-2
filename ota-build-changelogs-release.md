@@ -1,6 +1,64 @@
 # Release ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/release/
 
+## 1.6.1.9 (2026/09/26)
+### Victor side changes:
+Update Victor to `498c35e19d2a01589cb00deee9f401b16a2b703b`:
+- Going home now has dynamic brightness so that older Vectors with their original batteries can get home better.
+- Fix starry night weather not working correctly.
+- Older 1.4-era voice command idk timings
+- Fixed server information screen in CCIS when using a custom server config.
+- Config menu navigation changes:
+    - You now use the backpack button to navigate the config menu.
+    - 5 pages were condensed down to 3.
+- Added the ability to disable check for person / react to sound check when sleeping to [CCIS](https://github.com/Victor-Rebuild/victor-1.6-rebuild-2/blob/master/CONFIG_MENU.md).
+- Building with newer cmake, go, protoc, and upx versions.
+- 60fps bootanims.
+- Working pronouns implementation. (Managed in `vector-ip:8080` in a web browser)
+- Add a way to manually update Vector from within CCIS.
+- Remove WiFi SSID from screen 1 of CCIS, still in screen 2.
+- With the extra space the ESN can be shown on screen 1 along with the bot name.
+- Add a toggle for vic-cloudless in CCIS.
+- Add a option to set robot locale in `:8888/consolevars` --> `RobotSettings` tab.
+- Stop vic-engine from crashing if Vector boots up at midnight with `Rebuild Eyes` enabled.
+- Let Vector choose to socialize or explore in Dance To The Beat.
+- Fistbump Voice Command now looks for face.
+- Keepaway can now randomly activate via the `Do a trick` voice command.
+- Fix custom and WireOS backpack lights
+- 1.6-rebuild settings are now located in a json at `/data/data/rebuild/settings.json`
+- Backpack dot light options:
+    - Enable/Disable it blinking blue/green (Disabled by default)
+    - Enable/Disable it fading between blue/green when blinking is enabled (Disabled by default)
+- New animations for rock paper scissors made by toastito
+- Add snake game to Vector, it's been made to activate rarely so that it's actually special instead of being common.
+- Add a command to ask Vector his snake high score.
+- Make charger docking more reliable.
+- Fix asking Vector for the date.
+- CCIS now has some nice colored text.
+- Network screen now shows status of my server.
+- Rebuild eyes now saves every 3 hours instead of 5.
+- Add a option in `DATA OPTIONS/DATA` in CCIS to skip onboarding.
+- Old pre-0.13 sunny weather animation re-added.
+- Blackjack drive off charger now drives towards your face.
+- GazeDirection has been disabled.
+- Point stats for rock paper scissors saves point stats.
+- TFLite 2.19 upgrade.
+- General code cleanup.
+
+### oelinux side changes
+- `update-engine-rebuild` has been cleaned up.
+- `update-engine-rebuild` now runs only when the network is actually online.
+- A new service was added so that victor can reboot the bot once `update-engine-rebuild` finished when triggered in CCIS.
+- Bundle my fork of vic-cloudless in builds, off by default but can be enabled in CCIS config menu.
+- Fix hanging in internal built otas (non release/indev)
+- Add pigz to the system image
+Merged from WireOS:
+- Logging into ssh now shows system stats plus cfw name.
+Rebuild-specific changes:
+- Made cloudswitch much smaller.
+- Make OTA size smaller by removing some extra stuff.
+- Bump compat ver
+
 ## 1.6.1.8 (2026/06/26)
 ### Victor side changes:
 Update Victor to `eb9b86fec1d31d79dca4d1e1961552e4a486fe82`:
