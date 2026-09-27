@@ -10,6 +10,8 @@ This builds the OS, the /anki programs (`wire-os-victor`), and puts it all into 
 
 [Vector is a cute, animated home robot created by Anki](https://www.youtube.com/watch?v=Qy2Z2TWAt6A). They went under in 2019. The assets were bought up by Digital Dream Labs in 2020. Eventually, Vector's code leaked, and soon after that, a universal Vector unlocking tool was made available.
 
+[vector-docs](https://os-vector.github.io/vector-docs) is a good site for docs and resources.
+
 ## Yocto
 
 Yocto is the toolkit this repo uses to create OS images. Yocto, in of itself, is not a distribution. It's a toolkit which helps one create replicable OS builds with only little difficulty.
