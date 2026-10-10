@@ -28,5 +28,6 @@
         "MACHINE": "apq8009-robot",
         "VARIANT": "debug"
     },
-    "bitbake.workingDirectory": "${workspaceFolder}/poky/build"
+    "bitbake.workingDirectory": "${workspaceFolder}/poky/build",
+    "cmake.sourceDirectory": "${workspaceFolder}/anki/victor-1.6"
 }

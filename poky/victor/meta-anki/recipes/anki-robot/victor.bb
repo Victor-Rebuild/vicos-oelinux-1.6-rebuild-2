@@ -207,7 +207,7 @@ do_install () {
   install -m 0755 ${D}/anki/lib/libunwind.so.1 ${D}/usr/lib/
   # no need to ship these twice
   rm -f ${D}/anki/lib/libc++.so.1 ${D}/anki/lib/libc++abi.so.1 ${D}/anki/lib/libunwind.so.1
-  rm -f ${D}/anki/bin/vic-cloud
+  #rm -f ${D}/anki/bin/vic-cloud
 }
 
 do_generate_victor_canned_fs_config () {
@@ -253,9 +253,9 @@ EOF
   done
 }
 
-do_generate_victor_canned_fs_config:append () {
-  sed -i '/anki\/bin\/vic-cloud /d' ${DEPLOY_DIR_IMAGE}/victor_canned_fs_config
-}
+#do_generate_victor_canned_fs_config:append () {
+#  sed -i '/anki\/bin\/vic-cloud /d' ${DEPLOY_DIR_IMAGE}/victor_canned_fs_config
+#}
 
 addtask generate_victor_canned_fs_config after do_install before do_package
 

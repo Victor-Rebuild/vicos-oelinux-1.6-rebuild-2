@@ -8,6 +8,8 @@ ConditionPathExists=!/dev/rampost_error
 Type=simple
 Restart=no
 RemainAfterExit=no
+# Show rampost for a bit
+ExecStartPre=/usr/bin/sleep 3
 ExecStart=/anki/bin/vic-bootAnim
 ExecStopPost=/anki/bin/vic-on-exit
 Group=anki
