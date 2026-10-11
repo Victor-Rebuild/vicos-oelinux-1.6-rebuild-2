@@ -73,6 +73,11 @@ IMAGE_INSTALL += "${@oe.utils.conditional('USER_BUILD', '1', '', 'pigz', d)}"
 # skittle
 IMAGE_INSTALL += "purplpkg"
 
+# zram
+IMAGE_INSTALL += "zram"
+IMAGE_INSTALL += "util-linux-zramctl"
+IMAGE_INSTALL += "zram-victor"
+
 # want some debug tools?
 #IMAGE_INSTALL += "gdb"
 #IMAGE_INSTALL += "strace"
