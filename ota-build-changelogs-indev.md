@@ -1,6 +1,46 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0098 (2026/10/14)
+### Victor side changes:
+Update Victor to `6abda28bd8b76ed621b3d02c76a8a4ff88e0e51d`:
+- Snowglobe is now active from November to February.
+- Rainbow eyes is a little slower through the fade.
+- No longer running extra marker detection when it isn't needed.
+- Rebuild eyes has less logging
+- Make 2.0 image scaling a bit faster
+- Fix mics being too sensitive
+- Make it so that images don't get double processed when running at 60fps
+### From Wire (Ripped from WireOS 3.0.2.34 release notes):
+- Vector now uses yunet, will need to reenroll faces
+- TFLite models now load all at once rather than sequentially, bringing better boot times
+- Picovoice is now used for the alexa wake word
+Vision pipeline improvements
+- Facial detection now does not run a refine pass, making it smoother (it's already pretty good without that pass)
+- Extra NEON in gamma correction
+- Inlined Vector 2.0-specific contrast function
+- Altogether, Vector 1.0 is now capable of a 15FPS camera stream to the SDK at 533 MHz
+- 2.0 is capable of an 8 FPS stream at 533MHz, 15 FPS at 1.3 GHz
+
+### oelinux side changes:
+- Cloudswitch is temporarily removed
+- Add zram
+### From Wire (Ripped from WireOS 3.0.2.34 release notes):
+- msm-3.18 -> msm-4.9 kernel
+- Yocto Wrynose upgrade (me + wire)
+Image is now hardfp:
+- Vector's OS has been softfp until now
+- Now his OS is capable of easily running things prebuilt for armhf devices, like the Pi
+- Involved quite a lot of shimming
+Default CPU frequency has been brought down to 533 MHz (what Anki originally limited it to):
+- The other performance profiles are still available in :8080
+- Battery life should be better
+New `vhostname` command for setting an alternate hostname for Vector:
+- Example: if you run `vhostname vectordvt3`, your Vector will be accessible by other machines on the network at vectordvt3.local
+Ramdisk has been removed:
+- rampost now lives in sysfs, before boot anim
+
+
 ## 1.6.1.0097 (2026/09/26)
 ### Victor side changes:
 Update Victor to `498c35e19d2a01589cb00deee9f401b16a2b703b`:
@@ -15,6 +55,7 @@ Update Victor to `3ed98e78ff935bf7d8f8110331be1d5a8148f3e9`:
 ### oelinux side changes
 Merged from WireOS:
 - Logging into ssh now shows system stats plus cfw name.
+
 Rebuild-specific changes:
 - Made cloudswitch much smaller.
 - Make OTA size smaller by removing some extra stuff.

@@ -17,8 +17,6 @@ EXTERNALSRC = "${WORKSPACE}/anki/victor-1.6"
 export SSH_AUTH_SOCK
 export ANKI_BUILD_VERSION
 
-REBUILD_COMMIT = "$(cat ${WORKSPACE}/anki/victor-1.6-version)"
-
 # Prevent yocto from splitting out debug files for this recipe
 INHIBIT_PACKAGE_DEBUG_SPLIT = '1'
 # Victor's CMake build process already strips libs & exes, don't strip again.
@@ -177,18 +175,6 @@ run_victor() {
 
 do_compile () {
   cd ${WORKSPACE}/anki/victor-1.6
-
-  #if [[ ! -d victor-1.6 ]]; then
-  #  git clone --recursive https://github.com/Victor-Rebuild/victor-1.6-rebuild victor-1.6/
-  #fi
-
-  #cd victor-1.6/
-
-  #git checkout Main
-
-  #git pull --recurse-submodules
-
-  #git checkout $REBUILD_COMMIT
 
   TOPLEVEL=$(run_victor bash -c 'source ./project/victor/envsetup.sh && gettop')
   export TOPLEVEL
