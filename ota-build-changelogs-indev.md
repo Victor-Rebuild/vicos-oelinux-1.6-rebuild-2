@@ -1,6 +1,11 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0097 (2026/09/26)
+### Victor side changes:
+Update Victor to `498c35e19d2a01589cb00deee9f401b16a2b703b`:
+- TFLite 2.19 upgrade.
+
 ## 1.6.1.0096 (2026/09/20)
 ### Victor side changes:
 Update Victor to `3ed98e78ff935bf7d8f8110331be1d5a8148f3e9`:
