@@ -1,6 +1,39 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0099 (2026/10/25)
+### Victor side changes:
+Update Victor to `18890b7efc6bebe81a910608ea7c35e2d9fe35de`:
+- The wakeup from sleep nightmare is now colored.
+- Power save mode occasionally is disabled while sleeping so the bot can check for illumination.
+- Fix date intent and snowglobe shake.
+- Rebuild eyes now saves to the main settings json.
+- Backpack lights now light up green when a photo is captured.
+### From Wire (WireOS release notes 3.0.2.36/35):
+- Vector should no longer react to his own noises nearly as much
+
+### oelinux side changes:
+- Can play a chime on boot, put wav in `/data/data/rebuild/bootchime.wav`.
+- Removed `save-eye-color` script
+### From Wire:
+- Audio latency should be a lot better (thanks to reducing LPASS period length in the kernel)
+- Cut out a bunch of crap
+    - Unused ALSA UCM configs, ALSA utilities, lvm stuff
+    - OTA size is now smaller
+- Add a couple helpful utilities: strace, lsof, gdbserver
+- Disable systemd-timesyncd which might have been fighting chronyd
+- Fix a channel switching issue in prima
+    - Sometimes caused Wi-Fi to stop working for ~30 seconds upon a channel switch message from an AP
+- Update openembedded-core and meta-openembedded to the latest wrynose branch commits as of 10-24-2026
+- Disable wasteful kernel config options
+- Fix GPU IOMMU, there should no longer be any cma alloc errors
+- mDSP is no longer used for audio, we now drive LPASS directly
+    - 40 MiB of reserved RAM reclaimed
+- All in all, power consumption + heat output should be significantly better
+    - Thanks to the cutting out of the kernel config options, DTS cleanup, and the fact we no longer have to power a DSP
+- Remove rmt_storage and mdsprpcd blobs, which were only needed for the mDSP to work
+- Vector can now be a USB host if you want that for some reason
+
 ## 1.6.1.0098 (2026/10/14)
 ### Victor side changes:
 Update Victor to `6abda28bd8b76ed621b3d02c76a8a4ff88e0e51d`:
