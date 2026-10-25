@@ -95,6 +95,7 @@ function build-8009-robot-perf-image() {
   export DISTRO=msm-perf
   export VARIANT=perf
   export PRODUCT=robot
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 
@@ -105,6 +106,7 @@ function build-8009-robot-perf-devcloudless-image() {
   export VARIANT=perf
   export PRODUCT=robot
   export CLOUDLESS=1
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 
@@ -115,6 +117,7 @@ function build-8009-robot-oskr-image() {
   export VARIANT=perf
   export PRODUCT=robot
   export OSKR=1
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 
@@ -136,6 +139,7 @@ function build-8009-robot-user-image() {
   export VARIANT=perf
   export PRODUCT=robot
   export PROD=1
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 
@@ -146,6 +150,7 @@ function build-8009-robot-prodperf-image() {
   export VARIANT=perf
   export PRODUCT=robot
   export PROD=1
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 
@@ -157,6 +162,7 @@ function build-8009-robot-perf-prodcloudless-image() {
   export PRODUCT=robot
   export PROD=1
   export CLOUDLESS=1
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 
@@ -267,93 +273,7 @@ function build-prod() {
   build-victor-robot-user-image ${@}
 }
 
-# cleared every time
-cleanList=(vic-cloud anki-version machine-robot-image extra-conf vic-engine vic-robot update-os update-engine-rebuild update-engine wireutils wcnss mm-camera initscript-anki rebooter adreno adsprpc vic-anim vic-switchboard vic-gateway-cert victor wired vector-motd vic-cloudswitch vic-verbose)
-
-function clean-oskr() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-perf
-  export VARIANT=perf
-  export PRODUCT=robot
-  export OSKR=1
-  wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]}
-}
-
-function clean-dev() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-perf
-  export VARIANT=perf
-  export PRODUCT=robot
-  wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]}
-}
-
-function clean-devcloudless() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-perf
-  export VARIANT=perf
-  export PRODUCT=robot
-  export CLOUDLESS=1
-  wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]}
-}
-
-function clean-oskrcloudless() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-perf
-  export VARIANT=perf
-  export PRODUCT=robot
-  export CLOUDLESS=1
-  export OSKR=1
-  wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]}
-}
-
-function clean-prodcloudless() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-perf
-  export VARIANT=perf
-  export PRODUCT=robot
-  export CLOUDLESS=1
-  export PROD=1
-  wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]}
-}
-
-function clean-prod() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-user
-  export VARIANT=perf
-  export PRODUCT=robot
-  export PROD=1
-  wire-clean
-  cdbitbake -c cleanall ${cleanList[@]}
-}
-
-function clean-proddev() {
-  unset_bb_env
-  export MACHINE=apq8009-robot
-  export DISTRO=msm-perf
-  export VARIANT=perf
-  export PRODUCT=robot
-  export PROD=1
-  wire-clean
-  cdbitbake ${@} -c cleanall ${cleanList[@]}
-}
-
 function wire-clean() {
-	if [[ -f ${WS}/wire-cleaning ]]; then
-		echo "Cleaning file detected, cleaning: $(cat ${WS}/wire-cleaning)"
-		cdbitbake -c cleanall ${@} $(cat ${WS}/wire-cleaning)
-		rm -f ${WS}/wire-cleaning
-	fi
 	if [[ -d "${WS}/poky/build/downloads" ]]; then
 		if [[ "$(ls ${WS}/poky/build/downloads)" == *'release.2.42.master'* ]]; then
 			echo "Whinlatter build detected - removing build folders..."
@@ -426,6 +346,6 @@ export TEMPLATECONF="${WS}/poky/victor/meta-qcom/conf/templates/msm"
 # (BBLAYERS is explicitly blocked from this within OE-Core itself, though...)
 # oe-init-build-env calls oe-buildenv-internal which sets
 # BB_ENV_EXTRAWHITE, append our vars to the list
-export BB_ENV_PASSTHROUGH_ADDITIONS="${BB_ENV_PASSTHROUGH_ADDITIONS} DL_DIR PRODUCT VARIANT FACTORY DEV OSKR QSN BETA ANKI_AMAZON_ENDPOINTS_ENABLED ANKI_BUILD_VERSION INDEV_OR_RELEASE AUTO_UPDATE CLOUDLESS PROD"
+export BB_ENV_PASSTHROUGH_ADDITIONS="${BB_ENV_PASSTHROUGH_ADDITIONS} DL_DIR PRODUCT VARIANT FACTORY DEV OSKR QSN BETA ANKI_AMAZON_ENDPOINTS_ENABLED INDEV_OR_RELEASE AUTO_UPDATE CLOUDLESS PROD"
 
 list-build-commands
