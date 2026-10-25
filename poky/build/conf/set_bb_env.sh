@@ -275,7 +275,7 @@ function build-prod() {
 
 function wire-clean() {
 	if [[ -d "${WS}/poky/build/downloads" ]]; then
-		if [[ "$(ls ${WS}/poky/build/downloads)" == *'release.2.42.master'* ]]; then
+		if [[ "$(ls ${WS}/poky/build/downloads)" == *'release.2.42.master'* || -f "${WS}/force-clean" ]]; then
 			echo "Whinlatter build detected - removing build folders..."
 			sudo rm -rf ${WS}/poky/build/cache ${WS}/poky/build/sstate-cache ${WS}/poky/build/tmp-glibc ${WS}/poky/build/downloads
 		fi

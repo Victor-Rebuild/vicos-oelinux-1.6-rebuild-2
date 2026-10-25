@@ -27,3 +27,4 @@ latest
 *.o
 *.o.d
 *.o.cmd
+/force-clean
