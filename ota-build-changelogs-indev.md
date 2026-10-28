@@ -1,6 +1,18 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0100 (2026/10/28)
+### Victor side changes:
+Update Victor to `53aad352939bb388a00502d9849dd5f4fd47f74e`:
+- I forgot to update victor in the last update, 1.6.1.0099's changelogs are in this release
+- Add CCIS config menu for 0.11's TTS voice.
+- Add older more playful fist bump anims.
+- Link changelogs in the update screen.
+### From Wire:
+- [tflite is now hardfp](https://github.com/os-vector/wire-os-victor/commit/ec950f399db6d753e87e5d6f4c6765152c9f0421)
+- [Optimize debayer and use sjpeg](https://github.com/os-vector/wire-os-victor/commit/834f04bbcc26a1afbf14771f9bc3ee9faf678639)
+- [Fix vic-anim crash](https://github.com/os-vector/wire-os-victor/commit/c40266c11dd95e050d481a63ef661b7a01106e7e)
+
 ## 1.6.1.0099 (2026/10/25)
 ### Victor side changes:
 Update Victor to `18890b7efc6bebe81a910608ea7c35e2d9fe35de`:
