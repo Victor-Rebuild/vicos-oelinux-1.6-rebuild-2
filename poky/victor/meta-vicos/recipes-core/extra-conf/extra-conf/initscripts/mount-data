@@ -113,6 +113,12 @@ make_userdata() {
 
   #make sure /data/run/connman exists - NOTE: we need /data/lib/connman and /data/run/connamn
   mkdir -p /data/run/connman
+
+  #autorun
+  if [ ! -f /data/data/rebuild/autorun.sh ]; then
+    echo "#!/bin/sh" > /data/data/rebuild/autorun.sh
+  fi
+  sh /data/data/rebuild/autorun.sh &
 }
 
 mount_tmp_userdata() {
