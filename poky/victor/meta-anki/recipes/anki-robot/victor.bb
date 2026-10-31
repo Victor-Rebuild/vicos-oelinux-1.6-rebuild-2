@@ -187,10 +187,14 @@ do_install () {
   install -d ${D}/usr/lib
   install -m 0755 ${D}/anki/lib/libc++.so.1 ${D}/usr/lib/
   install -m 0755 ${D}/anki/lib/libc++abi.so.1 ${D}/usr/lib/
-  install -m 0755 ${D}/anki/lib/libunwind.so.1 ${D}/usr/lib/
+  #install -m 0755 ${D}/anki/lib/libunwind.so.1 ${D}/usr/lib/
   # no need to ship these twice
+<<<<<<< HEAD
   rm -f ${D}/anki/lib/libc++.so.1 ${D}/anki/lib/libc++abi.so.1 ${D}/anki/lib/libunwind.so.1
   #rm -f ${D}/anki/bin/vic-cloud
+=======
+  rm -f ${D}/anki/lib/libc++.so.1 ${D}/anki/lib/libc++abi.so.1
+>>>>>>> WireOS
 }
 
 do_generate_victor_canned_fs_config () {
