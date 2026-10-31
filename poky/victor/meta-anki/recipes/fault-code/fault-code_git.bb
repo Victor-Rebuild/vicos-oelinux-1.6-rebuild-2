@@ -14,7 +14,9 @@ S = "${UNPACKDIR}/anki/fault-code"
 SYSTEM_DIR = "${D}${sysconfdir}/systemd/system"
 
 do_install() {
+  install -d ${D}/etc
   install -d ${D}/usr/bin
+  install -m 0755 ${S}/crash.wav ${D}/etc
   install -m 0755 ${S}/fault-code-handler ${D}/usr/bin
   install -m 0755 ${S}/fault-code-clear ${D}/usr/bin
 
@@ -31,6 +33,7 @@ do_install() {
   fi   
 }
 
+FILES:${PN} += "/etc/crash.wav"
 FILES:${PN} += "/usr/bin/fault-code-handler"
 FILES:${PN} += "/usr/bin/fault-code-clear"
 FILES:${PN} += "/usr/lib/systemd/system"
