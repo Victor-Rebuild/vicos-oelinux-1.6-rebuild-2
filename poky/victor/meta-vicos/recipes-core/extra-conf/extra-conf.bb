@@ -25,6 +25,7 @@ do_install () {
 	install -m 0755 ${S}/other/export-gpio ${D}/usr/sbin/export-gpio
 	install -m 0755 ${S}/other/set-timezone ${D}/usr/sbin/set-timezone
 	install -m 0755 ${S}/other/btop.conf ${D}/etc/btop.conf
+	install -m 0755 ${S}/other/autorun-example ${D}/etc/autorun-example
 
 	cp -r ${S}/initscripts/* ${D}/etc/initscripts/
 	cp -r ${S}/services/* ${D}/usr/lib/systemd/system/

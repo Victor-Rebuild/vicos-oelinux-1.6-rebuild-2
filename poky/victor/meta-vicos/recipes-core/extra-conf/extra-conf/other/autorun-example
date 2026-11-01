@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# boot chime
+# mayybe do not delete
+if [ ! -f /data/data/rebuild/disable-boot-chime ] &&
+   [ ! -f /run/after_maintenance_reboot ] && 
+   [ ! -f /data/maintenance_reboot ]; then
+    if [ -f /data/data/rebuild/bootchime.wav ]; then
+        aplay /data/data/rebuild/bootchime.wav
+    else
+        aplay /etc/bootchime.wav
+    fi
+fi

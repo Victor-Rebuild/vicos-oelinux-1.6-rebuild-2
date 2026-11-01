@@ -116,7 +116,7 @@ make_userdata() {
 
   #autorun
   if [ ! -f /data/data/rebuild/autorun.sh ]; then
-    echo "#!/bin/sh" > /data/data/rebuild/autorun.sh
+    cp /etc/autorun-example /data/data/rebuild/autorun.sh
   fi
   sh /data/data/rebuild/autorun.sh &
 }
