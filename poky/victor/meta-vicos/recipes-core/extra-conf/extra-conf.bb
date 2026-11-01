@@ -26,6 +26,7 @@ do_install () {
 	install -m 0755 ${S}/other/set-timezone ${D}/usr/sbin/set-timezone
 	install -m 0755 ${S}/other/btop.conf ${D}/etc/btop.conf
 	install -m 0755 ${S}/other/autorun-example ${D}/etc/autorun-example
+	install -m 0755 ${S}/other/bootchime.wav ${D}/etc/bootchime.wav
 
 	cp -r ${S}/initscripts/* ${D}/etc/initscripts/
 	cp -r ${S}/services/* ${D}/usr/lib/systemd/system/
@@ -50,6 +51,7 @@ FILES:${PN} = "	/usr/lib/systemd/system \
 				/usr/sbin/export-gpio \
 				/usr/sbin/set-timezone \
 				/etc/autorun-example \
+				/etc/bootchime.wav \
 				/etc/btop.conf \
 				/etc/rsyncd-victor.conf"
 
