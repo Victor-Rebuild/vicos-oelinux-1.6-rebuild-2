@@ -49,6 +49,7 @@ FILES:${PN} = "	/usr/lib/systemd/system \
 				/etc/initscripts \
 				/usr/sbin/export-gpio \
 				/usr/sbin/set-timezone \
+				/etc/autorun-example \
 				/etc/btop.conf \
 				/etc/rsyncd-victor.conf"
 
