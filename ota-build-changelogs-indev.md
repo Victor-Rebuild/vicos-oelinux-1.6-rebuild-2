@@ -1,6 +1,25 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0101 (2026/11/01)
+Update Victor to `424cb8173493b3fd28ca4976bf1ba7e98f16cc85`:
+- Fix randomness for stuff like rebuild eyes, rock paper scissors, snake, and Mystery Eyes.
+
+## oelinux side changes
+- Autorun script that runs on boot:
+    - Similar to `autoexec.bat` on DOS.
+    - Lives in `/data/data/rebuild/autorun.sh`.
+    - A default one is added there by default.
+- Crash sound has been added:
+    - Disable by running: `touch /data/no-fault-sound` over SSH.
+    - Custom crash chime can be put in `/data/data/rebuild/crashsound.wav`.
+- Add a boot chime:
+    - Disable by running: `touch /data/data/rebuild/disable-boot-chime` over SSH.
+    - Custom boot chime can be put in `/data/data/rebuild/bootchime.wav`.
+    - It will not play during nightly reboots.
+### From Wire:
+- Compile with a Cortex-A7 tune.
+
 ## 1.6.1.0100 (2026/10/28)
 ### Victor side changes:
 Update Victor to `53aad352939bb388a00502d9849dd5f4fd47f74e`:
