@@ -1,5 +1,5 @@
 [Unit]
-Description=Hourly checks for update, made by Emily for 1.6 rebuild
+Description=used by victor to update, made by Emily for 1.6 rebuild
 After=network-online.target
 
 [Service]

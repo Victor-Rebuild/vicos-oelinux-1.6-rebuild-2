@@ -7,10 +7,8 @@ logger -t rebuild-auto-updater "Starting 1.6-rebuild auto update service"
 # Build ids
 DEV_BUILD_ID=d
 OSKR_BUILD_ID=oskr
-PROD_BUILD_ID=
 
 # Essential things for this to work
-BUILDINF="$(cat /build.prop)"
 CMDLINE="$(cat /proc/cmdline)"
 CURRENT_VERSION=$(getprop ro.anki.version)
 INDEV_OR_RELEASE="$(cat /etc/rebuild-dev-or-indev)"
