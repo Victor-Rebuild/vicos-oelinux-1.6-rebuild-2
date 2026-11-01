@@ -16,17 +16,16 @@ do_compile() {
 }
 
 do_install() {
-   mkdir -p ${D}/usr/sbin
-   cp ${S}/rebooter.sh ${D}/usr/sbin/
-   chmod 0755 ${D}/usr/sbin/rebooter.sh
+   #mkdir -p ${D}/usr/sbin
+   #cp ${S}/rebooter.sh ${D}/usr/sbin/
+   #chmod 0755 ${D}/usr/sbin/rebooter.sh
    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
       install -d ${SYSTEM_DIR}/
       install -d ${SYSTEM_DIR}/multi-user.target.wants/
       install -m 0644 ${S}/rebooter.service.1.6 -D ${SYSTEM_DIR}/rebooter.service
       install -m 0644 ${S}/rebooter.timer.1.6 -D ${SYSTEM_DIR}/rebooter.timer
       ln -sf /etc/systemd/system/rebooter.timer ${SYSTEM_DIR}/multi-user.target.wants/rebooter.timer
-  fi
+   fi
 }
 
-FILES:${PN} += "${systemd_unitdir}/system/ \
-		usr/sbin"
+FILES:${PN} += "${systemd_unitdir}/system/"
