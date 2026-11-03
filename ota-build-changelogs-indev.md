@@ -1,6 +1,10 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0102 (2026/11/03)
+Update Victor to `33a5c12d02e566751263f28e8f59e706f9fddcee`:
+- Just small fixes to maybe make it so that Vector gets stuck on cube less.
+
 ## 1.6.1.0101 (2026/11/01)
 Update Victor to `424cb8173493b3fd28ca4976bf1ba7e98f16cc85`:
 - Fix randomness for stuff like rebuild eyes, rock paper scissors, snake, and Mystery Eyes.
