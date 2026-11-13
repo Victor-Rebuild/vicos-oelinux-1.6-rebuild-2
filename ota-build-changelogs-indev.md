@@ -1,15 +1,29 @@
 # Indev ota changelogs
 ## https://anki2.ca/otas/1.6-rebuild/indev/
 
+## 1.6.1.0103 (2026/11/12)
+### Victor side changes:
+Update Victor to `1f8c0793bc1ef23540eee796ea199810b8384057`:
+- Add a option to disable the TTS filter seperately from the 0.11 voice.
+- Vector's block now identifies as block one again.
+- If Vector loses the block he'll play a fail anim.
+- Make charger detection in low light a little more reliable.
+- Revert eye color to teal if it's invalid.
+
+### oelinux side changes:
+- Re-add vic-cloudless/cloudswitch
+
 ## 1.6.1.0102 (2026/11/03)
+### Victor side changes:
 Update Victor to `33a5c12d02e566751263f28e8f59e706f9fddcee`:
 - Just small fixes to maybe make it so that Vector gets stuck on cube less.
 
 ## 1.6.1.0101 (2026/11/01)
+### Victor side changes:
 Update Victor to `424cb8173493b3fd28ca4976bf1ba7e98f16cc85`:
 - Fix randomness for stuff like rebuild eyes, rock paper scissors, snake, and Mystery Eyes.
 
-## oelinux side changes
+### oelinux side changes
 - Autorun script that runs on boot:
     - Similar to `autoexec.bat` on DOS.
     - Lives in `/data/data/rebuild/autorun.sh`.
