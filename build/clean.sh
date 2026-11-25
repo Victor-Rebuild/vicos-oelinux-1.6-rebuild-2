@@ -27,7 +27,6 @@ if [[ "$1" == "-nd" ]]; then
 	shift
 fi
 
-
 function run_in_docker() {
 	docker run -it --rm \
 		-v $(pwd)/anki-deps:${HOME}/.anki \

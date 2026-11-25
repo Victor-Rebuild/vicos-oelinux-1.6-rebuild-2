@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#EXPECTED_HASH_ELLIE="d454e1542f11d6432e24ced777faa285  -"
-
 unset DO_SIGN
 
 trap ctrl_c INT
@@ -46,28 +44,8 @@ echo
 
 VERSION_CODE=$version
 
-#echo "Now, did you get permission from Ellie to send your builds to the server?"
-#echo -n "(yes/no): "
-#read ellie_or_not
-
-#if [[ ${ellie_or_not} == "yes" ]]; then
-#    echo "Alright fine, you can continue"
-#elif [[ ${ellie_or_not} == "no" ]]; then
-#    echo "Then don't use this script"
-#    exit 1
-#else
-#    echo "That's not a yes or no"
-#    exit 1
-#fi
-
-echo "Getting passwords"
-prod_boot_password="$(cat /media/raj-jyot/modder-my-to/vector-stuff/vector-passwords/prod-boot)"
-oskr_boot_password="$(cat /media/raj-jyot/modder-my-to/vector-stuff/vector-passwords/oskr-boot)"
-OTA_PASS="$(cat /media/raj-jyot/modder-my-to/vector-stuff/vector-passwords/ota-pass)"
-
-#echo "Alright we need the passwords now, what's the prod boot password?"
-#echo -n "(aka, the ABOOT/qtipri password): "
-#read prod_boot_password
+echo "Checking passwords..."
+echo "Make sure to set them in your env variables..."
 
 if openssl rsa -in ota/qtipri.encrypted.key -passin pass:"$prod_boot_password" -noout 2>/dev/null; then
     echo "Prod boot image key password confirmed to be correct!"
@@ -79,12 +57,6 @@ else
     exit 1
 fi
 
-#echo
-#echo "Prod password is good, now what's the oskr boot password?"
-# echo "Alright we need the oskr password now, what's the oskr boot password?"
-#echo -n "(aka, qtioskrpri password): "
-#read oskr_boot_password
-
 if openssl rsa -in ota/qtioskrpri.encrypted.key -passin pass:"$oskr_boot_password" -noout 2>/dev/null; then
     echo "OSKR boot image key password confirmed to be correct!"
 else
@@ -94,12 +66,7 @@ else
     exit 1
 fi
 
-#echo
-#echo "The boot image passwords seem fine, what is the ota password now?"
-#echo -n "(aka, ota_prod.key): "
-#read ota_password
-
-if openssl rsa -in ota/ota_prod.key -passin pass:"$OTA_PASS" -noout 2>/dev/null; then
+if openssl rsa -in ota/ota_prod.key -passin pass:"$ota_signing_password" -noout 2>/dev/null; then
     echo "OTA key password confirmed to be correct!"
 else
     echo
@@ -142,17 +109,17 @@ echo "Starting build"
 export AUTO_UPDATE=1
 
 echo "Dev"
-time ./build/build.sh -bt dev -s -op $OTA_PASS -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt dev -s -op $ota_signing_password -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/dev/
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/dev/latest
 
 echo "OSKR"
-time ./build/build.sh -bt oskr -s -op $OTA_PASS -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt oskr -s -op $ota_signing_password -bp $oskr_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskr/
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/oskr/latest
 
 echo "Prod"
-time ./build/build.sh -bt proddev -s -op $OTA_PASS -bp $prod_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
+time ./build/build.sh -bt proddev -s -op $ota_signing_password -bp $prod_boot_password -v $VERSION_CODE -ir $BUILD_STACK -au
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prod/
 scp -P 44 -i ~/modder-my-key _build/*.ota raj-jyot@modder.my.to:/media/raj-jyot/modder-my-to/webserver/otas/1.6-rebuild/$BUILD_STACK/prod/latest
 
@@ -169,7 +136,7 @@ rm force_install
 
 echo
 echo "Unsetting variables"
-unset $VERSION_CODE $prod_boot_password $oskr_boot_password $OTA_PASS $ota_password $BUILD_STACK $FORCE_INSTALL $force_update
+unset $VERSION_CODE $prod_boot_password $oskr_boot_password $ota_signing_password $BUILD_STACK $FORCE_INSTALL $force_update
 echo
 
 echo "Done! Builds should be at https://anki2.ca/otas/1.6-rebuild/$BUILD_STACK/"
