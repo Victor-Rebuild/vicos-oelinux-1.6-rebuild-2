@@ -129,6 +129,7 @@ function build-8009-robot-perf-oskrcloudless-image() {
   export PRODUCT=robot
   export OSKR=1
   export CLOUDLESS=1
+  wire-clean
   cdbitbake ${@} machine-robot-image
 }
 

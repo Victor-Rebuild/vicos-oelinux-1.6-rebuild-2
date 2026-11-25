@@ -130,7 +130,7 @@ do_compile() {
     # using system Go
 
     if [ ! -f "${EXTERNALSRC}/build/sherpa-shared-citrinet/.unzipped" ]; then
-        wget https://github.com/kercre123/vic-cloudless/releases/download/v0.0.1/sherpa-shared-citrinet.tar.gz
+        wget https://github.com/Victor-Rebuild/vic-cloudswitch/releases/download/sherpa-tar-hardfp/sherpa-shared-citrinet.tar.gz
         mkdir -p "${EXTERNALSRC}/build"
         tar -zxf "${EXTERNALSRC}/sherpa-shared-citrinet.tar.gz" -C "${EXTERNALSRC}"
         mv "${EXTERNALSRC}/sherpa-shared-citrinet" "${EXTERNALSRC}/build/"
@@ -153,7 +153,7 @@ do_install() {
 
     install -m 0755 ${WORKSPACE}/anki/vic-cloudswitch/build/vic-* ${D}/anki/bin/
     install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/lib* ${D}/anki/lib/
-    install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libonnxruntime.so.1 ${D}/anki/lib/
+    install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libonnxruntime.so ${D}/anki/lib/
     install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libsherpa-onnx-c-api.so ${D}/anki/lib/
     install -m 0644 ${WORKSPACE}/anki/vic-cloudswitch/build/sherpa-shared-citrinet/lib/libonnxruntime_providers_shared.so ${D}/anki/lib/
     cp -r ${WORKSPACE}/anki/vic-cloudswitch/build/en-US ${D}/anki/data/cloudswitch/
